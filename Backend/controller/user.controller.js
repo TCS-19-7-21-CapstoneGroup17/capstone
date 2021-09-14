@@ -22,40 +22,47 @@ let signUp = (request, response)=> {
                             //sorted from highest to lowest, so result[0] will have the highest id
                             userId = result1[0]._id + 1;
                         }
-                        //attempt to add the new user
+                        //attempt to add the new user. loginAttempts will be 3, representing the amount of failed attempts the user can make to login before locking the account
                         userModel.insertMany({_id:userId, firstname:newUser.firstname, lastname:newUser.lastname,
                             emailId:newUser.emailId, password:newUser.password, dob:newUser.dob, phone:newUser.phone,
                             address:newUser.address, loginAttempts:3}, (err2, result2)=> {
                                 if (!err) {
                                     console.log("Successfully added user " + userId);
-                                    response.send({result:true, msg:"Successfully added user " + userId});
+                                    response.json({result:true, msg:"Successfully added user " + userId});
                                 }
                                 else {
                                     console.log("Error: " + err2);
-                                    response.send({result:false, msg:"Error: " + err2});
+                                    response.json({result:false, msg:"Error: " + err2});
                                 }
                             });
                     }
                     else 
                     {
                         console.log(err1);
-                        response.send({result:false, msg:"Error: " + err1});
+                        response.json({result:false, msg:"Error: " + err1});
                     }
                 });
             }
             else 
             {
                 console.log("Could not add user. User with this email already exists");
-                response.send({result:false, msg:"User with this email already exists"});
+                response.json({result:false, msg:"User with this email already exists"});
             }
         }
         else
         {
-            response.send({result:false, msg:"Error: " + err});
+            response.json({result:false, msg:"Error: " + err});
         }
     });
 }
 
+//attempt to sign in to a user account. 
+let signIn = (request, response)=> {
+    userLogin = request.body;
+    //see if a user with this emailId exists
+    userModel.find({emailId:userLogin.emailId}, (err, result)=>{
 
+    })
+}
 
-module.exports = {signUp, signIn}
+module.exports = {signUp}

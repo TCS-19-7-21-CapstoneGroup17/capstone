@@ -18,6 +18,6 @@ let userSchema = mongoose.Schema({
 });
 
 //create the user model using the user schema
-let userModel = mongose.model("User", userSchema);
+let userModel = mongoose.model("User", userSchema);
 
 module.exports = userModel;

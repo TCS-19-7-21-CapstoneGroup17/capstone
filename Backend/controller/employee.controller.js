@@ -23,18 +23,18 @@ let addEmployee = (request, response)=> {
             employeeModel.insertMany({_id:empId, firstname:newEmp.firstname, lastname:newEmp.lastname, 
                 emailId:newEmp.emailId, password:"temporary@123"}, (err1, result1) => {
                 if (!err1) {
-                    response.send({result:true, msg:"Successfully added employee " + empId});
+                    response.json({result:true, msg:"Successfully added employee " + empId});
                     console.log("Successfully added employee " + empId);
                 }
                 else {
                     console.log(err1);
-                    response.send({result:false, msg:"Error: " + err1});
+                    response.json({result:false, msg:"Error: " + err1});
                 }
             })
         }
         else {
             console.log(err);
-            response.send({result:false, msg:"Error: " + err});
+            response.json({result:false, msg:"Error: " + err});
         }
     });
 }
@@ -46,17 +46,17 @@ let deleteEmployee = (request, response)=> {
         if (!err) {
             if (result.deletedCount == 1) {
                 console.log("Successfully deleted employee " + employeeId._id);
-                response.send({result:false, msg:"Successfully deleted employee " + employeeId._id});
+                response.json({result:true, msg:"Successfully deleted employee " + employeeId._id});
             }
             else {
                 console.log("No employee with that ID found");
-                response.send({result:false, msg:"No employee with that ID found"});
+                response.json({result:false, msg:"No employee with that ID found"});
             }
             
         } 
         else {
             console.log(err);
-            response.send({result:false, msg:result});
+            response.json({result:false, msg:result});
         }
     })
 }
