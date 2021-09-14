@@ -65,4 +65,9 @@ let signIn = (request, response)=> {
     })
 }
 
+let editProfile = (request, response)=> {
+    userInfo = request.body;
+    // need the users id to find their entry in table
+    userModel.updateOne({$set:{firstname:userInfo.firstname}}, {$set:{lastname:userInfo.lastname}})
+}
 module.exports = {signUp}
