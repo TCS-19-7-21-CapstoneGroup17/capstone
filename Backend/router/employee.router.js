@@ -11,5 +11,6 @@ let employeeModel = require('../model/employee.model');
 //handle REST methods using controller functions, and define urls used to call them
 router.post("/addEmployee/", employeeController.addEmployee);
 router.delete("/deleteEmployee/", employeeController.deleteEmployee);
+router.post("/signInEmployee/", employeeController.signInEmployee);
 
 module.exports = router;
