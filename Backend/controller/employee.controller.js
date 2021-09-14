@@ -50,13 +50,13 @@ let deleteEmployee = (request, response)=> {
             }
             else {
                 console.log("No employee with that ID found");
-                response.send("No employee with that ID found");
+                response.send({result:false, msg:"No employee with that ID found"});
             }
             
         } 
         else {
             console.log(err);
-            response.send(result);
+            response.send({result:false, msg:result});
         }
     })
 }
