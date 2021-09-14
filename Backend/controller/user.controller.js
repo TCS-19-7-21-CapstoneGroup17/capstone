@@ -71,7 +71,7 @@ let signIn = (request, response)=> {
             }
             else {
                 //check remaining login attempts
-                let attempts = response[0].loginAttempts;
+                let attempts = result[0].loginAttempts;
                 if (attempts <= 0) {
                     response.json({result:false, msg:"No login attempts remaining. Your account has been locked"})
                 }
@@ -82,8 +82,9 @@ let signIn = (request, response)=> {
                         if (!err1) {
                             if (result1.length == 0) { //email and password combination didn't match
                                 //update remaining login attempts
-                                userModel.updateOne({emailId:userLogin.userId}, {$set:{loginAttempts:attempts - 1}}, (err2, result2)=> {
-                                    if (err2) {
+                                userModel.updateMany({emailId:userLogin.emailId}, {$set:{loginAttempts:attempts - 1}}, (err2, result2)=> {
+                                    if (!err2) {
+                                        console.log(result2);
                                         response.json({result:false, msg:"Email or password is incorrect"});
                                     }
                                     else {
@@ -92,7 +93,16 @@ let signIn = (request, response)=> {
                                 })
                             }
                             else {
-                                response.json({result:true, msg:"Login successful"})
+                                //login successful. Update login attempts back to 3
+                                userModel.updateMany({emailId:userLogin.emailId}, {$set:{loginAttempts:3}}, (err2, result2)=> {
+                                    if (!err2) {
+                                        response.json({result:true, msg:"Login successful"})
+                                    }
+                                    else {
+                                        response.json({result:false, msg:"Error: " + err2});
+                                    }
+                                })
+                                
                             }
                         }  
                         else {
@@ -108,4 +118,4 @@ let signIn = (request, response)=> {
     })
 }
 
-module.exports = {signUp}
+module.exports = {signUp, signIn}
