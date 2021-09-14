@@ -4,7 +4,8 @@ mongoose.pluralize(null);
 let productSchema = mongoose.Schema({
     productName: String,
     price: Number,
-    quantity: Number
+    quantity: Number,
+    image: String
 })
 
 let productModel = mongoose.model("Product", productSchema);
