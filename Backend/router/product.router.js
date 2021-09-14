@@ -9,4 +9,6 @@ router.get('/getAllProducts', productController.getAllProductDetails);
 // get A product's details 
 router.get('/getProduct/:pName', productController.getProductDetail);
 
+router.put('/updateProduct', productController.updateProducts);
+
 module.exports = router;
