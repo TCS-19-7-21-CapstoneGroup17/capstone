@@ -27,8 +27,12 @@ let signUp = (request, response)=> {
                             emailId:newUser.emailId, password:newUser.password, dob:newUser.dob, phone:newUser.phone,
                             address:newUser.address, loginAttempts:3}, (err2, result2)=> {
                                 if (!err) {
-                                    console.log("Successfully added user " + userId);
-                                    response.json({result:true, msg:"Successfully added user " + userId});
+                                    if (result2 == undefined) {
+                                        response.json({result:false, msg:"Failed to add user " + userId + ". Check that input types are valid"});
+                                    }
+                                    else {
+                                        response.json({result:true, msg:"Successfully added user " + userId});
+                                    }
                                 }
                                 else {
                                     console.log("Error: " + err2);
@@ -61,7 +65,46 @@ let signIn = (request, response)=> {
     userLogin = request.body;
     //see if a user with this emailId exists
     userModel.find({emailId:userLogin.emailId}, (err, result)=>{
-
+        if (!err) {
+            if (result.length == 0) { //email not found
+                response.json({result:false, msg:"Email or password is incorrect"})
+            }
+            else {
+                //check remaining login attempts
+                let attempts = response[0].loginAttempts;
+                if (attempts <= 0) {
+                    response.json({result:false, msg:"No login attempts remaining. Your account has been locked"})
+                }
+                else {
+                    //check password. Didn't check the first time because if emailId didn't exist,
+                    // we wouldn't be able to check remaining login attempts
+                    userModel.find({emailId:userLogin.emailId, password:userLogin.password}, (err1, result1) => {
+                        if (!err1) {
+                            if (result1.length == 0) { //email and password combination didn't match
+                                //update remaining login attempts
+                                userModel.updateOne({emailId:userLogin.userId}, {$set:{loginAttempts:attempts - 1}}, (err2, result2)=> {
+                                    if (err2) {
+                                        response.json({result:false, msg:"Email or password is incorrect"});
+                                    }
+                                    else {
+                                        response.json({result:false, msg:"Error: " + err2});
+                                    }
+                                })
+                            }
+                            else {
+                                response.json({result:true, msg:"Login successful"})
+                            }
+                        }  
+                        else {
+                            response.json({result:false, msg:"Error: " + err1});
+                        }
+                    })
+                }
+            }
+        }
+        else {
+            response.json({result:false, msg:"Error: " + err});
+        }
     })
 }
 
