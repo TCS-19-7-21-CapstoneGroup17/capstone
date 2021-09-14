@@ -39,7 +39,7 @@ let addEmployee = (request, response)=> {
     });
 }
 
-//Delete an employee using their id
+//Delete an employee using their id. Will be performed by Admin
 let deleteEmployee = (request, response)=> {
     let employeeId = request.body;
     employeeModel.deleteOne({_id:employeeId._id}, (err, result)=> {
