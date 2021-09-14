@@ -5,12 +5,14 @@ let mongoose = require('mongoose');
 let cors = require('cors');
 //load routers
 let employeeRouter = require('./router/employee.router');
+let productRouter = require('./router/product.router');
 
 //create express reference and add middleware
 let app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use("/admin", employeeRouter);
+app.use("/product", productRouter);
 
 //connect the database
 mongoose.connect("mongodb://localhost:27017/capstone").
