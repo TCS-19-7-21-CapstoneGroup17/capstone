@@ -13,7 +13,8 @@ let userSchema = mongoose.Schema({
     password:String,
     dob:String,
     phone:Number,
-    address:String
+    address:String,
+    loginAttempts:Number
 });
 
 //create the user model using the user schema
