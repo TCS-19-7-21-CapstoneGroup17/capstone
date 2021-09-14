@@ -8,9 +8,8 @@ mongoose.pluralize(null);
 let employeeSchema = mongoose.Schema({
     _id:Number,
     firstname:String,
-    lastname:String,
-    //employee's email id should be unique. Will be used to log-in
-    emailId:{type:String, unique:true},
+    lastname:String, 
+    emailId:{type:String, unique:true}, //employee's email id should be unique. Will be used to log-in
     password:String
 });
 

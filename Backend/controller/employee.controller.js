@@ -1,7 +1,9 @@
 //load the usermodel
 let employeeModel = require("../model/employee.model");
 
-//add an employee, given their firstname, lastname, and email address. 
+//define the functions for use with the employee table
+
+//add an employee, given their firstname, lastname, and email address. Will be performed by Admin
 //employees start with the same password and ids are auto-generated
 let addEmployee = (request, response)=> {
     let newEmp = request.body;
@@ -21,18 +23,18 @@ let addEmployee = (request, response)=> {
             employeeModel.insertMany({_id:empId, firstname:newEmp.firstname, lastname:newEmp.lastname, 
                 emailId:newEmp.emailId, password:"temporary@123"}, (err1, result1) => {
                 if (!err1) {
-                    response.send("Successfully added employee " + empId);
+                    response.send({result:true, msg:"Successfully added employee " + empId});
                     console.log("Successfully added employee " + empId);
                 }
                 else {
                     console.log(err1);
-                    response.send("Error: " + err1);
+                    response.send({result:false, msg:"Error: " + err1});
                 }
             })
         }
         else {
             console.log(err);
-            response.send("Error: " + err);
+            response.send({result:false, msg:"Error: " + err});
         }
     });
 }
@@ -44,7 +46,7 @@ let deleteEmployee = (request, response)=> {
         if (!err) {
             if (result.deletedCount == 1) {
                 console.log("Successfully deleted employee " + employeeId._id);
-                response.send("Successfully deleted employee " + employeeId._id);
+                response.send({result:false, msg:"Successfully deleted employee " + employeeId._id});
             }
             else {
                 console.log("No employee with that ID found");
