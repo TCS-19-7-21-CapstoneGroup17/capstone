@@ -4,10 +4,8 @@ const { report } = require('../router/user.router');
 
 //define the functions for use with the order table
 
-//Will be performed by admin. Generate report of all orders
-//Can specify a specific user or 
-
 //Will be performed by admin. Generate report of orders made in a specific day
+//Can specify a specific user or product to filter with
 let generateDailyReport = (request, response)=> {
     let reportDay = request.body;
     if (reportDay.filter == "") { //not filtering by product or user
@@ -45,7 +43,14 @@ let generateDailyReport = (request, response)=> {
     }
 }
 
+//Will be performed by admin. Generate report of orders made in a specific week
+//Can specify a specific user or product to filter with
+let generateWeeklyReport = (request,response)=> {
+    
+}
+
 //Will be performed by admin. Generate report of orders made in a specific month
+//Can specify a specific user or product to filter with
 let generateMonthlyReport = (request, response)=> {
     let reportMonth = request.body;
     if (reportMonth.filter == "") { //not filtering by a product or user
@@ -85,6 +90,7 @@ let generateMonthlyReport = (request, response)=> {
 }
 
 //Will be performed by admin. Generate report of orders made in a specific month
+//Can specify a specific user or product to filter with
 let generateYearlyReport = (request,response)=> {
     let reportYear = request.body;
     if (reportYear.filter == "") { //not filtering by a product or user
