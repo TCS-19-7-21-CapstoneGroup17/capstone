@@ -26,5 +26,14 @@ let getProductDetail = (request, response) => {
     })
 }
 
+let addProduct = (req, res) =>{
+
+}
+let updateProduct = (req, res) =>{
+
+}
+let deleteProduct = (req, res) =>{
+    
+}
 
 module.exports = { getAllProductDetails, getProductDetail };
