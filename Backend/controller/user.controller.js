@@ -60,7 +60,7 @@ let signUp = (request, response)=> {
     });
 }
 
-//attempt to sign in to a user account. 
+//attempt to sign in to a user account.
 let signIn = (request, response)=> {
     userLogin = request.body;
     //see if a user with this emailId exists
