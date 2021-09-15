@@ -56,24 +56,38 @@ let addEmployee = (request, response)=> {
 
 //Delete an employee using their id. Will be performed by Admin
 let deleteEmployee = (request, response)=> {
-    let employeeId = request.body;
-    employeeModel.deleteOne({_id:employeeId._id}, (err, result)=> {
-        if (!err) {
-            if (result.deletedCount == 1) {
-                console.log("Successfully deleted employee " + employeeId._id);
-                response.json({result:true, msg:"Successfully deleted employee " + employeeId._id});
+    let delEmpRequest = request.body;
+    //validate admin login that was sent with the employee deletion request. If login is incorrect, do not delete
+    adminModel.find({username:delEmpRequest.adminUsername, password:delEmpRequest.adminPassword}, (err0, result0) =>{
+        if (!err0)
+        {
+            if (result0.length == 0) { //admin account not found
+                response.json({result:false, msg:"Admin credentials invalid"})
             }
-            else {
-                console.log("No employee with that ID found");
-                response.json({result:false, msg:"No employee with that ID found"});
+            else { //admin account found, proceed
+                employeeModel.deleteOne({_id:employeeId._id}, (err, result)=> {
+                    if (!err) {
+                        if (result.deletedCount == 1) {
+                            console.log("Successfully deleted employee " + employeeId._id);
+                            response.json({result:true, msg:"Successfully deleted employee " + employeeId._id});
+                        }
+                        else {
+                            console.log("No employee with that ID found");
+                            response.json({result:false, msg:"No employee with that ID found"});
+                        }
+                        
+                    } 
+                    else {
+                        console.log(err);
+                        response.json({result:false, msg:result});
+                    }
+                })
             }
-            
-        } 
-        else {
-            console.log(err);
-            response.json({result:false, msg:result});
         }
-    })
+        else {
+            response.json({result:false, msg:"Error: " + err0});
+        }
+    });
 }
 
 module.exports = {addEmployee, deleteEmployee};

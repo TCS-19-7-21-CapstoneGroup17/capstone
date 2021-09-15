@@ -10,10 +10,10 @@ let generateReport = (request, response)=> {
     //get all records. Will need to extract their Date() objects to process
     orderModel.find({}, (err, result)=> {
         if (!err) {
-            
+            response.json({result:false, msg:"Error: " + err});
         }
         else {
-
+            //filter the report
         }
     })
 }
