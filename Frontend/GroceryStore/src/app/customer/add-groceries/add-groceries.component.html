@@ -1,27 +1,10 @@
 <div>
     <h3>Add Groceries</h3>
     <hr/>
-
-    <!-- display the products down here -->
-    <div class="cards">
-        <div class="card" *ngFor="let p of productsArray">
-            <!-- get image from ts -->
-            <!-- <img class="card-img-top" src="p.image" alt="Card image cap"> -->
-            <div class="card-body">
-                <h5 class="card-title">{{p.productName}}</h5>
-                <div>
-                    <p>Price: {{p.price}}</p>
-                    <p>Quantity: {{p.quantity}}</p>
-                </div>
-                <div>
-                    <button type="button" (click)="addToCart(p.productName)">Add</button>
-                    <button type="button" (click)="deleteFromCart(p.productName)">Delete</button>
-                </div>
-
-            </div>
-            
-            
+    <!-- display ALL products in grid format -->
+    <div class="container">
+        <div class="row" id="rows">
+            <!-- this is where the products will go -->
         </div>
-    
     </div>
 </div>
