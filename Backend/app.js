@@ -8,6 +8,7 @@ let employeeRouter = require('./router/employee.router');
 let productRouter = require('./router/product.router');
 let userRouter = require('./router/user.router');
 let adminRouter = require('./router/admin.router');
+let orderRouter = require('./router/order.router');
 
 //create express reference and add middleware
 let app = express();
@@ -17,6 +18,7 @@ app.use("/admin", employeeRouter);
 app.use("/product", productRouter);
 app.use("/user", userRouter);
 app.use("/admin", adminRouter);
+app.use("/order", orderRouter);
 
 //connect the database
 mongoose.connect("mongodb://localhost:27017/capstone").

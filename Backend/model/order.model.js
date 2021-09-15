@@ -10,7 +10,9 @@ let orderSchema = mongoose.Schema({
     userId:Number,
     productId:Number,
     price:Number, //price for an individual object (not the total, if purchasing multiple. Can calculate that using this and quantity)
-    date:String, //should store a stringified date object
+    day:Number,
+    month:Number,
+    year:Number,
     quantity:Number,
     status:String //Status of the order like shipped, delivered, etc.
 });
