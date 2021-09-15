@@ -4,14 +4,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { AddGroceriesComponent } from './add-groceries/add-groceries.component';
+import { ShoppingCartComponent } from './customer/shopping-cart/shopping-cart.component';
+import { AddGroceriesComponent } from './customer/add-groceries/add-groceries.component';
+import { CustomerComponent } from './customer/customer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShoppingCartComponent,
-    AddGroceriesComponent
+    AddGroceriesComponent,
+    CustomerComponent
   ],
   imports: [
     BrowserModule,

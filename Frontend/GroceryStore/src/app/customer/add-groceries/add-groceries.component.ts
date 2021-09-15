@@ -4,7 +4,7 @@ import { EditCartService } from '../edit-cart.service';
 @Component({
   selector: 'app-add-groceries',
   templateUrl: './add-groceries.component.html',
-  styleUrls: ['./add-groceries.component.css']
+  styleUrls: ['./add-groceries.component.css', '../customer.component.css']
 })
 export class AddGroceriesComponent implements OnInit {
   // variables

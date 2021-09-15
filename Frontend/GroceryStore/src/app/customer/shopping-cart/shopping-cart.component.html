@@ -1,0 +1,21 @@
+<div>
+    <h3>Shopping Cart</h3>
+
+    <div class="cards">
+        <div class="card" *ngFor="let p of shoppingCart">
+            <!-- get image from ts -->
+            <!-- <img class="card-img-top" src="p.image" alt="Card image cap"> -->
+            <div class="card-body">
+                <h5 class="card-title">{{p.productName}}</h5>
+                <div>
+                    <!-- <p>Price: {{p.price}}</p> -->
+                    <p>Quantity: {{p.quantity}}</p>
+                </div>
+    
+            </div>
+    
+    
+        </div>
+    
+    </div>
+</div>
