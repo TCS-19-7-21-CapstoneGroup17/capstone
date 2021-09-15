@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdersService } from 'src/app/orders.service';
-import { UserService } from 'src/app/user.service';
+import { OrdersService } from 'src/app/employee/orders.service';
+import { UserService } from 'src/app/employee/user.service';
 
 @Component({
   selector: 'app-out-for-delivery-orders',

@@ -31,7 +31,7 @@ import { AppRoutingModule } from './app-routing.module';
     ShippedOrdersComponent,
     DeliveredOrdersComponent,
     CancelledOrdersComponent,
-    OutForDeliveryOrdersComponent,
+    OutForDeliveryOrdersComponent
     ],
   imports: [
     BrowserModule,
