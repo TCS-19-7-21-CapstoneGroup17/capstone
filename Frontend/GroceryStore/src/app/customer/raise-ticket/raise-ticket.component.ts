@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { EditCartService } from '../edit-cart.service';
 
 @Component({
   selector: 'app-raise-ticket',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RaiseTicketComponent implements OnInit {
 
-  constructor() { }
+  ticketRef = new FormGroup({
+    userID: new FormControl(),
+    reason: new FormControl()
+  })
+
+  constructor(public editCartSer: EditCartService) { }
 
   ngOnInit(): void {
+  }
+
+  submitTicket() {
+    let ticket = { "userID": this.ticketRef.value.userID, "reason": this.ticketRef.value.reason };
+    this.editCartSer.sendTicket(ticket).subscribe((result) => {
+      console.log(result);
+    })
   }
 
 }

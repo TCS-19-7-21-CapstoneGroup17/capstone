@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from './product';
+import { Ticket } from './ticket';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,11 @@ export class EditCartService {
 
   getOneProduct(pName: string): Observable<any>{
     return this.http.get("http://localhost:9090/product/getProduct/" + pName);
+  }
+
+  // send ticket to unlock user account
+  sendTicket(ticket: Ticket): Observable<any>{
+    return this.http.post("http://localhost:9090/ticket/addTicket", ticket);
   }
 
   // given an array of products, display products in a grid

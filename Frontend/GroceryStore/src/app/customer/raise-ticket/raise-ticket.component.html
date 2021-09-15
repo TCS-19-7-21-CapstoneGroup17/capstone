@@ -1,9 +1,9 @@
 <div>
     <h3>Raise Ticket</h3>
-    <form>
+    <form [formGroup]="ticketRef" (ngSubmit)="submitTicket()">
         <!--  -->
-        User ID: <input type="number"/> <br/>
-        Reason: <input type="text"/><br/>
+        User ID: <input type="number" formControlName="userID" /> <br/>
+        Reason: <input type="text" formControlName="reason" /><br/>
         <input type="submit" value="Submit"/>
     </form>
 </div>

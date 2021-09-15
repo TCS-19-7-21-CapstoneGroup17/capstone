@@ -8,6 +8,7 @@ import { ShoppingCartComponent } from './customer/shopping-cart/shopping-cart.co
 import { AddGroceriesComponent } from './customer/add-groceries/add-groceries.component';
 import { CustomerComponent } from './customer/customer.component';
 import { RaiseTicketComponent } from './customer/raise-ticket/raise-ticket.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RaiseTicketComponent } from './customer/raise-ticket/raise-ticket.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
