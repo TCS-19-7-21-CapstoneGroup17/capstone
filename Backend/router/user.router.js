@@ -9,5 +9,7 @@ let router = express.Router();
 router.post("/signUp/", userController.signUp);
 router.get("/editProfile/", userController.getUserInfo);
 router.post("/editProfile/update/", userController.editUserInfo);
+router.get("/addFunds/", userController.getUserFunds);
+router.post("/addFunds/update/", userController.addFunds);
 
 module.exports = router;

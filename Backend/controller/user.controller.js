@@ -99,4 +99,37 @@ let editUserInfo = (request, response) => {
         });
 }
 
-module.exports = {signUp, getUserInfo, editUserInfo}
+let getUserFunds = (request, response) => {
+    // pull the id
+    let userId = request.body;
+    userModel.findOne({_id:userId}, (err, res) => {
+        if(!err){
+            response.send(res.fundsAmt)
+        }else{
+            response.json(err);
+        }
+    })
+}
+
+let addFunds = (request, response) => {
+    // pull the id
+    let updateFunds = request.body;
+    userModel.findOne({_id:userId}, (err, res) => {
+        if(!err){
+            if(res.fundsAmt != null){
+                let newAmt = parseInt(userId.amt) + res.fundsAmt;
+                userModel.updateOne({_id:updateFunds.id}, {$set:{fundsAmt:newAmt}}, {$set:{bankAccountNumber:updateFunds.bankAccountNumber}}, (err1, res1) => {
+                    if(!err1){
+                        response.json(res1);
+                    }else{
+                        response.json(err1);
+                    }
+                });
+            }
+        }else{
+            response.json(err);
+        }
+    })
+}
+
+module.exports = {signUp, getUserInfo, editUserInfo, getUserFunds, addFunds}
