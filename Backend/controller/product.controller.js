@@ -27,13 +27,33 @@ let getProductDetail = (request, response) => {
 }
 
 let addProduct = (req, res) =>{
+    let product = req.body;
 
+    productModel.insertMany(product,(err, result)=> {
+        if (!err){
+            res.send("Product stored successfully");
+            //return to dashboard?
+        }
+        else{
+            res.send(err);
+        }
+    })
 }
 let updateProduct = (req, res) =>{
-
+    let product = req.body;
+    
+    //let ?price = product.productPrice;
+    //let ?quantity = product.productQuantity;
+    productModel.find({productName:product.productName},(err,result)=>{
+        //update with new price or quantity
+    })
 }
 let deleteProduct = (req, res) =>{
+    let product = req.body;
     
+    productModel.find({productName:product.productName},(err,result)=>{
+        //delete entry
+    })
 }
 
-module.exports = { getAllProductDetails, getProductDetail };
+module.exports = { getAllProductDetails, getProductDetail, addProduct, updateProduct, deleteProduct };
