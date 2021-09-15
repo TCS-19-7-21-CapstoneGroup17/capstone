@@ -18,7 +18,7 @@ let getAllProductDetails = (request, response) => {
 // send the array of all rows in Products table that have that product name
 let getProductDetail = (request, response) => {
     let productName = request.params.pName;
-    productModel.find({productName: productName}, (err, data) => {
+    productModel.find({ productName: productName }, (err, data) => {
         if (err) response.json(err)
         else {
             response.json(data);
@@ -26,38 +26,55 @@ let getProductDetail = (request, response) => {
     })
 }
 
-// in the request body, given an ONE product in json format
-// (quantity given <= quantity in database)
-// new quantity = quantity in db - quantity given in body
-let updateProducts = (request, response) => {
-    let updateProduct = request.body;
+let addProduct = (req, res) => {
+    let product = req.body;
 
-    productModel.findOne({ productName: updateProduct.productName }, (err, result) => {
+    productModel.insertMany(product, (err, result) => {
         if (!err) {
-            if (result && result.quantity >= updateProduct.quantity) {
-                
-                productModel.updateOne({ productName: updateProduct.productName }, { $set: { quantity: result.quantity - updateProduct.quantity } }, (err1, result1) => {
-                    if (!err1) {
-                        if (result1.modifiedCount > 0) {
-                            console.log("Successfully modified product: " + updateProduct.productName);
-                            response.json({ result: true, msg: "Successfully modified product: " + updateProduct.productName });
-                        }
-                    }
-                    else {
-                        console.log("Error modifying product: " + updateProduct.productName);
-                        response.json({ result: false, msg: "Error: " + err1 });
-                    }
-                })
-            }
-            else {
-                response.json({ result: false, msg: "Error: Product does not exist in database" });
-            }
+            res.send("Product stored successfully");
+            //return to dashboard?
         }
         else {
-            response.json({ result: false, msg: "Error: " + err });
+            res.send(err);
+        }
+    })
+}
+let updateProduct = (req, res) => {
+    let product = req.body;
+
+    if (product.price != null) {
+        productModel.updateOne({ productName: product.productName }, { $set: { price: product.price } }, (err, result) => {
+            if (!err) {
+                res.send("Product updated successfully")
+            }
+            else {
+                res.send(err);
+            }
+        })
+    }
+    else if (product.quantity != null) {
+        productModel.updateOne({ productName: product.productName }, { $set: { quantity: product.quantity } }, (err, result) => {
+            if (!err) {
+                res.send("Product updated successfully")
+            }
+            else {
+                res.send(err);
+            }
+        })
+    }
+
+}
+let deleteProduct = (req, res) => {
+    let product = req.body;
+
+    productModel.deleteOne({ productName: product.productName }, (err, result) => {
+        if (!err) {
+            res.send("Product deleted successfully");
+        }
+        else {
+            res.send(err);
         }
     })
 }
 
-
-module.exports = { getAllProductDetails, getProductDetail, updateProducts };
+module.exports = { getAllProductDetails, getProductDetail, addProduct, updateProduct, deleteProduct };
