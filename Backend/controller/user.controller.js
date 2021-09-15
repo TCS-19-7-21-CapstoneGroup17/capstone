@@ -23,9 +23,10 @@ let signUp = (request, response)=> {
                             userId = result1[0]._id + 1;
                         }
                         //attempt to add the new user. loginAttempts will be 3, representing the amount of failed attempts the user can make to login before locking the account
+                        //users start with $500 available funds
                         userModel.insertMany({_id:userId, firstname:newUser.firstname, lastname:newUser.lastname,
                             emailId:newUser.emailId, password:newUser.password, dob:newUser.dob, phone:newUser.phone,
-                            address:newUser.address, loginAttempts:3}, (err2, result2)=> {
+                            address:newUser.address, loginAttempts:3, fundsAmt:500}, (err2, result2)=> {
                                 if (!err) {
                                     if (result2 == undefined) {
                                         response.json({result:false, msg:"Failed to add user " + userId + ". Check that input types are valid"});
@@ -60,14 +61,14 @@ let signUp = (request, response)=> {
     });
 }
 
-//attempt to sign in to a user account.
+//attempt to sign in to a user account. Sign in using user ID and password
 let signIn = (request, response)=> {
     userLogin = request.body;
-    //see if a user with this emailId exists
-    userModel.find({emailId:userLogin.emailId}, (err, result)=>{
+    //see if a user with this id exists
+    userModel.find({_id:userLogin._id}, (err, result)=>{
         if (!err) {
-            if (result.length == 0) { //email not found
-                response.json({result:false, msg:"Email or password is incorrect"})
+            if (result.length == 0) { //id not found
+                response.json({result:false, msg:"ID or password is incorrect"})
             }
             else {
                 //check remaining login attempts
@@ -76,16 +77,16 @@ let signIn = (request, response)=> {
                     response.json({result:false, msg:"No login attempts remaining. Your account has been locked"})
                 }
                 else {
-                    //check password. Didn't check the first time because if emailId didn't exist,
+                    //check password. Didn't check the first time because if ID didn't exist,
                     // we wouldn't be able to check remaining login attempts
-                    userModel.find({emailId:userLogin.emailId, password:userLogin.password}, (err1, result1) => {
+                    userModel.find({_id:userLogin._id, password:userLogin.password}, (err1, result1) => {
                         if (!err1) {
-                            if (result1.length == 0) { //email and password combination didn't match
+                            if (result1.length == 0) { //ID and password combination didn't match
                                 //update remaining login attempts
-                                userModel.updateMany({emailId:userLogin.emailId}, {$set:{loginAttempts:attempts - 1}}, (err2, result2)=> {
+                                userModel.updateMany({_id:userLogin._id}, {$set:{loginAttempts:attempts - 1}}, (err2, result2)=> {
                                     if (!err2) {
                                         console.log(result2);
-                                        response.json({result:false, msg:"Email or password is incorrect"});
+                                        response.json({result:false, msg:"ID or password is incorrect"});
                                     }
                                     else {
                                         response.json({result:false, msg:"Error: " + err2});
@@ -94,7 +95,7 @@ let signIn = (request, response)=> {
                             }
                             else {
                                 //login successful. Update login attempts back to 3
-                                userModel.updateMany({emailId:userLogin.emailId}, {$set:{loginAttempts:3}}, (err2, result2)=> {
+                                userModel.updateMany({_id:userLogin._id}, {$set:{loginAttempts:3}}, (err2, result2)=> {
                                     if (!err2) {
                                         response.json({result:true, msg:"Login successful"})
                                     }
