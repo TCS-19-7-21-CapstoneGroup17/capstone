@@ -1,12 +1,27 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+
+
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { OrderStatusComponent } from './user/order-status/order-status.component';
 import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
 import { FundsComponent } from './user/funds/funds.component';
+import { EmployeeComponent } from './employee/employee.component';
+import { FormsModule } from '@angular/forms';
+import {ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import { SendRequestComponent } from './employee/send-request/send-request.component';
+import { UpdateOrderStatusComponent } from './employee/update-order-status/update-order-status.component';
+import { UnlockUsersComponent } from './employee/unlock-users/unlock-users.component';
+import { EditEmployeeProfileComponent } from './employee/edit-employee-profile/edit-employee-profile.component';
+import { PendingOrdersComponent } from './employee/update-order-status/pending-orders/pending-orders.component';
+import { ShippedOrdersComponent } from './employee/update-order-status/shipped-orders/shipped-orders.component';
+import { DeliveredOrdersComponent } from './employee/update-order-status/delivered-orders/delivered-orders.component';
+import { CancelledOrdersComponent } from './employee/update-order-status/cancelled-orders/cancelled-orders.component';
+import { OutForDeliveryOrdersComponent } from './employee/update-order-status/out-for-delivery-orders/out-for-delivery-orders.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -14,11 +29,24 @@ import { FundsComponent } from './user/funds/funds.component';
     UserComponent,
     OrderStatusComponent,
     EditProfileComponent,
-    FundsComponent
+    FundsComponent,
+    EmployeeComponent,
+    SendRequestComponent,
+    UpdateOrderStatusComponent,
+    UnlockUsersComponent,
+    EditEmployeeProfileComponent,
+    PendingOrdersComponent,
+    ShippedOrdersComponent,
+    DeliveredOrdersComponent,
+    CancelledOrdersComponent,
+    OutForDeliveryOrdersComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
