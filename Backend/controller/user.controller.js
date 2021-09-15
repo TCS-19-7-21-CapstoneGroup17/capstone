@@ -68,8 +68,8 @@ let signIn = (request, response)=> {
 // gets the info to pre fill the response fields in the edit user panel
 let getUserInfo = (request, response) => {
     // need employee id used request as placeholder
-    let empId = request.body;
-    userModel.findOne({_id:empId}, (err, res)=> {
+    let userId = request.body;
+    userModel.findOne({_id:userId}, (err, res)=> {
         if(!err){
             response.json(res);
         }else{
@@ -78,8 +78,25 @@ let getUserInfo = (request, response) => {
     })
 }
 
-let editEmployeeInfo = (request, response) => {
-    //
+// with input prefilled we can update all of it at once since user can change any and leave the rest
+let editUserInfo = (request, response) => {
+    // still need the way to pull the user id, using placeholder instead
+    let updatedInfo = request.body;
+    userModel.updateOne({_id:updatedInfo.id},
+        {$set:{firstname:updatedInfo.firstname}},
+        {$set:{lastname:updatedInfo.lastname}},
+        {$set:{emailId:updatedInfo.emailId}},
+        {$set:{password:updatedInfo.password}},
+        {$set:{dob:updatedInfo.dob}},
+        {$set:{phone:updatedInfo.phone}},
+        {$set:{address:updatedInfo.address}},
+        (err, res) => {
+            if(!err){
+                response.json(res);
+            }else{
+                response.json(err);
+            }
+        });
 }
 
-module.exports = {signUp}
+module.exports = {signUp, getUserInfo, editUserInfo}

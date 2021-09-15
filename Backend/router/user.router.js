@@ -7,5 +7,7 @@ let router = express.Router();
 
 //handle REST methods using controller functions, and define urls used to call them
 router.post("/signUp/", userController.signUp);
+router.get("/editProfile/", userController.getUserInfo);
+router.post("/editProfile/update/", userController.editUserInfo);
 
 module.exports = router;
