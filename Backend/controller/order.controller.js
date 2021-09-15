@@ -6,7 +6,16 @@ let orderModel = require('../model/order.model');
 //Will be performed by admin. Generate report of all orders made
 //Can specify if it should make a daily report, weekly report, monthly report, or give all data
 let generateReport = (request, response)=> {
+    let reportType = request.body;
+    //get all records. Will need to extract their Date() objects to process
+    orderModel.find({}, (err, result)=> {
+        if (!err) {
+            
+        }
+        else {
 
+        }
+    })
 }
 
 //Will be performed by admin. Generate report of all orders made with a specific product
