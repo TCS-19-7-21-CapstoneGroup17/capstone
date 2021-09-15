@@ -7,9 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerComponent implements OnInit {
   // variables
-  clicked_AddGroceries: boolean = true;
+  clicked_AddGroceries: boolean = false;
   clicked_ViewShoppingCart: boolean = false;
-
   
   constructor() { }
 

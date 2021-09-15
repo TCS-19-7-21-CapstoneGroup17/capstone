@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { ShoppingCartComponent } from './customer/shopping-cart/shopping-cart.component';
 import { AddGroceriesComponent } from './customer/add-groceries/add-groceries.component';
 import { CustomerComponent } from './customer/customer.component';
+import { RaiseTicketComponent } from './customer/raise-ticket/raise-ticket.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ShoppingCartComponent,
     AddGroceriesComponent,
-    CustomerComponent
+    CustomerComponent,
+    RaiseTicketComponent
   ],
   imports: [
     BrowserModule,
