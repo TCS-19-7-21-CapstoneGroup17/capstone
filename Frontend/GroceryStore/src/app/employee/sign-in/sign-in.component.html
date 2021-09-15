@@ -1,0 +1,11 @@
+<div>
+    <h2>Employee Sign In</h2>
+    <form [formGroup]="employeeLoginRef" (ngSubmit)="checkEmployee()">
+        <label>Employee ID: </label>
+        <input type="text" formControlName="id"/><br/>
+        <label>Password: </label>
+        <input type="password" formControlName="password"/><br/>
+        <input type="submit" value="Sign In"/>
+        <input type="reset" value="Reset"/>
+    </form>
+</div>

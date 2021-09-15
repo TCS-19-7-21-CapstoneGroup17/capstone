@@ -22,6 +22,7 @@ import { DeliveredOrdersComponent } from './employee/update-order-status/deliver
 import { CancelledOrdersComponent } from './employee/update-order-status/cancelled-orders/cancelled-orders.component';
 import { OutForDeliveryOrdersComponent } from './employee/update-order-status/out-for-delivery-orders/out-for-delivery-orders.component';
 import { AppRoutingModule } from './app-routing.module';
+import { SignInComponent } from './employee/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -39,14 +40,16 @@ import { AppRoutingModule } from './app-routing.module';
     ShippedOrdersComponent,
     DeliveredOrdersComponent,
     CancelledOrdersComponent,
-    OutForDeliveryOrdersComponent
+    OutForDeliveryOrdersComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
