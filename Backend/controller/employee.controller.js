@@ -64,7 +64,7 @@ let deleteEmployee = (request, response)=> {
 // sign in page for the employee with emailID and password
 let signInEmployee = (request, response) => {
     let login = request.body;
-    employeeModel.findOne({emailId:login.email, password:login.password}, (err, result)=>{
+    employeeModel.findOne({_id:login.id, password:login.password}, (err, result)=>{
         if(!err){
             // Employee successfully logged in
             response.send("Success");

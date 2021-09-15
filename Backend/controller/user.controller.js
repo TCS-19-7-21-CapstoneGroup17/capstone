@@ -65,4 +65,21 @@ let signIn = (request, response)=> {
     })
 }
 
+// gets the info to pre fill the response fields in the edit user panel
+let getUserInfo = (request, response) => {
+    // need employee id used request as placeholder
+    let empId = request.body;
+    userModel.findOne({_id:empId}, (err, res)=> {
+        if(!err){
+            response.json(res);
+        }else{
+            response.json(err);
+        }
+    })
+}
+
+let editEmployeeInfo = (request, response) => {
+    //
+}
+
 module.exports = {signUp}
