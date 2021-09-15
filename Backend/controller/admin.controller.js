@@ -12,9 +12,4 @@ let signIn = async (req,res)=> {
     }
 }
 
-// let signIn = (req, res) => {
-//     adminModel.find({}, (err, data) => {
-
-//     })
-// }
 module.exports = { signIn }

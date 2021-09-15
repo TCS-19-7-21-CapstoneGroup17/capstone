@@ -13,7 +13,9 @@ router.get('/getProduct/:pName', productController.getProductDetail);
 router.post('/addProduct',productController.addProduct);
 
 //update product
+router.post('/updateProduct',productController.updateProduct);
 
 //delete product
+router.post('/deleteProduct', productController.deleteProduct);
 
 module.exports = router;
