@@ -14,7 +14,9 @@ let userSchema = mongoose.Schema({
     dob:String,
     phone:Number,
     address:String,
-    loginAttempts:Number
+    loginAttempts:Number,
+    bankAccountNumber:Number,
+    fundsAmt:Number
 });
 
 //create the user model using the user schema
