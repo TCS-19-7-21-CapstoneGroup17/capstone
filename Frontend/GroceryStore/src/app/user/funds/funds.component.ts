@@ -23,6 +23,7 @@ export class FundsComponent implements OnInit {
 
   showFundsPageFlag:boolean = false;
   amt:Number = -1;
+  msg?:string
 
   ngOnInit(): void {
   }
@@ -43,7 +44,11 @@ export class FundsComponent implements OnInit {
     let userId = this.userIDref.value;
     let bankInfo = this.userFundsAcct.value;
     let bankInfoWithId = {...userId , ...bankInfo};
-    
+    this.user_service.updateFundsInfo(bankInfoWithId).
+    subscribe(result=> {
+      this.msg = result;
+    },
+    error=>console.log(error));
   }
 
 }

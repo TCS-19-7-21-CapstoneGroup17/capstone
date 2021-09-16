@@ -1,21 +1,30 @@
 <div>
-    <h2>Grocery Store Funds!</h2>
-    <h4>Enter Your User ID</h4>
-    <form [formGroup]="userIDref" (ngSubmit)="submitUserId()">
-        <label>User ID</label>
-        <input type="text" formControlName="userId"/><br/>
-        <input type="submit" value="View Funds"/>
-    </form>
-    <div *ngIf="showFundsPageFlag">
-        <h3>You have {{amt}} dollars in your account!</h3>
-        <br/>
-        <form [formGroup]="userFundsAcct">
-            <h3>Add funds here:</h3>
-            <label>Account Number </label>
-            <input type="text" name="accountNum"/><br/>
-            <label>Amount </label>
-            <input type="text" name="amount"/><br/>
-            <input type="submit" value="Add Funds"/>
-        </form>
+    <div class="container" style="background-color: rgb(179, 179, 179); box-shadow: 4px 4px 6px black; margin-top: 15%;">
+        <div class="row">
+            <h2 style="text-align: center; margin-top: 15px;">Grocery Store Funds!</h2>
+        </div>
+        <div class="row" style="text-align: center;">
+            <h4>Enter Your User ID</h4>
+            <form [formGroup]="userIDref" (ngSubmit)="submitUserId()">
+                <label>User ID: </label>
+                <input type="text" formControlName="userId" style="margin-bottom: 10px;"/><br/>
+                <input type="submit" value="View Funds" class="btn-primary" style="margin-bottom: 10px;"/>
+            </form>
+            <div *ngIf="showFundsPageFlag">
+                <h3>You have {{amt}} dollars in your account!</h3>
+                <br/>
+                <form [formGroup]="userFundsAcct" (ngSubmit)="fundsTransaction()">
+                    <h3>Add funds here:</h3>
+                    <label>Account Number:  </label>
+                    <input type="text" formControlName="bankAccountref" style="margin-bottom: 10px;"/><br/>
+                    <label>Amount: </label>
+                    <input type="text" formControlName="fundsAmtRef" style="margin-bottom: 10px;"/><br/>
+                    <input type="submit" value="Add Funds" class="btn-primary" style="margin-bottom: 20px;"/>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <span class="alert" role="alert" style="text-align: center;">{{msg}}</span>
+        </div>
     </div>
 </div>
