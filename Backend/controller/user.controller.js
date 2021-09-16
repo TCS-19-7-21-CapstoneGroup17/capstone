@@ -118,4 +118,43 @@ let signIn = (request, response) => {
     })
 }
 
-module.exports = { signUp, signIn }
+// given {userID, totalCost} in request.body
+let updateFund = (request, response) => {
+    let updateInfo = request.body;
+    console.log(updateInfo)
+    userModel.find({ _id: updateInfo.userID }, (err, result) => {
+        if (!err) {
+            if (result.length == 0) {
+                response.json({ result: false, msg: "Error: User ID not found" });
+            }
+            else {
+                // if funds >= groceries cost
+                console.log(result[0].fundsAmt + " " + updateInfo.totalCost);
+                if (result[0].fundsAmt >= updateInfo.totalCost) {
+                    userModel.updateMany({ _id: updateInfo.userID }, { $set: { fundsAmt: result[0].fundsAmt - updateInfo.totalCost } }, (err1, result1) => {
+                        if (!err1) {
+                            console.log(result1.modifiedCount)
+                            if (result1.modifiedCount > 0) {
+                                response.json({ result: true, msg: "Successfully update funds" });
+                            }
+                            else {
+                                response.json({ result: false, msg: "Error: Funds not updated" });
+                            }
+                        }
+                        else {
+                            response.json({ result: false, msg: "Error: " + err1 });
+                        }
+                    })
+                }
+                else {
+                    response.json({ result: false, msg: "Error: Insufficient funds" });
+                }
+            }
+        }
+        else {
+            response.json({result: false, msg: "Error: " + err})
+        }
+    })
+}
+
+module.exports = { signUp, signIn, updateFund }

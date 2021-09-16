@@ -35,13 +35,29 @@ export class EditCartService {
     return this.http.post("http://localhost:9090/ticket/addTicket", ticket);
   }
 
-  // input: user info from form input { firstname, lastname, emailId, password, dob, phone, address }
+  // input: user info from signup page { firstname, lastname, emailId, password, dob, phone, address }
   addUser(user: User): Observable<any> {
     return this.http.post("http://localhost:9090/user/signUp", user);
   }
 
+  // input: user info from signin page {userID, password}
   checkSignIn(user: any): Observable<any>{
     return this.http.post("http://localhost:9090/user/signIn", user);
+  }
+
+  // input: checkout cost details {userID, totalCost of shopping cart}
+  updateFunds(info: any): Observable<any>{
+    return this.http.post("http://localhost:9090/user/updateFund", info);
+  }
+
+  // input: new product quantity {productName, newQuantity}
+  updateProductQuantity(quantity: any): Observable<any>{
+    return this.http.post("http://localhost:9090/product/updateProduct", quantity);
+  }
+
+  // input: order {userID, productName, price (per product), day, month, year, quantity, status}
+  addOrder(order: any): Observable<any>{
+    return this.http.post("http://localhost:9090/order/addOrder", order);
   }
 
   // input: none

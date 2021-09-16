@@ -53,5 +53,68 @@ export class ShoppingCartComponent implements OnInit {
 
   }
 
+  // need userID, totalCost, productName, productQuantity
+  doCheckout() {
+    console.log("doing checkout")
+
+    let userID = this.editCartSer.getUserID();
+    let totalCost = 0;
+
+    // if user has their shopping cart in localStorage
+    if (localStorage.getItem(JSON.stringify(userID))) {
+      this.shoppingCart = JSON.parse(localStorage.getItem(JSON.stringify(userID)) || "");
+
+      for (let idx in this.shoppingCart) {
+        // for each product in the shopping cart, get the full details of it
+        // product[0] == ALL details about product (from db)
+        // shoppingCart[idx] == productName + quantity in cart
+        this.editCartSer.getOneProduct(this.shoppingCart[idx].productName).subscribe(product => {
+          let date = new Date();
+          let order = {
+            userId: userID,
+            productName: this.shoppingCart[idx].productName,
+            price: product[0].price,
+            day: date.getDate(),
+            month: date.getMonth(),
+            year: date.getFullYear(),
+            quantity: this.shoppingCart[idx].quantity,
+            status: "shipped"
+          }
+          this.editCartSer.addOrder(order).subscribe(orderRes => {
+            // if successfully add to Order table ... 
+            if (orderRes.result) {
+              let prodQuan = {
+                productName: this.shoppingCart[idx].productName,
+                quantity: product[0].quantity - this.shoppingCart[idx].quantity
+              };
+              this.editCartSer.updateProductQuantity(prodQuan).subscribe(updateQuantityRes => {
+                // if successfully updated product quantity ... 
+                if (updateQuantityRes.result) {
+                  totalCost += this.shoppingCart[idx].quantity * product[0].price;
+                  if (parseInt(idx) == this.shoppingCart.length - 1) {
+                    this.editCartSer.updateFunds({ userID: userID, totalCost: totalCost }).subscribe(updateFundRes => {
+                      if (updateFundRes) {
+                        this.shoppingCart = []
+                        localStorage.setItem(JSON.stringify(userID), JSON.stringify(this.shoppingCart));
+                      }
+                      else {
+                        console.log(updateFundRes.msg)
+                      }
+                    })
+                  }
+                }
+                else {
+                  console.log(updateQuantityRes.msg);
+                }
+              })
+            }
+            else {
+              console.log(orderRes.msg);
+            }
+          })
+        })
+      }
+    }
+  }
 
 }

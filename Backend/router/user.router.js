@@ -8,5 +8,6 @@ let router = express.Router();
 //assign url paths to methods
 router.post("/signUp/", userController.signUp);
 router.post("/signIn/", userController.signIn);
+router.post("/updateFund", userController.updateFund)
 
 module.exports = router;
