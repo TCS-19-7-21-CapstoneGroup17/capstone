@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdersService } from 'src/app/orders.service';
+import { OrdersService } from 'src/app/employee/orders.service';
 
 @Component({
   selector: 'app-cancelled-orders',

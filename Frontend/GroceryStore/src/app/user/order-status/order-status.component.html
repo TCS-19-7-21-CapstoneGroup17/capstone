@@ -1,3 +1,11 @@
 <div>
     <h2>Order Status</h2>
-</div>>
+    <form [formGroup]="userIDform" (ngSubmit)="displayOrders()">
+        <h4>Enter User ID</h4>
+        <label>User ID</label>
+        <input type="text" formControlName="userId"/><br/>
+        <input type="submit" value="Display Orders"/>
+    </form>
+    <div id="orderTable">
+    </div>
+</div>

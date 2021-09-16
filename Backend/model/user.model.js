@@ -16,7 +16,8 @@ let userSchema = mongoose.Schema({
     address: String,
     loginAttempts: Number,
     bankAccountNumber: Number,
-    fundsAmt: Number
+    fundsAmt: Number,
+    bankFunds: Number
 });
 
 //create the user model using the user schema

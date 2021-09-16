@@ -1,0 +1,27 @@
+<div>
+    <div class="container" style="background-color: rgb(179, 179, 179); box-shadow: 4px 4px 6px black; margin-top: 15%;">
+        <div class="row">
+            <h2 style="text-align: center; margin-top: 15px;">Employee Sign In</h2>
+        </div>
+        <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-6">
+                <form [formGroup]="employeeLoginRef" (ngSubmit)="checkEmployee()">
+                    <label>Employee ID: </label>
+                    <input type="text" formControlName="empId" class="form-control"/><br/>
+                    <label>Password: </label>
+                    <input type="password" formControlName="password" class="form-control"/><br/>
+                    <input type="submit" value="Sign In" style="margin-right: 5px;" class="btn-primary"/>
+                    <input type="reset" value="Reset" class="btn-danger" style="margin-bottom: 5px;"/>
+                </form>
+                
+            </div>
+            <div class="col-3">
+            </div>
+        </div>
+        <div class="row">
+            <span class="alert" role="alert" style="text-align: center; color: crimson;">{{msg}}</span>
+        </div>
+    </div>
+</div>

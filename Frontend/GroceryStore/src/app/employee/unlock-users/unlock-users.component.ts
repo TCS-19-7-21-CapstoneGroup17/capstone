@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Data } from 'src/app/model.ticket';
-import { UserService } from 'src/app/user.service';
+import { Data } from 'src/app/employee/model.ticket';
+import { UserService } from 'src/app/employee/user.service';
 
 @Component({
   selector: 'app-unlock-users',

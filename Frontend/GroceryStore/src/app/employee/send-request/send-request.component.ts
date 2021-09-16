@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Data, Router } from '@angular/router';
-import { ProductRequestService } from 'src/app/product-request.service';
-import { ProductService } from 'src/app/product.service';
+import { ProductRequestService } from 'src/app/employee/product-request.service';
+import { ProductService } from 'src/app/employee/product.service';
 
 
 @Component({

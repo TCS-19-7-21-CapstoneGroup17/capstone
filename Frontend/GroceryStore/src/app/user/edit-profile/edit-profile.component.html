@@ -3,7 +3,7 @@
     <form (ngSubmit)  ="updateProfile()">
         <label>First Name </label>
         <input type="text" name="firstname" [(ngModel)]="firstname"/><br/>
-
+        
         <label>Last Name </label>
         <input type="text" name="lastname" [(ngModel)]="lastname"/><br/>
 
@@ -26,4 +26,3 @@
     </form>
     <p style="color:darkgreen">{{successMessage}}</p>
     <p style="color:red">{{errorMessage}}</p>
-</div>

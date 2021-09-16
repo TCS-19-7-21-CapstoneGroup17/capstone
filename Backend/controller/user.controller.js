@@ -1,4 +1,5 @@
 //load the user model
+const orderModel = require('../model/order.model');
 let userModel = require('../model/user.model');
 
 //define the functions for use with the user table
@@ -22,25 +23,41 @@ let signUp = (request, response) => {
                             //sorted from highest to lowest, so result[0] will have the highest id
                             userId = result1[0]._id + 1;
                         }
-                        //attempt to add the new user. loginAttempts will be 3, representing the amount of failed attempts the user can make to login before locking the account
-                        //users start with $500 available funds
-                        userModel.insertMany({
-                            _id: userId, firstname: newUser.firstname, lastname: newUser.lastname,
-                            emailId: newUser.emailId, password: newUser.password, dob: newUser.dob, phone: newUser.phone,
-                            address: newUser.address, loginAttempts: 3, fundsAmt: 500 }, (err2, result2) => {
+                        //get highest bank account number. New user's account number will be this + 1
+                        userModel.find({}).sort([["bankAccountNumber", -1]]).exec((err2, result2)=> {
                             if (!err2) {
-                                if (result2 == undefined) {
-                                    response.json({ result: false, msg: "Failed to add user " + userId + ". Check that input types are valid" });
+                                let bankNum;
+                                if (result2.length == 0) { //no existing users with bank account numbers. Start with 100000
+                                    bankNum = 100000;
                                 }
                                 else {
-                                    response.json({ result: true, msg: "Successfully added user " + userId, uid:userId });
+                                    bankNum = result2[0].bankAccountNumber + 1;
                                 }
+                                //attempt to add the new user. loginAttempts will be 3, representing the amount of failed attempts the user can make to login before locking the account
+                                //users start with $500 available funds, and $2500 in their bank account
+                                userModel.insertMany({
+                                    _id: userId, firstname: newUser.firstname, lastname: newUser.lastname,
+                                    emailId: newUser.emailId, password: newUser.password, dob: newUser.dob, phone: newUser.phone,
+                                    address: newUser.address, loginAttempts: 3, bankAccountNumber:bankNum,
+                                    fundsAmt: 500, fundsAmt:2500 }, (err3, result3) => {
+                                    if (!err3) {
+                                        if (result3 == undefined) {
+                                            response.json({ result: false, msg: "Failed to add user " + userId + ". Check that input types are valid" });
+                                        }
+                                        else {
+                                            response.json({ result: true, msg: "Successfully added user " + userId, uid:userId });
+                                        }
+                                    }
+                                    else {
+                                        console.log("Error: " + err3);
+                                        response.json({ result: false, msg: "Error: " + err3 });
+                                    }
+                                });
                             }
                             else {
-                                console.log("Error: " + err2);
-                                response.json({ result: false, msg: "Error: " + err2 });
+                            response.json({ result: false, msg: "Error: " + err2 });
                             }
-                        });
+                        })
                     }
                     else {
                         console.log(err1);
@@ -162,6 +179,7 @@ let getUserInfo = (request, response) => {
     let userId = request.body;
     userModel.findOne({_id:userId._id}, (err, res)=> {
         if(!err){
+            console.log(res)
             response.json(res);
         }else{
             response.json(err);
@@ -187,10 +205,11 @@ let editUserInfo = (request, response) => {
 
 let getUserFunds = (request, response) => {
     // pull the id
-    let userId = request.body;
-    userModel.findOne({_id:userId}, (err, res) => {
+    let usrId = request.body;
+    userModel.findOne({_id:usrId.userId}, (err, res)=> {
         if(!err){
-            response.send(res.fundsAmt)
+            console.log(res)
+            response.json(res);
         }else{
             response.json(err);
         }
@@ -218,4 +237,17 @@ let addFunds = (request, response) => {
     })
 }
 
-module.exports = {signUp, signIn, getUserInfo, editUserInfo, getUserFunds, addFunds, updateFund}
+let getOrderStatus = (request,response) => {
+    let usrID = request.body;
+    orderModel.find({userId:usrID.userId}, (err, data) => {
+        if (!err) {
+            console.log("sending data" + data);
+            response.json(data);
+        }
+        else {
+            response.json(err);
+        }
+    })
+}
+
+module.exports = {signUp, signIn, getUserInfo, editUserInfo, getUserFunds, addFunds, getOrderStatus}

@@ -18,15 +18,16 @@ export class EmployeeService {
 
   constructor(public http:HttpClient) { }
 
-  sendCredentials(employee:any):Observable<ServerResponse>{
+  sendCredentials(employee:any):Observable<any>{
+  //<ServerResponse>{
     let URL:string
     if(this.config['deployed']){
-      URL = this.config['URL2']+"/v1/employees/login"
+      URL = this.config['URL2']+"/v1/employee/login"
     }else{
-      URL = this.config["URL"]+this.config["PORT"]+"/v1/employees/login"
+      URL = this.config["URL"]+this.config["PORT"]+"/v1/employee/login"
     }
     console.log("[LOG]: Going to: " + URL)
-    return this.http.post<ServerResponse>(URL,employee)
+    return this.http.post("http://localhost:9090/api/employee/login",employee, {responseType:'text'});
   }
 
 

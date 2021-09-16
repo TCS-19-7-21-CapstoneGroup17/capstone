@@ -25,9 +25,17 @@ const routes: Routes = [
       { path: 'edit-profile', component: EditProfileComponent},
       { path: 'funds', component: FundsComponent},
       { path: '', redirectTo: 'signup', pathMatch: 'full'}
-    ]
+    ],
+    
   },
-  {path:"employee",component:EmployeeComponent}
+  {path:"employee",component:EmployeeComponent},
+  {path:"dashboard/:empId",component:EmployeeComponent},
+  {path:"employeeSignin", component:SignInComponent},
+  {path:"userOrderStatus", component:OrderStatusComponent},
+  {path:"editProfile", component:EditProfileComponent},
+  {path:"addFunds", component:FundsComponent},
+  //should be set to home or index page
+  {path:"", redirectTo:"employeeSignin",pathMatch:"prefix"}
 ];
 
 @NgModule({
