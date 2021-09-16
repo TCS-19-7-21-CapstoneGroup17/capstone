@@ -34,7 +34,7 @@ let signUp = (request, response) => {
                                     response.json({ result: false, msg: "Failed to add user " + userId + ". Check that input types are valid" });
                                 }
                                 else {
-                                    response.json({ result: true, msg: "Successfully added user " + userId });
+                                    response.json({ result: true, msg: "Successfully added user " + userId, uid: userId });
                                 }
                             }
                             else {

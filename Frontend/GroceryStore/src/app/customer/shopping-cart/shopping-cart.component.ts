@@ -12,7 +12,8 @@ export class ShoppingCartComponent implements OnInit {
   // variables
   shoppingCart: Array<any> = []
   shoppingArray: Array<Product> = []
-  timerInterval: any
+  errorMsg: string = ""
+
   // DI to edit-cart.service.ts to use service class's functions
   constructor(public editCartSer: EditCartService) {
   }
@@ -61,7 +62,6 @@ export class ShoppingCartComponent implements OnInit {
     // if user has their shopping cart in localStorage
     if (localStorage.getItem(JSON.stringify(userID))) {
       this.shoppingCart = JSON.parse(localStorage.getItem(JSON.stringify(userID)) || "");
-
       for (let idx in this.shoppingCart) {
         // product[0] == ALL details about product (from db)
         // shoppingCart[idx] == productName + quantity in cart
