@@ -6,6 +6,7 @@ import { SignInComponent } from './employee/sign-in/sign-in.component';
 const routes: Routes = [
   {path:"dashboard/:empId",component:EmployeeComponent},
   {path:"employeeSignin", component:SignInComponent},
+  //should be set to home or index page
   {path:"", redirectTo:"employeeSignin",pathMatch:"prefix"}
 ];
 
