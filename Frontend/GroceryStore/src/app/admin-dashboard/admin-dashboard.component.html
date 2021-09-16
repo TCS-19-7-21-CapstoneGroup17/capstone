@@ -1,31 +1,37 @@
 <div>
     <h2>Admin Dashboard</h2>
+    <h3>Add Product</h3>
     <form [formGroup]="addProductRef" (ngSubmit)="addProduct()">
         <label>Product Name</label>
-        <input type="text" formControlName = "pName"><br>
+        <input type="text" formControlName="pName"><br>
         <label>Price</label>
-        <input type="text" formControlName = "price"> <br>
+        <input type="text" formControlName="price"> <br>
         <label>Quantity</label>
-        <input type="text" formControlName = "quantity"> <br>
+        <input type="text" formControlName="quantity"> <br>
         <label>Image</label>
-        <input type="image" src="" alt="" formControlName = "image"> <br>
+        <input type="image" src="" alt="" formControlName="image"> <br>
         <input type="submit" value="Add">
         <input type="reset" value="reset">
     </form>
+    <hr>
+    <h3>Update Price or Quantity</h3>
     <form [formGroup]="updateProductRef" (ngSubmit)="updateProduct()">
         <label>Product Name</label>
-        <input type="text" formControlName = "pName"><br>
-        <label>Price Update</label>
-        <input type="text" formControlName = "price"><br>
+        <input type="text" formControlName="pName"><br>
+        <label>Price Update OR</label>
+        <input type="text" formControlName="price"><br>
         <label>Quantity Update</label>
-        <input type="text" formControlName = "quantity"><br>
+        <input type="text" formControlName="quantity"><br>
         <input type="submit" value="Update">
         <input type="reset" value="reset">
     </form>
+    <hr>
+    <h3>Delete Product</h3>
     <form [formGroup]="deleteProductRef" (ngSubmit)="deleteProduct()">
         <label>Product Name</label>
-        <input type="text" formControlName = "pName"><br>
+        <input type="text" formControlName="pName"><br>
         <input type="submit" value="Delete">
         <input type="reset" value="reset">
     </form>
+    <hr>
 </div>

@@ -26,8 +26,8 @@ export class AdminDashboardComponent implements OnInit {
     pName: new FormControl()
   })
 
-  constructor(public adminSer:AdminService,
-    public router:Router) { }
+  constructor(public adminSer: AdminService,
+    public router: Router) { }
 
   ngOnInit(): void {
   }
@@ -35,40 +35,40 @@ export class AdminDashboardComponent implements OnInit {
   addProduct() {
     let product = this.addProductRef.value;
     this.adminSer.addProduct(product).
-    subscribe(result=>{
-      if(result=="Success"){
-        //this.router.navigate(["admin-home",login.username]);
-      }else {
+      subscribe(result => {
+        if (result == "Success") {
+          //this.router.navigate(["admin-home",login.username]);
+        } else {
           //this.msg = result;
-      }
-    },
-    error=>console.log(error));
+        }
+      },
+        error => console.log(error));
     this.addProductRef.reset();
   }
   updateProduct() {
     let product = this.updateProductRef.value;
     this.adminSer.updateProduct(product).
-    subscribe(result=>{
-      if(result=="Success"){
-        //this.router.navigate(["admin-home",login.username]);
-      }else {
+      subscribe(result => {
+        if (result == "Success") {
+          //this.router.navigate(["admin-home",login.username]);
+        } else {
           //this.msg = result;
-      }
-    },
-    error=>console.log(error));
+        }
+      },
+        error => console.log(error));
     this.updateProductRef.reset();
   }
   deleteProduct() {
     let product = this.deleteProductRef.value;
     this.adminSer.deleteProduct(product).
-    subscribe(result=>{
-      if(result=="Success"){
-        //this.router.navigate(["admin-home",login.username]);
-      }else {
+      subscribe(result => {
+        if (result == "Success") {
+          //this.router.navigate(["admin-home",login.username]);
+        } else {
           //this.msg = result;
-      }
-    },
-    error=>console.log(error));
+        }
+      },
+        error => console.log(error));
     this.deleteProductRef.reset();
   }
 }
