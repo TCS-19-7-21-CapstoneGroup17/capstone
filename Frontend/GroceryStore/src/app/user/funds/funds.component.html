@@ -6,10 +6,10 @@
         <input type="text" formControlName="userId"/><br/>
         <input type="submit" value="View Funds"/>
     </form>
-    <div *ngIf="showProfileFlag">
-        <h3>You have x dollars in your account!</h3>
+    <div *ngIf="showFundsPageFlag">
+        <h3>You have {{amt}} dollars in your account!</h3>
         <br/>
-        <form>
+        <form [formGroup]="userFundsAcct">
             <h3>Add funds here:</h3>
             <label>Account Number </label>
             <input type="text" name="accountNum"/><br/>

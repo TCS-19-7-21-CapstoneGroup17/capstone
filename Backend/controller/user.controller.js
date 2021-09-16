@@ -227,12 +227,20 @@ let getUserFunds = (request, response) => {
 let addFunds = (request, response) => {
     // pull the id
     let updateFunds = request.body;
-    userModel.findOne({_id:userId}, (err, res) => {
+    userModel.findOne({_id:updateFunds.userId, bankAccountNumber:updateFunds.bankAccountref}, (err, res) => {
         if(!err){
             if(res.fundsAmt != null){
-                let newAmt = parseInt(userId.amt) + res.fundsAmt;
-                userModel.updateOne({_id:updateFunds.id}, {$set:{fundsAmt:newAmt}}, {$set:{bankAccountNumber:updateFunds.bankAccountNumber}}, (err1, res1) => {
+                let newAmt = updateFunds.fundsAmtRef + res.fundsAmt;
+                let bankAmt = res.xyz - updateFunds.fundsAmtRef
+                userModel.updateOne({_id:updateFunds.userId}, {$set:{fundsAmt:newAmt}}, (err1, res1) => {
                     if(!err1){
+                        userModel.updateOne({_id:updateFunds.userId}, {$set:{fundsAmt:bankAmt}}, (err2, res2) => {
+                            if(!err2){
+                                response.json(res2);
+                            }else{
+                                response.json(err2);
+                            }
+                        })
                         response.json(res1);
                     }else{
                         response.json(err1);
