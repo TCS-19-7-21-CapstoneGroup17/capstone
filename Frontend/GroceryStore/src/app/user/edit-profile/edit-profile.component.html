@@ -1,32 +1,27 @@
 <div>
     <h2>Edit your profile!</h2>
-    <form>
+    <h4>Enter Your User ID</h4>
+    <form [formGroup]="userIDref" (ngSubmit)="submitUserId()">
+        <label>User ID</label>
+        <input type="text" formControlName="userId"/><br/>
+        <input type="submit" value="Edit Profile"/>
+    </form>
+
+    <form *ngIf="showProfileFlag" [formGroup]="editProfileRef" (ngSubmit)="editInformation()">
         <label>First Name </label>
-        <input type="text" name="firstname"/><br/>
-        <input type="submit" value="Update First Name"/><br/>
-
+        <input type="text" formControlName="firstnameRef" placeholder={{firstname}}/><br/>
         <label>Last Name </label>
-        <input type="text" name="lastname"/><br/>
-        <input type="submit" value="Update Last Name"/><br/>
-
+        <input type="text" formControlName="lastnameRef" placeholder={{lastname}}/><br/>
         <label>Email </label>
-        <input type="text" name="emailId"/><br/>
-        <input type="submit" value="Update Email"/><br/>
-
+        <input type="text" formControlName="emailIdRef" placeholder={{emailId}}/><br/>
         <label>Password </label>
-        <input type="text" name="password"/><br/>
-        <input type="submit" value="Update Password"/><br/>
-
+        <input type="text" formControlName="passwordRef" placeholder={{password}}/><br/>
         <label>Date of Birth </label>
-        <input type="text" name="dob"/><br/>
-        <input type="submit" value="Update Date of Birth"/><br/>
-
+        <input type="text" formControlName="dobRef" placeholder={{dob}}/><br/>
         <label>Phone Number </label>
-        <input type="text" name="phone"/><br/>
-        <input type="submit" value="Update Phone Number"/><br/>
-
+        <input type="text" formControlName="phoneRef" placeholder={{phone}}/><br/>
         <label>Address </label>
-        <input type="text" name="address"/><br/>
-        <input type="submit" value="Update Address"/>
+        <input type="text" formControlName="addressRef" placeholder={{address}}/><br/>
+        <input type="submit" value="Update Information"/>
     </form>
 </div>

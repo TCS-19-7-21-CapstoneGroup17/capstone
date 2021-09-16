@@ -123,9 +123,10 @@ let signIn = (request, response)=> {
 // gets the info to pre fill the response fields in the edit user panel
 let getUserInfo = (request, response) => {
     // need employee id used request as placeholder
-    let userId = request.body;
-    userModel.findOne({_id:userId}, (err, res)=> {
+    let usrId = request.body;
+    userModel.findOne({_id:usrId.userId}, (err, res)=> {
         if(!err){
+            console.log(res)
             response.json(res);
         }else{
             response.json(err);
@@ -135,23 +136,79 @@ let getUserInfo = (request, response) => {
 
 // with input prefilled we can update all of it at once since user can change any and leave the rest
 let editUserInfo = (request, response) => {
-    // still need the way to pull the user id, using placeholder instead
-    let updatedInfo = request.body;
-    userModel.updateOne({_id:updatedInfo.id},
-        {$set:{firstname:updatedInfo.firstname}},
-        {$set:{lastname:updatedInfo.lastname}},
-        {$set:{emailId:updatedInfo.emailId}},
-        {$set:{password:updatedInfo.password}},
-        {$set:{dob:updatedInfo.dob}},
-        {$set:{phone:updatedInfo.phone}},
-        {$set:{address:updatedInfo.address}},
-        (err, res) => {
-            if(!err){
-                response.json(res);
-            }else{
-                response.json(err);
+    let info = request.body;
+    console.log(info);
+    if (info.firstnameRef != null) {
+        userModel.updateOne({ _id: info.userId }, { $set: { firstname: info.firstnameRef } }, (err, result) => {
+            if (!err) {
+                response.send("First Name updated successfully");
             }
-        });
+            else {
+                response.send(err);
+            }
+        })
+    }
+    if (info.lastnameRef != null) {
+        userModel.updateOne({ _id: info.userId }, { $set: { lastname: info.lastnameRef } }, (err, result) => {
+            if (!err) {
+                response.send("Last Name updated successfully");
+            }
+            else {
+                response.send(err);
+            }
+        })
+    }
+    if (info.emailIdRef != null) {
+        userModel.updateOne({ _id: info.userId }, { $set: { emailId: info.emailIdRef } }, (err, result) => {
+            if (!err) {
+                response.send("Email updated successfully");
+            }
+            else {
+                response.send(err);
+            }
+        })
+    }
+    if (info.passwordRef != null) {
+        userModel.updateOne({ _id: info.userId }, { $set: { password: info.passwordRef } }, (err, result) => {
+            if (!err) {
+                response.send("Password updated successfully");
+            }
+            else {
+                response.send(err);
+            }
+        })
+    }
+    if (info.dobRef != null) {
+        userModel.updateOne({ _id: info.userId }, { $set: { dob: info.dobRef } }, (err, result) => {
+            if (!err) {
+                response.send("Date of Birth updated successfully");
+            }
+            else {
+                response.send(err);
+            }
+        })
+    }
+    if (info.phoneRef != null) {
+        userModel.updateOne({ _id: info.userId }, { $set: { phone: info.phoneRef } }, (err, result) => {
+            if (!err) {
+                response.send("Phone Number updated successfully");
+            }
+            else {
+                response.send(err);
+            }
+        })
+    }
+    if (info.addressRef != null) {
+        userModel.updateOne({ _id: info.userId }, { $set: { address: info.addressRef } }, (err, result) => {
+            if (!err) {
+                response.send("Address updated successfully");
+            }
+            else {
+                response.send(err);
+            }
+        })
+    }
+    console.log("updated");
 }
 
 let getUserFunds = (request, response) => {

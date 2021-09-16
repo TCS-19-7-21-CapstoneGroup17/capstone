@@ -11,7 +11,7 @@ import { UserService } from 'src/app/employee/user.service';
 export class OrderStatusComponent implements OnInit {
 
   userIDform = new FormGroup({
-  userId:new FormControl(),
+    userId:new FormControl(),
   });
   orderHistoryArray = [];
   tableContent = "";
