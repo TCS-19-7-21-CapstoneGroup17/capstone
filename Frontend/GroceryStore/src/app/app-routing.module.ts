@@ -6,6 +6,7 @@ import { RaiseTicketComponent } from './customer/raise-ticket/raise-ticket.compo
 import { ShoppingCartComponent } from './customer/shopping-cart/shopping-cart.component';
 import { SignInComponent } from './customer/sign-in/sign-in.component';
 import { SignUpComponent } from './customer/sign-up/sign-up.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,8 @@ const routes: Routes = [
       { path: 'raise-ticket', component: RaiseTicketComponent },
       { path: '', redirectTo: 'signup', pathMatch: 'full'}
     ]
-  }
+  },
+  { path: "employee", component: EmployeeComponent }
 ];
 
 @NgModule({

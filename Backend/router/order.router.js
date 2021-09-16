@@ -6,9 +6,9 @@ let orderController = require('../controller/order.controller');
 let router = express.Router();
 
 //assign url paths to methods
-// router.post("/dailyReport", orderController.generateDailyReport);
-// router.post("/weeklyReport", orderController.generateWeeklyReport);
-// router.post("/monthlyReport", orderController.generateMonthlyReport);
-// router.post("/yearlyReport", orderController.generateYearlyReport);
+router.post("/dailyReport", orderController.generateDailyReport);
+router.post("/weeklyReport", orderController.generateWeeklyReport);
+router.post("/monthlyReport", orderController.generateMonthlyReport);
+router.post("/yearlyReport", orderController.generateYearlyReport);
 router.post("/addOrder", orderController.addOrder);
 module.exports = router;

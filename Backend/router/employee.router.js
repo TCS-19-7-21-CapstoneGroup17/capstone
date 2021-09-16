@@ -8,7 +8,7 @@ let router = express.Router();
 let employeeController = require('../controller/employee.controller');
 let employeeModel = require('../model/employee.model');
 
-//handle REST methods using controller functions, and define urls used to call them
+//assign urls to methods
 router.post("/addEmployee/", employeeController.addEmployee);
 router.delete("/deleteEmployee/", employeeController.deleteEmployee);
 
