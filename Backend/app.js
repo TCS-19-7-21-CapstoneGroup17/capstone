@@ -13,13 +13,18 @@ let adminRouter = require('./router/admin.router');
 let app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use("/admin", employeeRouter);
-app.use("/product", productRouter);
-app.use("/user", userRouter);
-app.use("/admin", adminRouter);
 
 //connect the database
 mongoose.connect("mongodb://localhost:27017/capstone").
 then(res=>console.log("Connected to mongodb")).catch(error=>console.log(error));
+
+app.use("/api/employee", employeeRouter);
+//http://localhost:9090/api/employee/login
+
+app.use("/product", productRouter);
+app.use("/user", userRouter);
+app.use("/admin", adminRouter);
+
+
 
 app.listen(9090, ()=>console.log("Server running on port number 9090"));

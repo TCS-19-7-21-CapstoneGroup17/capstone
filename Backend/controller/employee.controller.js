@@ -63,10 +63,12 @@ let deleteEmployee = (request, response)=> {
 
 // sign in page for the employee with emailID and password
 let signInEmployee = (request, response) => {
+    console.log("method called")
     let login = request.body;
-    employeeModel.findOne({_id:login.id, password:login.password}, (err, result)=>{
+    employeeModel.findOne({_id:login.empId, password:login.password}, (err, result)=>{
         if(!err){
             // Employee successfully logged in
+            console.log("found employee");
             response.send("Success");
         }else{
             // failed login
