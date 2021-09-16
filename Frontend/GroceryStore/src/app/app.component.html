@@ -1,4 +1,12 @@
 <div>
   <!-- this is for routing between admin, employee, and user -->
-  <router-outlet></router-outlet>
+  <div *ngIf="isHomePage">
+    <button >Admin</button>
+    <button [routerLink]="['../employee']" (click)="isClicked()">Employee</button>
+    <button [routerLink]="['../user']" (click)="isClicked()">User</button>    
+  </div>
+
+
+  <!-- display content here -->
+  <router-outlet *ngIf="!isHomePage"></router-outlet>
 </div>

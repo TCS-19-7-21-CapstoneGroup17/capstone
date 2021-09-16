@@ -65,7 +65,6 @@ export class EditCartService {
   getUserID(): number {
     let userID = localStorage.getItem("userID");
     if (userID) {
-      console.log("something is stored " + userID);
       return JSON.parse(userID);
     }
     // first time opening page. set userID == -1 (not logged in)
@@ -77,17 +76,13 @@ export class EditCartService {
 
   // given an array of products, display products in a grid
   displayProducts(productArray: Array<Product>) {
-    console.log("Using service class, display products");
     let rowTag = document.getElementById('rows') || document.createElement('div');
     while (rowTag.firstChild) {
-      console.log("delete children")
       rowTag.removeChild(rowTag.firstChild);
     }
 
     // for each product in shopping cart, display it
     for (let pp of productArray) {
-      console.log(pp.productName);
-
       let columnDiv = document.createElement('div');
       columnDiv.className = 'col-3';
       columnDiv.id = "columns";
@@ -154,8 +149,8 @@ export class EditCartService {
 
   // delete product from shopping cart
   deleteFromCart(pName: string) {
+    // get userID and shopping cart from localStorage
     let userID = JSON.stringify(this.getUserID());
-
     let shoppingCart = JSON.parse(localStorage.getItem(userID) || "");
     function findProduct(product: any) { return product.productName == pName; }
 
@@ -171,8 +166,6 @@ export class EditCartService {
       }
       localStorage.setItem(userID, JSON.stringify(shoppingCart));
     }
-
-    console.log(shoppingCart);
   }
 
 }

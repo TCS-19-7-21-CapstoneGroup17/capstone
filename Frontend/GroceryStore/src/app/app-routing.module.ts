@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AppComponent } from './app.component';
 import { AddGroceriesComponent } from './customer/add-groceries/add-groceries.component';
 import { CustomerComponent } from './customer/customer.component';
 import { RaiseTicketComponent } from './customer/raise-ticket/raise-ticket.component';
@@ -21,7 +22,10 @@ const routes: Routes = [
       { path: '', redirectTo: 'signup', pathMatch: 'full'}
     ]
   },
-  { path: "employee", component: EmployeeComponent }
+  { path: "employee", component: EmployeeComponent },
+  { path: "home", component: AppComponent },
+  { path: '', redirectTo: "home", pathMatch: "full" }
+  
 ];
 
 @NgModule({

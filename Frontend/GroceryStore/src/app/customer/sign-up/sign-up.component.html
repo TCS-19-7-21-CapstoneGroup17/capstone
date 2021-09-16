@@ -1,18 +1,25 @@
-<div>
-    <h3>Sign Up</h3>
-    <hr/>
-    <form [formGroup]="signupRef" (ngSubmit)="doSignup()" >
-        First Name <input type="text" formControlName="firstname" /> <br/>
-        Last Name <input type="text" formControlName="lastname" /> <br />
-        Email <input type="email" formControlName="emailId" /> <br/>
-        Password <input type="password" formControlName="password"/> <br/>
-        Date of Birth <input type="text" formControlName="dob" placeholder="mm/dd/yyyy"/> <br/>
-        Phone Number <input type="number" formControlName="phone"/> <br/>
-        Address <input type="text" formControlName="address"/> <br/>
 
-        <div style="color: red;">{{errorMsg}}</div>
+<div class="row align-items-center">
+    <h2 style="text-align: center; padding: 6px; font-family: 'Archivo', sans-serif;">Sign Up</h2>
+    
+    <div class="col"></div>
+    <div class="col">
+        <div class="container-md">
+            <form [formGroup]="signupRef" (ngSubmit)="doSignup()" >
+                First Name <input type="text" formControlName="firstname" /> <br/><br/>
+                Last Name <input type="text" formControlName="lastname" /> <br /><br/>
+                Email <input type="email" formControlName="emailId" /> <br/><br/>
+                Password <input type="password" formControlName="password"/> <br/><br/>
+                Date of Birth <input type="text" formControlName="dob" placeholder="mm/dd/yyyy"/> <br/><br/>
+                Phone Number <input type="number" formControlName="phone"/> <br/><br/>
+                Address <input type="text" formControlName="address"/> <br/><br/>
 
-        <input type="submit" value="Submit"/> 
-        <input type="reset" value="Reset"/>
-    </form>
+                <div style="color: red;">{{errorMsg}}</div>
+                <br/>
+                <input type="submit" value="Submit"/> 
+                <input type="reset" value="Reset"/>
+            </form>
+        </div>
+    </div>
+    <div class="col"> </div>
 </div>

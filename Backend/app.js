@@ -9,7 +9,7 @@ let productRouter = require('./router/product.router');
 let userRouter = require('./router/user.router');
 let adminRouter = require('./router/admin.router');
 let orderRouter = require('./router/order.router');
-
+let ticketRouter = require('./router/ticket.router')
 //create express reference and add middleware
 let app = express();
 app.use(cors());
