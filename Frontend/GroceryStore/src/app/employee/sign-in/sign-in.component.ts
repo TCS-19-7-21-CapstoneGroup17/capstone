@@ -27,10 +27,10 @@ export class SignInComponent implements OnInit {
     let employeeLogin = this.employeeLoginRef.value;
     this.employee_service.sendCredentials(employeeLogin).
     subscribe(result => {
-      if(result.message == "Success"){
+      if(result == "Success"){
         this.router.navigate(["dashboard",employeeLogin.empId]);
       }else{
-        this.msg = result.message;
+        this.msg = result;
       }
     },
     error=>console.log(error));

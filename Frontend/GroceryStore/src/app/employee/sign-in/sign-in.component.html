@@ -2,7 +2,7 @@
     <h2>Employee Sign In</h2>
     <form [formGroup]="employeeLoginRef" (ngSubmit)="checkEmployee()">
         <label>Employee ID: </label>
-        <input type="text" formControlName="id"/><br/>
+        <input type="text" formControlName="empId"/><br/>
         <label>Password: </label>
         <input type="password" formControlName="password"/><br/>
         <input type="submit" value="Sign In"/>
