@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { AdminService } from './admin.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { ProductRequestService } from '../employee/product-request.service';
 
 @Component({
   selector: 'app-admin',
@@ -16,7 +17,8 @@ export class AdminComponent implements OnInit {
   });
 
   constructor(public adminSer: AdminService,
-    public router: Router) { }
+    public router: Router,
+    public reqSer: ProductRequestService) { }
   msg?: string;
   ngOnInit(): void {
   }
@@ -35,4 +37,11 @@ export class AdminComponent implements OnInit {
     this.loginRef.reset();
   }
 
+  viewRequest() {
+    this.reqSer.getRequest().
+    subscribe(result=>{
+      console.log(result);
+    },
+    error=>console.log(error));
+  }
 }

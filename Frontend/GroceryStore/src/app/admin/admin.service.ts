@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Admin } from './model.admin';
 import { Product } from '../employee/model.product';
+import { Request } from '../employee/model.request';
 
 @Injectable({
   providedIn: 'root'
@@ -23,4 +24,7 @@ export class AdminService {
   deleteProduct(product:Product):Observable<any>{
     return this.http.post("http://localhost:9090/product/deleteProduct", product)
   }
+  // viewRequest():Observable<any>{
+  //   return this.http.get("")
+  // }
 }
