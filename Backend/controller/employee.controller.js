@@ -90,4 +90,18 @@ let deleteEmployee = (request, response)=> {
     });
 }
 
-module.exports = {addEmployee, deleteEmployee};
+// sign in page for the employee with emailID and password
+let signInEmployee = (request, response) => {
+    let login = request.body;
+    employeeModel.findOne({_id:login.id, password:login.password}, (err, result)=>{
+        if(!err){
+            // Employee successfully logged in
+            response.send("Success");
+        }else{
+            // failed login
+            response.send("Login failed, Incorrect Email or Password");
+        }
+    });
+}
+
+module.exports = {addEmployee, deleteEmployee, signInEmployee};

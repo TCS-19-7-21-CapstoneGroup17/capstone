@@ -119,4 +119,71 @@ let signIn = (request, response)=> {
     })
 }
 
-module.exports = {signUp, signIn}
+// gets the info to pre fill the response fields in the edit user panel
+let getUserInfo = (request, response) => {
+    // need employee id used request as placeholder
+    let userId = request.body;
+    userModel.findOne({_id:userId}, (err, res)=> {
+        if(!err){
+            response.json(res);
+        }else{
+            response.json(err);
+        }
+    })
+}
+
+// with input prefilled we can update all of it at once since user can change any and leave the rest
+let editUserInfo = (request, response) => {
+    // still need the way to pull the user id, using placeholder instead
+    let updatedInfo = request.body;
+    userModel.updateOne({_id:updatedInfo.id},
+        {$set:{firstname:updatedInfo.firstname}},
+        {$set:{lastname:updatedInfo.lastname}},
+        {$set:{emailId:updatedInfo.emailId}},
+        {$set:{password:updatedInfo.password}},
+        {$set:{dob:updatedInfo.dob}},
+        {$set:{phone:updatedInfo.phone}},
+        {$set:{address:updatedInfo.address}},
+        (err, res) => {
+            if(!err){
+                response.json(res);
+            }else{
+                response.json(err);
+            }
+        });
+}
+
+let getUserFunds = (request, response) => {
+    // pull the id
+    let userId = request.body;
+    userModel.findOne({_id:userId}, (err, res) => {
+        if(!err){
+            response.send(res.fundsAmt)
+        }else{
+            response.json(err);
+        }
+    })
+}
+
+let addFunds = (request, response) => {
+    // pull the id
+    let updateFunds = request.body;
+    userModel.findOne({_id:userId}, (err, res) => {
+        if(!err){
+            if(res.fundsAmt != null){
+                let newAmt = parseInt(userId.amt) + res.fundsAmt;
+                userModel.updateOne({_id:updateFunds.id}, {$set:{fundsAmt:newAmt}}, {$set:{bankAccountNumber:updateFunds.bankAccountNumber}}, (err1, res1) => {
+                    if(!err1){
+                        response.json(res1);
+                    }else{
+                        response.json(err1);
+                    }
+                });
+            }
+        }else{
+            response.json(err);
+        }
+    })
+}
+
+module.exports = {signUp, getUserInfo, editUserInfo, getUserFunds, addFunds}
