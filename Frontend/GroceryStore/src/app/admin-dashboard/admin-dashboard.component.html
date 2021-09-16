@@ -15,6 +15,10 @@
     <form [formGroup]="updateProductRef" (ngSubmit)="updateProduct()">
         <label>Product Name</label>
         <input type="text" formControlName = "pName"><br>
+        <label>Price Update</label>
+        <input type="text" formControlName = "price"><br>
+        <label>Quantity Update</label>
+        <input type="text" formControlName = "quantity"><br>
     </form>
     <form [formGroup]="deleteProductRef" (ngSubmit)="deleteProduct()">
         <label>Product Name</label>
