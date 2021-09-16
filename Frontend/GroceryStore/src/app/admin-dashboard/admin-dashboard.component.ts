@@ -17,6 +17,14 @@ export class AdminDashboardComponent implements OnInit {
     quantity: new FormControl(),
     image: new FormControl()
   });
+  updateProductRef = new FormGroup({
+    pName: new FormControl(),
+    price: new FormControl(),
+    quantity: new FormControl()
+  })
+  deleteProductRef = new FormGroup({
+    pName: new FormControl()
+  })
 
   constructor(public adminSer:AdminService,
     public router:Router) { }
@@ -35,7 +43,32 @@ export class AdminDashboardComponent implements OnInit {
       }
     },
     error=>console.log(error));
-    this.loginRef.reset();
+    this.addProductRef.reset();
   }
-
+  updateProduct() {
+    let product = this.updateProductRef.value;
+    this.adminSer.updateProduct(product).
+    subscribe(result=>{
+      if(result=="Success"){
+        //this.router.navigate(["admin-home",login.username]);
+      }else {
+          //this.msg = result;
+      }
+    },
+    error=>console.log(error));
+    this.updateProductRef.reset();
+  }
+  deleteProduct() {
+    let product = this.deleteProductRef.value;
+    this.adminSer.deleteProduct(product).
+    subscribe(result=>{
+      if(result=="Success"){
+        //this.router.navigate(["admin-home",login.username]);
+      }else {
+          //this.msg = result;
+      }
+    },
+    error=>console.log(error));
+    this.deleteProductRef.reset();
+  }
 }
