@@ -12,6 +12,6 @@ router.post("/editProfile/update/", userController.editUserInfo);
 router.get("/addFunds/", userController.getUserFunds);
 router.post("/addFunds/update/", userController.addFunds);
 router.post("/signIn/", userController.signIn);
-router.get("/:userId/orderStatus", userController.getOrderStatus);
+router.post("/orderStatus", userController.getOrderStatus);
 
 module.exports = router;

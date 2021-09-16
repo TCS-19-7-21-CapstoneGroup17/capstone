@@ -7,7 +7,7 @@ import { OrderStatusComponent } from './user/order-status/order-status.component
 const routes: Routes = [
   {path:"dashboard/:empId",component:EmployeeComponent},
   {path:"employeeSignin", component:SignInComponent},
-  {path:":userId/userOrderStatus", component:OrderStatusComponent},
+  {path:"userOrderStatus", component:OrderStatusComponent},
   //should be set to home or index page
   {path:"", redirectTo:"employeeSignin",pathMatch:"prefix"}
 ];
