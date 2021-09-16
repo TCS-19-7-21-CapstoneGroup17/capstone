@@ -1,0 +1,11 @@
+<div>
+    <h2>Admin Login</h2>
+    <form [formGroup]="loginRef" (ngSubmit)="checkAdmin()">
+        <label>Username</label>
+        <input type="text" formControlName = "username"><br>
+        <label>Password</label>
+        <input type="text" formControlName = "password"> <br>
+        <input type="submit" value="Login">
+        <input type="reset" value="reset">
+    </form>
+</div>

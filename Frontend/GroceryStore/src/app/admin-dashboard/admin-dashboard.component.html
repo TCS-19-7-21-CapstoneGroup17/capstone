@@ -1,0 +1,23 @@
+<div>
+    <h2>Admin Dashboard</h2>
+    <form [formGroup]="addProductRef" (ngSubmit)="addProduct()">
+        <label>Product Name</label>
+        <input type="text" formControlName = "pName"><br>
+        <label>Price</label>
+        <input type="text" formControlName = "price"> <br>
+        <label>Quantity</label>
+        <input type="text" formControlName = "quantity"> <br>
+        <label>Image</label>
+        <input type="image" src="" alt="" formControlName = "image"> <br>
+        <input type="submit" value="Add">
+        <input type="reset" value="reset">
+    </form>
+    <form [formGroup]="updateProductRef" (ngSubmit)="updateProduct()">
+        <label>Product Name</label>
+        <input type="text" formControlName = "pName"><br>
+    </form>
+    <form [formGroup]="deleteProductRef" (ngSubmit)="deleteProduct()">
+        <label>Product Name</label>
+        <input type="text" formControlName = "pName"><br>
+    </form>
+</div>

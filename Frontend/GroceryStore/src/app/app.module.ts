@@ -18,6 +18,8 @@ import { DeliveredOrdersComponent } from './employee/update-order-status/deliver
 import { CancelledOrdersComponent } from './employee/update-order-status/cancelled-orders/cancelled-orders.component';
 import { OutForDeliveryOrdersComponent } from './employee/update-order-status/out-for-delivery-orders/out-for-delivery-orders.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AdminComponent } from './admin/admin.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { AppRoutingModule } from './app-routing.module';
     ShippedOrdersComponent,
     DeliveredOrdersComponent,
     CancelledOrdersComponent,
-    OutForDeliveryOrdersComponent
+    OutForDeliveryOrdersComponent,
+    AdminComponent,
+    AdminDashboardComponent
     ],
   imports: [
     BrowserModule,
