@@ -5,7 +5,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 
 const routes: Routes = [
   {path:"employee",component:EmployeeComponent},
-  {path:"admin-home/:user",component:AdminDashboardComponent}
+  {path:"admin-home",component:AdminDashboardComponent}
 ];
 
 @NgModule({
