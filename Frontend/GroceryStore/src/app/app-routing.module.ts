@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/employee.component';
 import { AddGroceriesComponent } from './customer/add-groceries/add-groceries.component';
@@ -10,6 +10,7 @@ import { SignUpComponent } from './customer/sign-up/sign-up.component';
 import { OrderStatusComponent } from './user/order-status/order-status.component';
 import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
 import { FundsComponent } from './user/funds/funds.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
     
   },
   {path:"employee",component:EmployeeComponent},
+  {path:"admin-home",component:AdminDashboardComponent},
   {path:"dashboard/:empId",component:EmployeeComponent},
   {path:"employeeSignin", component:SignInComponent},
   {path:"userOrderStatus", component:OrderStatusComponent},

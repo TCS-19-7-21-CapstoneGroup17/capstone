@@ -25,6 +25,8 @@ import { SignInComponent } from './employee/sign-in/sign-in.component';
 import { ShoppingCartComponent } from './customer/shopping-cart/shopping-cart.component';
 import { AddGroceriesComponent } from './customer/add-groceries/add-groceries.component';
 import { CustomerComponent } from './customer/customer.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -55,8 +57,10 @@ import { CustomerComponent } from './customer/customer.component';
     SignInComponent,
     ShoppingCartComponent,
     AddGroceriesComponent,
-    CustomerComponent
-  ],
+    CustomerComponent,
+    AdminComponent,
+    AdminDashboardComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
