@@ -1,0 +1,18 @@
+<div>
+    <h3>Sign Up</h3>
+    <hr/>
+    <form [formGroup]="signupRef" (ngSubmit)="doSignup()" >
+        First Name <input type="text" formControlName="firstname" /> <br/>
+        Last Name <input type="text" formControlName="lastname" /> <br />
+        Email <input type="email" formControlName="emailId" /> <br/>
+        Password <input type="password" formControlName="password"/> <br/>
+        Date of Birth <input type="date" formControlName="dob"/> <br/>
+        Phone Number <input type="number" formControlName="phone"/> <br/>
+        Address <input type="text" formControlName="address"/> <br/>
+
+        <div style="color: red;">{{errorMsg}}</div>
+
+        <input type="submit" value="Submit"/> 
+        <input type="reset" value="Reset"/>
+    </form>
+</div>

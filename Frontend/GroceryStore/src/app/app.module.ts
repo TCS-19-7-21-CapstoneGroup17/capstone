@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-
-
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { OrderStatusComponent } from './user/order-status/order-status.component';
@@ -21,6 +18,8 @@ import { ShippedOrdersComponent } from './employee/update-order-status/shipped-o
 import { DeliveredOrdersComponent } from './employee/update-order-status/delivered-orders/delivered-orders.component';
 import { CancelledOrdersComponent } from './employee/update-order-status/cancelled-orders/cancelled-orders.component';
 import { OutForDeliveryOrdersComponent } from './employee/update-order-status/out-for-delivery-orders/out-for-delivery-orders.component';
+import { RaiseTicketComponent } from './customer/raise-ticket/raise-ticket.component';
+import { SignUpComponent } from './customer/sign-up/sign-up.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SignInComponent } from './employee/sign-in/sign-in.component';
 import { ShoppingCartComponent } from './customer/shopping-cart/shopping-cart.component';
@@ -44,6 +43,15 @@ import { CustomerComponent } from './customer/customer.component';
     DeliveredOrdersComponent,
     CancelledOrdersComponent,
     OutForDeliveryOrdersComponent,
+    UserComponent,
+    OrderStatusComponent,
+    EditProfileComponent,
+    FundsComponent,
+    ShoppingCartComponent,
+    AddGroceriesComponent,
+    CustomerComponent,
+    RaiseTicketComponent,
+    SignUpComponent,
     SignInComponent,
     ShoppingCartComponent,
     AddGroceriesComponent,

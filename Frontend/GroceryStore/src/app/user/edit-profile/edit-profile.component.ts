@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { UserService } from 'src/app/employee/user.service';
-import { User } from '../user';
+import { EditCartService } from 'src/app/customer/edit-cart.service';
+import { UserService } from 'src/app/user.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -9,68 +8,54 @@ import { User } from '../user';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent implements OnInit {
+  _id?:number;
+  firstname:string = "";
+  lastname:string = "";
+  email:string = "";
+  password:string = "";
+  dob:string = "";
+  phone:string = "";
+  address:string = "";
 
-  constructor(public user_service:UserService) { }
-
-  _id:Number = -1;
-  firstname:String = "";
-  lastname:String = "";
-  emailId:String = "";
-  password:String = "";
-  dob:String = "";
-  phone:Number = -1;
-  address:String = "";
-
-  userIDref = new FormGroup({
-    userId:new FormControl(),
-  })
-
-  editProfileRef = new FormGroup({
-    firstnameRef:new FormControl(),
-    lastnameRef:new FormControl(),
-    emailIdRef:new FormControl(),
-    passwordRef:new FormControl(),
-    dobRef:new FormControl(),
-    phoneRef:new FormControl(),
-    addressRef:new FormControl()
-  })
-
-  showProfileFlag:boolean = false;
+  errorMessage:string = "";
+  successMessage:string = "";
+  
+  constructor(public userService:UserService, public cartService:EditCartService) { }
 
   ngOnInit(): void {
+    this._id = this.cartService.getUserID();
+    //get and load user details into fields
+    this.userService.get_userData({_id:this._id}).subscribe(res=> {
+      console.log(res);
+      this.firstname = res.firstname;
+      this.lastname = res.lastname;
+      this.email = res.emailId;
+      this.password = res.password;
+      this.dob = res.dob;
+      this.phone = res.phone;
+      this.address = res.address;
+    })
   }
 
-  submitUserId() {
-    let userId = this.userIDref.value;
-    this.user_service.pullUserInfo(userId).
-    subscribe(result => {
-      let userInfo:User = result;
+  updateProfile() {
+    let update = {
+      _id:this._id,
+      firstname:this.firstname,
+      lastname:this.lastname,
+      emailId:this.email,
+      password:this.password,
+      dob:this.dob,
+      phone:this.phone,
+      address:this.address
+    }
+    this.userService.updateProfile(update).subscribe(result=> {
       console.log(result);
-      this._id = userInfo._id
-      this.firstname = userInfo.firstname
-      this.lastname = userInfo.lastname
-      this.emailId = userInfo.emailId
-      this.password = userInfo.password
-      this.dob = userInfo.dob
-      this.phone = userInfo.phone
-      this.address = userInfo.address
-    },
-    error => console.log(error));
-  this.showProfileFlag = true;
+      if (result.modifiedCount == 1) { //update was successful
+        this.successMessage = "Successfully updated account";
+      }
+      else {
+        this.errorMessage = "Failed to update account";
+      }
+    });
   }
-
-  editInformation() {
-    let newInfo = this.editProfileRef.value;
-    let userId = this.userIDref.value;
-    let completeInfo = {...userId , ...newInfo};
-    console.log(completeInfo);
-    // let jsonVer = JSON.stringify(completeInfo);
-    // console.log(jsonVer);
-    this.user_service.updateUserInfo(completeInfo).
-    subscribe(result => console.log(result),
-    error => console.log(error));
-
-    console.log("done");
-  }
-  
 }

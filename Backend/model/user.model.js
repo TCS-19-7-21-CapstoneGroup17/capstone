@@ -6,18 +6,18 @@ mongoose.pluralize(null);
 
 //define the user schema
 let userSchema = mongoose.Schema({
-    _id:Number,
-    firstname:String,
-    lastname:String,
-    emailId:{type:String, unique:true}, //user's email should be unique. Will be used to log-in
-    password:String,
-    dob:String,
-    phone:Number,
-    address:String,
-    loginAttempts:Number,
-    bankAccountNumber:Number,
-    fundsAmt:Number,
-    bankFunds:Number
+    _id: Number,
+    firstname: String,
+    lastname: String,
+    emailId: { type: String, unique: true }, //user's email should be unique. Will be used to log-in
+    password: String,
+    dob: String,
+    phone: Number,
+    address: String,
+    loginAttempts: Number,
+    bankAccountNumber: Number,
+    fundsAmt: Number,
+    bankFunds: Number
 });
 
 //create the user model using the user schema

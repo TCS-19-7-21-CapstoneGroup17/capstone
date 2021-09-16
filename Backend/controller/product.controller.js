@@ -45,20 +45,25 @@ let updateProduct = (req, res) => {
     if (product.price != null) {
         productModel.updateOne({ productName: product.productName }, { $set: { price: product.price } }, (err, result) => {
             if (!err) {
-                res.send("Product updated successfully")
+                // res.send("Product updated successfully")
+                res.json({result: true, msg:"Product updated successfully"})
             }
             else {
-                res.send(err);
+                // res.send(err);
+                res.json({result: false, msg: "Error: " + err})
             }
         })
     }
     else if (product.quantity != null) {
         productModel.updateOne({ productName: product.productName }, { $set: { quantity: product.quantity } }, (err, result) => {
             if (!err) {
-                res.send("Product updated successfully")
+                // res.send("Product updated successfully")
+                res.json({ result: true, msg: "Product updated successfully" })
             }
             else {
-                res.send(err);
+                console.log("error updating quantity");
+                // res.send(err);
+                res.json({ result: true, msg: "Product updated successfully" })
             }
         })
     }

@@ -2,9 +2,11 @@
 // will include HTTP calls to products API
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from './product';
+import { Ticket } from './ticket';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -15,18 +17,74 @@ export class EditCartService {
   constructor(public http: HttpClient) { }
 
   // input: takes in no parameters
-  // output: returns result of a HTTP call to API
+  // output: returns all products from database
   getAllProducts(): Observable<any> {
     return this.http.get("http://localhost:9090/product/getAllProducts");
   }
 
+  // input: takes in a product name
+  // output: returns product with product name
   getOneProduct(pName: string): Observable<any>{
     return this.http.get("http://localhost:9090/product/getProduct/" + pName);
+  }
+
+  // input: ticket to unlock account {userID:number , reason:string}
+  // add ticket to Ticket table
+  // output: return JSON {result:boolean, msg:string}
+  sendTicket(ticket: Ticket): Observable<any>{
+    return this.http.post("http://localhost:9090/ticket/addTicket", ticket);
+  }
+
+  // input: user info from signup page { firstname, lastname, emailId, password, dob, phone, address }
+  addUser(user: User): Observable<any> {
+    return this.http.post("http://localhost:9090/user/signUp", user);
+  }
+
+  // input: user info from signin page {userID, password}
+  checkSignIn(user: any): Observable<any>{
+    return this.http.post("http://localhost:9090/user/signIn", user);
+  }
+
+  // input: checkout cost details {userID, totalCost of shopping cart}
+  updateFunds(info: any): Observable<any>{
+    return this.http.post("http://localhost:9090/user/updateFund", info);
+  }
+
+  // input: new product quantity {productName, newQuantity}
+  updateProductQuantity(quantity: any): Observable<any>{
+    return this.http.post("http://localhost:9090/product/updateProduct", quantity);
+  }
+
+  // input: order {userID, productName, price (per product), day, month, year, quantity, status}
+  addOrder(order: any): Observable<any>{
+    return this.http.post("http://localhost:9090/order/addOrder", order);
+  }
+
+  // input: none
+  // output: number?
+  getUserID(): number {
+    let userID = localStorage.getItem("userID");
+    if (userID) {
+      console.log("something is stored " + userID);
+      return JSON.parse(userID);
+    }
+    // first time opening page. set userID == -1 (not logged in)
+    else {
+      localStorage.setItem("userID", JSON.stringify(-1))
+      return -1;
+    }
   }
 
   // given an array of products, display products in a grid
   displayProducts(productArray: Array<Product>) {
     console.log("Using service class, display products");
+    let rowTag = document.getElementById('rows') || document.createElement('div');
+    while (rowTag.firstChild) {
+      console.log("delete children")
+      rowTag.removeChild(rowTag.firstChild);
+    }
+
+    // for each product in shopping cart, display it
     for (let pp of productArray) {
       console.log(pp.productName);
 
@@ -72,24 +130,33 @@ export class EditCartService {
   // add product to shopping cart (stored in localStorage)
   addToCart(pName: string) {
     // get shopping cart from localStorage
-    let shoppingCart = JSON.parse(localStorage.getItem("shoppingCart") || "");
-    console.log(shoppingCart); //delete
-    function findProduct(product: any) { return product.productName == pName; }
+    let userID = JSON.stringify(this.getUserID());
+    // if shopping cart for this user already exists
+    if (localStorage.getItem(userID)) {
+      // get shopping cart from localStorage
+      let shoppingCart = JSON.parse(localStorage.getItem(userID) || "");
+      function findProduct(product: any) { return product.productName == pName; }
 
-    // if product is already in shopping cart, increment product quantity by 1
-    // else, add product to shopping cart for the first time
-    if (shoppingCart.find(findProduct)) {
-      shoppingCart.find(findProduct).quantity += 1;
-    } else {
-      shoppingCart.push({ productName: pName, quantity: 1 });
+      // if product is already in shopping cart, increment product quantity by 1
+      if (shoppingCart.find(findProduct)) shoppingCart.find(findProduct).quantity += 1;
+      // else, add product to shopping cart for the first time
+      else shoppingCart.push({ productName: pName, quantity: 1 });
+
+      // store updated shopping cart into localStorage
+      localStorage.setItem(userID, JSON.stringify(shoppingCart));
     }
-    // store updated shopping cart into localStorage
-    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+    // create a shopping cart for them and add first item
+    else {
+      localStorage.setItem(userID, JSON.stringify([{productName: pName, quantity:1}]))
+    }
+    
   }
 
   // delete product from shopping cart
   deleteFromCart(pName: string) {
-    let shoppingCart = JSON.parse(localStorage.getItem("shoppingCart") || "");
+    let userID = JSON.stringify(this.getUserID());
+
+    let shoppingCart = JSON.parse(localStorage.getItem(userID) || "");
     function findProduct(product: any) { return product.productName == pName; }
 
     // if product in shopping cart
@@ -102,7 +169,7 @@ export class EditCartService {
       else if (shoppingCart[foundProductIdx].quantity > 1) {
         shoppingCart[foundProductIdx].quantity -= 1;
       }
-      localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+      localStorage.setItem(userID, JSON.stringify(shoppingCart));
     }
 
     console.log(shoppingCart);
