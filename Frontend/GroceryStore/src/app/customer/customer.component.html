@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">Grocery Store Name</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <button class="btn btn-outline-primary" type="button" style="margin:5px 2px;" (click)="showAddGroceries()">
+                        Add Groceries
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-primary" type="button" style="margin:5px 2px;" (click)="showViewShoppingCart()">
+                        View Shopping Cart
+                    </button>
+                </li>
+            </ul>
+            <button class="btn btn-danger" type="button" style="margin:5px 2px;">
+                Log Out
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- down here is where the content will show up -->
+<app-add-groceries *ngIf="clicked_AddGroceries"></app-add-groceries>
+<app-shopping-cart *ngIf="clicked_ViewShoppingCart"></app-shopping-cart>

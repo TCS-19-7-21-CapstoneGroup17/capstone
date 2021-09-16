@@ -1,0 +1,13 @@
+/* for the grid layout */
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+/* for each individual card */
+.card{
+    flex: 0 1 20%;
+    background-color: antiquewhite;
+    border: solid black 1px;
+}

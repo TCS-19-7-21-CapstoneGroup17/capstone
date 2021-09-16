@@ -23,6 +23,9 @@ import { CancelledOrdersComponent } from './employee/update-order-status/cancell
 import { OutForDeliveryOrdersComponent } from './employee/update-order-status/out-for-delivery-orders/out-for-delivery-orders.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SignInComponent } from './employee/sign-in/sign-in.component';
+import { ShoppingCartComponent } from './customer/shopping-cart/shopping-cart.component';
+import { AddGroceriesComponent } from './customer/add-groceries/add-groceries.component';
+import { CustomerComponent } from './customer/customer.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,10 @@ import { SignInComponent } from './employee/sign-in/sign-in.component';
     DeliveredOrdersComponent,
     CancelledOrdersComponent,
     OutForDeliveryOrdersComponent,
-    SignInComponent
+    SignInComponent,
+    ShoppingCartComponent,
+    AddGroceriesComponent,
+    CustomerComponent
   ],
   imports: [
     BrowserModule,

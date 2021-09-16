@@ -10,10 +10,10 @@ router.get('/getAllProducts', productController.getAllProductDetails);
 router.get('/getProduct/:pName', productController.getProductDetail);
 
 // add product
-router.post('/addProduct',productController.addProduct);
+router.post('/addProduct', productController.addProduct);
 
 //update product
-router.post('/updateProduct',productController.updateProduct);
+router.post('/updateProduct', productController.updateProduct);
 
 //delete product
 router.post('/deleteProduct', productController.deleteProduct);
