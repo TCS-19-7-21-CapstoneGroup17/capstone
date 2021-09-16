@@ -7,6 +7,9 @@ import { RaiseTicketComponent } from './customer/raise-ticket/raise-ticket.compo
 import { ShoppingCartComponent } from './customer/shopping-cart/shopping-cart.component';
 import { SignInComponent } from './customer/sign-in/sign-in.component';
 import { SignUpComponent } from './customer/sign-up/sign-up.component';
+import { OrderStatusComponent } from './user/order-status/order-status.component';
+import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
+import { FundsComponent } from './user/funds/funds.component';
 
 const routes: Routes = [
   {
@@ -18,6 +21,9 @@ const routes: Routes = [
       { path: 'add-groceries', component: AddGroceriesComponent },
       { path: 'shopping-cart', component: ShoppingCartComponent },
       { path: 'raise-ticket', component: RaiseTicketComponent },
+      { path: 'order-status', component: OrderStatusComponent},
+      { path: 'edit-profile', component: EditProfileComponent},
+      { path: 'funds', component: FundsComponent},
       { path: '', redirectTo: 'signup', pathMatch: 'full'}
     ]
   },

@@ -160,7 +160,7 @@ let updateFund = (request, response) => {
 let getUserInfo = (request, response) => {
     // need employee id used request as placeholder
     let userId = request.body;
-    userModel.findOne({_id:userId}, (err, res)=> {
+    userModel.findOne({_id:userId._id}, (err, res)=> {
         if(!err){
             response.json(res);
         }else{
@@ -173,14 +173,9 @@ let getUserInfo = (request, response) => {
 let editUserInfo = (request, response) => {
     // still need the way to pull the user id, using placeholder instead
     let updatedInfo = request.body;
-    userModel.updateOne({_id:updatedInfo.id},
-        {$set:{firstname:updatedInfo.firstname}},
-        {$set:{lastname:updatedInfo.lastname}},
-        {$set:{emailId:updatedInfo.emailId}},
-        {$set:{password:updatedInfo.password}},
-        {$set:{dob:updatedInfo.dob}},
-        {$set:{phone:updatedInfo.phone}},
-        {$set:{address:updatedInfo.address}},
+    userModel.updateOne({_id:updatedInfo._id},
+        {$set:{firstname:updatedInfo.firstname, lastname:updatedInfo.lastname, emailId:updatedInfo.emailId, 
+            password:updatedInfo.password, dob:updatedInfo.dob, phone:updatedInfo.phone, address:updatedInfo.address}},
         (err, res) => {
             if(!err){
                 response.json(res);
@@ -223,4 +218,4 @@ let addFunds = (request, response) => {
     })
 }
 
-module.exports = {signUp, getUserInfo, editUserInfo, getUserFunds, addFunds, updateFund}
+module.exports = {signUp, signIn, getUserInfo, editUserInfo, getUserFunds, addFunds, updateFund}
