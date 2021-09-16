@@ -21,7 +21,8 @@ import { OutForDeliveryOrdersComponent } from './employee/update-order-status/ou
 import { RaiseTicketComponent } from './customer/raise-ticket/raise-ticket.component';
 import { SignUpComponent } from './customer/sign-up/sign-up.component';
 import { AppRoutingModule } from './app-routing.module';
-import { SignInComponent } from './employee/sign-in/sign-in.component';
+import { SignInComponent } from './customer/sign-in/sign-in.component';
+import { SignInComponent2 } from './employee/sign-in/sign-in.component';
 import { ShoppingCartComponent } from './customer/shopping-cart/shopping-cart.component';
 import { AddGroceriesComponent } from './customer/add-groceries/add-groceries.component';
 import { CustomerComponent } from './customer/customer.component';
@@ -51,6 +52,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     RaiseTicketComponent,
     SignUpComponent,
     SignInComponent,
+    SignInComponent2,
     AdminComponent,
     AdminDashboardComponent
     ],

@@ -8,7 +8,7 @@ import { EmployeeService } from '../employee.service';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css']
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent2 implements OnInit {
 
   employeeLoginRef = new FormGroup({
     empId:new FormControl(),
