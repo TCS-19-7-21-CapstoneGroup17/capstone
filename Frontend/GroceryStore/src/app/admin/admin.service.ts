@@ -10,7 +10,7 @@ import { Request } from '../employee/model.request';
 })
 export class AdminService {
 
-  constructor() { }
+  constructor(public http:HttpClient) { }
 
   checkLoginDetails(admin:Admin):Observable<any>{
     return this.http.post("http://localhost:9090/admin/signin",admin)

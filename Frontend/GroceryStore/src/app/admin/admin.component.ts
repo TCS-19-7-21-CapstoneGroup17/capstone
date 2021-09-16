@@ -28,7 +28,7 @@ export class AdminComponent implements OnInit {
     this.adminSer.checkLoginDetails(login).
       subscribe(result => {
         if (result == "Success") {
-          this.router.navigate("admin-home");
+          this.router.navigate(["admin-home"]);
         } else {
           this.msg = result;
         }
