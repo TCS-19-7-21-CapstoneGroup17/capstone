@@ -6,14 +6,16 @@ mongoose.pluralize(null);
 
 //create the schema for employees
 let employeeSchema = mongoose.Schema({
-    _id:Number,
+    id:String,
     firstname:String,
     lastname:String, 
-    emailId:{type:String, unique:true}, //employee's email id should be unique. Will be used to log-in
-    password:String
+    email:{type:String, unique:true}, //employee's email id should be unique. Will be used to log-in
+    password:String,
+    changedPassword: {
+        type: Boolean,
+        default: 0
+    }
 });
 
 //create the model for employees using the schema
-let employeeModel = mongoose.model("Employee", employeeSchema);
-
-module.exports = employeeModel;
+module.exports = mongoose.model("employees", employeeSchema);

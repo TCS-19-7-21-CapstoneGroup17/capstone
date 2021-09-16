@@ -1,11 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-<<<<<<< HEAD
 import { EmployeeComponent } from './employee/employee.component';
-
-const routes: Routes = [
-  {path:"employee",component:EmployeeComponent}
-=======
 import { AddGroceriesComponent } from './customer/add-groceries/add-groceries.component';
 import { CustomerComponent } from './customer/customer.component';
 import { RaiseTicketComponent } from './customer/raise-ticket/raise-ticket.component';
@@ -25,8 +20,8 @@ const routes: Routes = [
       { path: 'raise-ticket', component: RaiseTicketComponent },
       { path: '', redirectTo: 'signup', pathMatch: 'full'}
     ]
-  }
->>>>>>> origin/edit_checkout
+  },
+  {path:"employee",component:EmployeeComponent}
 ];
 
 @NgModule({
