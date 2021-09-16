@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from './product';
 import { Ticket } from './ticket';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -16,18 +17,27 @@ export class EditCartService {
   constructor(public http: HttpClient) { }
 
   // input: takes in no parameters
-  // output: returns result of a HTTP call to API
+  // output: returns all products from database
   getAllProducts(): Observable<any> {
     return this.http.get("http://localhost:9090/product/getAllProducts");
   }
 
+  // input: takes in a product name
+  // output: returns product with product name
   getOneProduct(pName: string): Observable<any>{
     return this.http.get("http://localhost:9090/product/getProduct/" + pName);
   }
 
-  // send ticket to unlock user account
+  // input: ticket to unlock account {userID:number , reason:string}
+  // add ticket to Ticket table
+  // output: return JSON {result:boolean, msg:string}
   sendTicket(ticket: Ticket): Observable<any>{
     return this.http.post("http://localhost:9090/ticket/addTicket", ticket);
+  }
+
+  // input: user info from form input { firstname, lastname, emailId, password, dob, phone, address }
+  addUser(user: User): Observable<any> {
+    return this.http.post("http://localhost:9090/user/signUp", user);
   }
 
   // given an array of products, display products in a grid

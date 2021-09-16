@@ -9,6 +9,8 @@ import { AddGroceriesComponent } from './customer/add-groceries/add-groceries.co
 import { CustomerComponent } from './customer/customer.component';
 import { RaiseTicketComponent } from './customer/raise-ticket/raise-ticket.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SignUpComponent } from './customer/sign-up/sign-up.component';
+import { SignInComponent } from './customer/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     ShoppingCartComponent,
     AddGroceriesComponent,
     CustomerComponent,
-    RaiseTicketComponent
+    RaiseTicketComponent,
+    SignUpComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
