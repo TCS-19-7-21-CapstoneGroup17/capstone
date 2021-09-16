@@ -20,8 +20,8 @@ let addEmployee = (request, response)=> {
                 empId = result[0]._id + 1;
             }
             //every newly added employee's password will be "temporary@123", will be prompted to change at their first login
-            employeeModel.insertMany({_id:empId, firstname:newEmp.firstname, lastname:newEmp.lastname, 
-                emailId:newEmp.emailId, password:"temporary@123"}, (err1, result1) => {
+            employeeModel.insertMany({id:empId, firstname:newEmp.firstname, lastname:newEmp.lastname, 
+                email:newEmp.email, password:"temporary@123"}, (err1, result1) => {
                 if (!err1) {
                     response.send({result:true, msg:"Successfully added employee " + empId});
                     console.log("Successfully added employee " + empId);
@@ -42,11 +42,11 @@ let addEmployee = (request, response)=> {
 //Delete an employee using their id
 let deleteEmployee = (request, response)=> {
     let employeeId = request.body;
-    employeeModel.deleteOne({_id:employeeId._id}, (err, result)=> {
+    employeeModel.deleteOne({id:employeeId.id}, (err, result)=> {
         if (!err) {
             if (result.deletedCount == 1) {
-                console.log("Successfully deleted employee " + employeeId._id);
-                response.send({result:false, msg:"Successfully deleted employee " + employeeId._id});
+                console.log("Successfully deleted employee " + employeeId.id);
+                response.send({result:false, msg:"Successfully deleted employee " + employeeId.id});
             }
             else {
                 console.log("No employee with that ID found");
