@@ -15,6 +15,9 @@ export class AdminService {
   checkLoginDetails(admin:Admin):Observable<any>{
     return this.http.post("http://localhost:9090/admin/signin",admin)
   }
+  // checkLoginDetails(admin:Admin):Observable<any>{
+  //   return this.http.post("http://localhost:4200/api/admin/signin",admin)
+  // }
   addProduct(product:Product):Observable<any>{
     return this.http.post("http://localhost:9090/product/addProduct", product)
   }
