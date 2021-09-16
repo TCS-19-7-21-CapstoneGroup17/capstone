@@ -9,7 +9,7 @@ let router = express.Router();
 router.post("/signUp/", userController.signUp);
 router.post("/editProfile", userController.getUserInfo);
 router.put("/editProfile/update", userController.editUserInfo);
-router.get("/addFunds/", userController.getUserFunds);
+router.post("/addFunds", userController.getUserFunds);
 router.post("/addFunds/update/", userController.addFunds);
 router.post("/signIn/", userController.signIn);
 router.post("/orderStatus", userController.getOrderStatus);

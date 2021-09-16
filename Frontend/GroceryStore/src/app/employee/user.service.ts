@@ -185,4 +185,8 @@ export class UserService {
     return this.http.put("http://localhost:9090/api/user/editProfile/update", profileInfo, {responseType:'text'})
   }
 
+  pullFundsInfo(userId:number):Observable<any> {
+    return this.http.post("http://localhost:9090/api/user/addFunds", userId)
+  }
+
 }

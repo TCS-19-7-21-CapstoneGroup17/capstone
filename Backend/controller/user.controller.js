@@ -213,10 +213,11 @@ let editUserInfo = (request, response) => {
 
 let getUserFunds = (request, response) => {
     // pull the id
-    let userId = request.body;
-    userModel.findOne({_id:userId}, (err, res) => {
+    let usrId = request.body;
+    userModel.findOne({_id:usrId.userId}, (err, res)=> {
         if(!err){
-            response.send(res.fundsAmt)
+            console.log(res)
+            response.json(res);
         }else{
             response.json(err);
         }
