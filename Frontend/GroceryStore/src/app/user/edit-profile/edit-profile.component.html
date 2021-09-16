@@ -1,28 +1,37 @@
 <div>
-    <h2>Edit your profile!</h2>
-    <form (ngSubmit)  ="updateProfile()">
-        <label>First Name </label>
-        <input type="text" name="firstname" [(ngModel)]="firstname"/><br/>
-        
-        <label>Last Name </label>
-        <input type="text" name="lastname" [(ngModel)]="lastname"/><br/>
-
-        <label>Email </label>
-        <input type="text" name="emailId" [(ngModel)]="email"/><br/>
-
-        <label>Password </label>
-        <input type="text" name="password" [(ngModel)]="password"/><br/>
-
-        <label>Date of Birth </label>
-        <input type="date" name="dob" [(ngModel)]="dob"/><br/>
-
-        <label>Phone Number </label>
-        <input type="text" name="phone" [(ngModel)]="phone"/><br/>
-
-        <label>Address </label>
-        <input type="text" name="address" [(ngModel)]="address"/><br/>
-        <br>
-        <input type="submit" value="Update Profile">
-    </form>
-    <p style="color:darkgreen">{{successMessage}}</p>
-    <p style="color:red">{{errorMessage}}</p>
+    <div class="container" style="background-color: rgb(179, 179, 179); box-shadow: 4px 4px 6px black; margin-top: 15%;">
+        <div class="row">
+            <h2 style="text-align: center; margin-top: 15px;">Edit your profile!</h2>
+        </div>
+        <div class="row" style="text-align: center;">
+            <form (ngSubmit)="updateProfile()">
+                <label>First Name: </label>
+                <input type="text" name="firstname" [(ngModel)]="firstname" style="margin-bottom: 10px;"/><br/>
+                
+                <label>Last Name: </label>
+                <input type="text" name="lastname" [(ngModel)]="lastname" style="margin-bottom: 10px;"/><br/>
+    
+                <label>Email: </label>
+                <input type="text" name="emailId" [(ngModel)]="email" style="margin-bottom: 10px;"/><br/>
+    
+                <label>Password: </label>
+                <input type="text" name="password" [(ngModel)]="password" style="margin-bottom: 10px;"/><br/>
+    
+                <label>Date of Birth: </label>
+                <input type="date" name="dob" [(ngModel)]="dob" style="margin-bottom: 10px;"/><br/>
+    
+                <label>Phone Number: </label>
+                <input type="text" name="phone" [(ngModel)]="phone" style="margin-bottom: 10px;"/><br/>
+    
+                <label>Address: </label>
+                <input type="text" name="address" [(ngModel)]="address" /><br/>
+                <br>
+                <input type="submit" value="Update Profile" class="btn-primary" style="margin-bottom: 10px;">
+            </form>
+        </div>
+        <div class="row" style="text-align: center;">
+            <p style="color:darkgreen">{{successMessage}}</p>
+            <p style="color:red">{{errorMessage}}</p>
+        </div>
+    </div>
+</div>
