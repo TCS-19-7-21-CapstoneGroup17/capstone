@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { EditCartService } from './edit-cart.service';
+import { interval } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
@@ -7,22 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerComponent implements OnInit {
   // variables
-  clicked_AddGroceries: boolean = false;
-  clicked_ViewShoppingCart: boolean = false;
-  
-  constructor() { }
+  userID?: number
+
+  constructor(public editCartSer: EditCartService, public router: Router) {
+    
+   }
 
   ngOnInit(): void {
+    this.userID = this.editCartSer.getUserID();
+    console.log("In customer.component.ts userID is " + this.userID);
+    interval(1000).subscribe(x => this.userID = this.editCartSer.getUserID())
   }
 
-  showAddGroceries() {
-    this.clicked_AddGroceries = true;
-    this.clicked_ViewShoppingCart = false;
-  }
-
-  showViewShoppingCart() {
-    this.clicked_AddGroceries = false;
-    this.clicked_ViewShoppingCart = true;
+  logout() {
+    localStorage.setItem("userID", JSON.stringify(-1));
+    this.router.navigate(["user/signup"]);
   }
 
 }

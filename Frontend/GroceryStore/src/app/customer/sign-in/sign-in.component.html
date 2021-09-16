@@ -1,0 +1,12 @@
+<div>
+    <h3>Sign In</h3>
+    <hr/>
+
+    <form [formGroup]="signinRef" (ngSubmit)="doSignIn()">
+        User ID <input type="number" formControlName="_id"/> <br/>
+        Password <input type="password" formControlName="password"/> <br/>
+        <div style="color: red;">{{errorMsg}}</div>
+        
+        <input type="submit" value="Submit"/>
+    </form>
+</div>

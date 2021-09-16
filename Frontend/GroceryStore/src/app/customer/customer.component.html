@@ -2,22 +2,41 @@
     <div class="container-fluid">
         <a class="navbar-brand">Grocery Store Name</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- if signed in (bool variable?), display these options + logout button -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <button class="btn btn-outline-primary" type="button" style="margin:5px 2px;" (click)="showAddGroceries()">
-                        Add Groceries
-                    </button>
-                </li>
-                <li class="nav-item">
-                    <button class="btn btn-outline-primary" type="button" style="margin:5px 2px;" (click)="showViewShoppingCart()">
-                        View Shopping Cart
-                    </button>
-                </li>
-            </ul>
-            <button class="btn btn-danger" type="button" style="margin:5px 2px;">
-                Log Out
-            </button>
+            <!-- logged in (userID is current user's ID) -->
+            <div *ngIf="userID != -1">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+                    <li class="nav-item">
+                        <button class="btn btn-outline-primary" type="button" style="margin:5px 2px;" [routerLink]="['./add-groceries']">
+                            Add Groceries
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-primary" type="button" style="margin:5px 2px;" [routerLink]="['shopping-cart']">
+                            View Shopping Cart
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-danger" type="button" style="margin:5px 2px;" (click)="logout()">
+                            Log Out
+                        </button>
+                    </li>
+                </ul>
+                
+            </div>
+            
+            <!-- not logged in yet -->
+            <div *ngIf="userID == -1">
+                <button class="btn btn-outline-primary" type="button" style="margin:5px 2px;" [routerLink]="['./raise-ticket']">
+                    Raise Ticket
+                </button>
+                <button class="btn btn-outline-primary" type="button" style="margin:5px 2px;" [routerLink]="['./signup']" >
+                    Sign Up
+                </button>
+                <button class="btn btn-outline-primary" type="button" style="margin:5px 2px;" [routerLink]="['./signin']">
+                    Sign In
+                </button>
+            </div>
+            
             
         </div>
     </div>
@@ -25,6 +44,5 @@
 
 <!-- down here is where the content will show up -->
 <!-- <app-raise-ticket></app-raise-ticket> -->
-<app-sign-up></app-sign-up>
-<app-add-groceries *ngIf="clicked_AddGroceries"></app-add-groceries>
-<app-shopping-cart *ngIf="clicked_ViewShoppingCart"></app-shopping-cart>
+<!-- this is for routing between signup, signin, add-grocery, shopping-cart -->
+<router-outlet></router-outlet>
