@@ -1,8 +1,10 @@
 export interface Order {
     _id: number;
-    productId: number;
+    productName: string;
     price: number;
-    date: string;
+    day:number,
+    month:number,
+    year:number,
     quantity: number;
     status: string;
 }

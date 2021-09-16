@@ -219,20 +219,27 @@ let getUserFunds = (request, response) => {
 let addFunds = (request, response) => {
     // pull the id
     let updateFunds = request.body;
-    userModel.findOne({_id:userId}, (err, res) => {
-        if(!err){
-            if(res.fundsAmt != null){
-                let newAmt = parseInt(userId.amt) + res.fundsAmt;
-                userModel.updateOne({_id:updateFunds.id}, {$set:{fundsAmt:newAmt}}, {$set:{bankAccountNumber:updateFunds.bankAccountNumber}}, (err1, res1) => {
-                    if(!err1){
-                        response.json(res1);
-                    }else{
-                        response.json(err1);
-                    }
-                });
-            }
+    userModel.findOne({_id:updateFunds.userId, bankAccountNumber:updateFunds.bankAccountref}, (err, res) => {
+        if(res != null){
+            console.log(res);
+            let newAmt = updateFunds.fundsAmtRef + res.fundsAmt;
+            let bankAmt = res.bankFunds - updateFunds.fundsAmtRef
+            userModel.updateOne({_id:updateFunds.userId}, {$set:{fundsAmt:newAmt}}, (err1, res1) => {
+                if(!err1){
+                    userModel.updateOne({_id:updateFunds.userId}, {$set:{bankFunds:bankAmt}}, (err2, res2) => {
+                        if(!err2){
+                            response.send("Funds Added");
+                            console.log(res2);
+                        }else{
+                            console.log(err2);
+                        }
+                    })
+                }else{
+                    console.log(err1);
+                }
+            });
         }else{
-            response.json(err);
+            response.send("Invalid bank account");
         }
     })
 }

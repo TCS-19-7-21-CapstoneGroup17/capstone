@@ -16,7 +16,14 @@ export class FundsComponent implements OnInit {
     userId:new FormControl(),
   })
 
+  userFundsAcct = new FormGroup({
+    bankAccountref: new FormControl(),
+    fundsAmtRef: new FormControl()
+  });
+
   showFundsPageFlag:boolean = false;
+  amt:Number = -1;
+  msg?:string
 
   ngOnInit(): void {
   }
@@ -26,10 +33,22 @@ export class FundsComponent implements OnInit {
     this.user_service.pullFundsInfo(userId).
     subscribe(result => {
       let userInfo:UserWithFunds = result;
+      this.amt = userInfo.fundsAmt;
       console.log(result);
     },
     error => console.log(error));
   this.showFundsPageFlag = true;
+  }
+
+  fundsTransaction(){
+    let userId = this.userIDref.value;
+    let bankInfo = this.userFundsAcct.value;
+    let bankInfoWithId = {...userId , ...bankInfo};
+    this.user_service.updateFundsInfo(bankInfoWithId).
+    subscribe(result=> {
+      this.msg = result;
+    },
+    error=>console.log(error));
   }
 
 }

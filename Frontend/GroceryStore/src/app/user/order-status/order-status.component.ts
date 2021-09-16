@@ -15,7 +15,7 @@ export class OrderStatusComponent implements OnInit {
   });
   orderHistoryArray = [];
   tableContent = "";
-  tableStart = "<table border=\"1\"><tr><th>Order ID</th><th>Product ID</th><th>Price</th><th>Date</th><th>Quantity</th><th>Status</th></tr>";
+  tableStart = "<table class=\"table\"><thead class=\"thead-dark\"><tr><th>Order ID</th><th>Product Name</th><th>Price</th><th>Day</th><th>Month</th><th>Year</th><th>Quantity</th><th>Status</th></thead></tr>";
   tableEnd = "</table>"
 
   constructor(public user_service:UserService) { }
@@ -31,7 +31,7 @@ export class OrderStatusComponent implements OnInit {
         console.log(this.orderHistoryArray);
         this.orderHistoryArray.forEach((element: Order) => {
           console.log("loop")
-          this.tableContent += "<tr><td>"+ element._id +"</td><td>"+ element.productId +"</td><td>"+ element.price +"</td><td>"+ element.date +"</td><td>"+ element.quantity +"</td><td>"+ element.status +"</td></tr>";
+          this.tableContent += "<tr><td>"+ element._id +"</td><td>"+ element.productName +"</td><td>"+ element.price +"</td><td>"+ element.day +"</td><td>" + element.month +"</td><td>"+ element.year +"</td><td>" + element.quantity +"</td><td>"+ element.status +"</td></tr>";
           console.log(this.tableContent);
         })
       document.getElementById("orderTable")!.innerHTML+= this.tableStart + this.tableContent + this.tableEnd;
