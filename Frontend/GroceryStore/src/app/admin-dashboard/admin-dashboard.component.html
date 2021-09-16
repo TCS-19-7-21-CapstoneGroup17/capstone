@@ -19,9 +19,13 @@
         <input type="text" formControlName = "price"><br>
         <label>Quantity Update</label>
         <input type="text" formControlName = "quantity"><br>
+        <input type="submit" value="Update">
+        <input type="reset" value="reset">
     </form>
     <form [formGroup]="deleteProductRef" (ngSubmit)="deleteProduct()">
         <label>Product Name</label>
         <input type="text" formControlName = "pName"><br>
+        <input type="submit" value="Delete">
+        <input type="reset" value="reset">
     </form>
 </div>
