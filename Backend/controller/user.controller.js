@@ -188,10 +188,10 @@ let addFunds = (request, response) => {
 }
 
 let getOrderStatus = (request,response) => {
-    // pull that users id
-    let placeholder = request.body;
-    orderModel.find({userId:placeholder}, (err, data) => {
+    let usrID = request.params.userId;
+    orderModel.find({userId:usrID}, (err, data) => {
         if (!err) {
+            console.log("sending data" + data);
             response.json(data);
         }
         else {

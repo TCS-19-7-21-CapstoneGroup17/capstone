@@ -172,4 +172,8 @@ export class UserService {
     }
     return this.http.get<Order>(URL)
   }
+
+  getOrderHistory():Observable<any> {
+    return this.http.get("http://localhost:9090/api/user/:userId/orderStatus");
+  }
 }
