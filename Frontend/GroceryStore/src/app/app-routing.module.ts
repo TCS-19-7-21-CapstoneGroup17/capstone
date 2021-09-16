@@ -11,6 +11,7 @@ import { OrderStatusComponent } from './user/order-status/order-status.component
 import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
 import { FundsComponent } from './user/funds/funds.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {

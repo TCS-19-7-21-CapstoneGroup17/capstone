@@ -7,8 +7,8 @@ import { EditProfileComponent } from './user/edit-profile/edit-profile.component
 import { FundsComponent } from './user/funds/funds.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { FormsModule } from '@angular/forms';
-import {ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule} from '@angular/common/http';
 import { SendRequestComponent } from './employee/send-request/send-request.component';
 import { UpdateOrderStatusComponent } from './employee/update-order-status/update-order-status.component';
 import { UnlockUsersComponent } from './employee/unlock-users/unlock-users.component';
@@ -45,19 +45,12 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     DeliveredOrdersComponent,
     CancelledOrdersComponent,
     OutForDeliveryOrdersComponent,
-    UserComponent,
-    OrderStatusComponent,
-    EditProfileComponent,
-    FundsComponent,
     ShoppingCartComponent,
     AddGroceriesComponent,
     CustomerComponent,
     RaiseTicketComponent,
     SignUpComponent,
     SignInComponent,
-    ShoppingCartComponent,
-    AddGroceriesComponent,
-    CustomerComponent,
     AdminComponent,
     AdminDashboardComponent
     ],
@@ -66,8 +59,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    AppRoutingModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
