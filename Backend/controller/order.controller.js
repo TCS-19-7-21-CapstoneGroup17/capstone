@@ -175,4 +175,19 @@ let generateYearlyReport = (request,response)=> {
     }
 }
 
-module.exports = {generateDailyReport, generateWeeklyReport, generateMonthlyReport, generateYearlyReport}
+// performed by user {userId, productId, price, day,  month, year, quantity, status}
+let addOrder = (request, response) => {
+    let orderInfo = request.body;
+    orderModel.insertMany(orderInfo, (err, result) => {
+        if (!err) {
+            // console.log(result)
+            // response.send("Inserted");
+            response.json({ result: true, msg: "Successfully added Order" });
+        }
+        else {
+            response.json({ result: false, msg: "Error: " + err });
+        }
+    })
+}
+
+module.exports = {generateDailyReport, generateWeeklyReport, generateMonthlyReport, generateYearlyReport, addOrder}

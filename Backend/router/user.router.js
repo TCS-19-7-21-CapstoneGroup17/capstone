@@ -12,5 +12,6 @@ router.get("/editProfile/", userController.getUserInfo);
 router.post("/editProfile/update/", userController.editUserInfo);
 router.get("/addFunds/", userController.getUserFunds);
 router.post("/addFunds/update/", userController.addFunds);
+router.post("/updateFund", userController.updateFund)
 
 module.exports = router;

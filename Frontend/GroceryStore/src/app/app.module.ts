@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-
-
 import { AppComponent } from './app.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { FormsModule } from '@angular/forms';
@@ -17,11 +14,17 @@ import { ShippedOrdersComponent } from './employee/update-order-status/shipped-o
 import { DeliveredOrdersComponent } from './employee/update-order-status/delivered-orders/delivered-orders.component';
 import { CancelledOrdersComponent } from './employee/update-order-status/cancelled-orders/cancelled-orders.component';
 import { OutForDeliveryOrdersComponent } from './employee/update-order-status/out-for-delivery-orders/out-for-delivery-orders.component';
-import { AppRoutingModule } from './app-routing.module';
 import { UserComponent } from './user/user.component';
 import { OrderStatusComponent } from './user/order-status/order-status.component';
 import { EditProfileComponent } from './user/edit-profile/edit-profile.component';
 import { FundsComponent } from './user/funds/funds.component';
+import { AppRoutingModule } from './app-routing.module';
+import { ShoppingCartComponent } from './customer/shopping-cart/shopping-cart.component';
+import { AddGroceriesComponent } from './customer/add-groceries/add-groceries.component';
+import { CustomerComponent } from './customer/customer.component';
+import { RaiseTicketComponent } from './customer/raise-ticket/raise-ticket.component';
+import { SignUpComponent } from './customer/sign-up/sign-up.component';
+import { SignInComponent } from './customer/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,13 @@ import { FundsComponent } from './user/funds/funds.component';
     UserComponent,
     OrderStatusComponent,
     EditProfileComponent,
-    FundsComponent
+    FundsComponent,
+    ShoppingCartComponent,
+    AddGroceriesComponent,
+    CustomerComponent,
+    RaiseTicketComponent,
+    SignUpComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,

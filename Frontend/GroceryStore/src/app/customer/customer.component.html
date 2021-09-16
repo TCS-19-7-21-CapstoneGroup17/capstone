@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">Grocery Store Name</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- logged in (userID is current user's ID) -->
+            <div *ngIf="userID != -1">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+                    <li class="nav-item">
+                        <button class="btn btn-outline-primary" type="button" style="margin:5px 2px;" [routerLink]="['./add-groceries']">
+                            Add Groceries
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-primary" type="button" style="margin:5px 2px;" [routerLink]="['shopping-cart']">
+                            View Shopping Cart
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-danger" type="button" style="margin:5px 2px;" (click)="logout()">
+                            Log Out
+                        </button>
+                    </li>
+                </ul>
+                
+            </div>
+            
+            <!-- not logged in yet -->
+            <div *ngIf="userID == -1">
+                <button class="btn btn-outline-primary" type="button" style="margin:5px 2px;" [routerLink]="['./raise-ticket']">
+                    Raise Ticket
+                </button>
+                <button class="btn btn-outline-primary" type="button" style="margin:5px 2px;" [routerLink]="['./signup']" >
+                    Sign Up
+                </button>
+                <button class="btn btn-outline-primary" type="button" style="margin:5px 2px;" [routerLink]="['./signin']">
+                    Sign In
+                </button>
+            </div>
+            
+            
+        </div>
+    </div>
+</nav>
+
+<!-- down here is where the content will show up -->
+<!-- <app-raise-ticket></app-raise-ticket> -->
+<!-- this is for routing between signup, signin, add-grocery, shopping-cart -->
+<router-outlet></router-outlet>
