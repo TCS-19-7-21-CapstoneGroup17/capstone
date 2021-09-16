@@ -1,4 +1,5 @@
 //load the user model
+const orderModel = require('../model/order.model');
 let userModel = require('../model/user.model');
 
 //define the functions for use with the user table
@@ -186,4 +187,17 @@ let addFunds = (request, response) => {
     })
 }
 
-module.exports = {signUp, signIn, getUserInfo, editUserInfo, getUserFunds, addFunds}
+let getOrderStatus = (request,response) => {
+    // pull that users id
+    let placeholder = request.body;
+    orderModel.find({userId:placeholder}, (err, data) => {
+        if (!err) {
+            response.json(data);
+        }
+        else {
+            response.json(err);
+        }
+    })
+}
+
+module.exports = {signUp, signIn, getUserInfo, editUserInfo, getUserFunds, addFunds, getOrderStatus}

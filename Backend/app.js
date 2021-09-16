@@ -22,7 +22,10 @@ app.use("/api/employee", employeeRouter);
 //http://localhost:9090/api/employee/login
 
 app.use("/product", productRouter);
-app.use("/user", userRouter);
+
+app.use("/api/user", userRouter);
+//http://localhost:9090/api/user/orderStatus
+
 app.use("/admin", adminRouter);
 
 
