@@ -1,6 +1,6 @@
 import { AdminService } from './../admin/admin.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
@@ -25,12 +25,23 @@ export class AdminDashboardComponent implements OnInit {
   deleteProductRef = new FormGroup({
     pName: new FormControl()
   })
+  generateReportRef = new FormGroup({
+    timeFilter: new FormControl("", Validators.required),
+    orderFilter: new FormControl("", Validators.required)
+  })
 
   constructor(public adminSer: AdminService,
     public router: Router) { }
 
   ngOnInit(): void {
   }
+
+  // function to toggle between components
+  component?: string
+  showComponent(compo: string) {
+    this.component = compo;
+  }
+
 
   addProduct() {
     let product = this.addProductRef.value;
@@ -71,4 +82,19 @@ export class AdminDashboardComponent implements OnInit {
         error => console.log(error));
     this.deleteProductRef.reset();
   }
+
+  // generate report functions
+  time?: string
+  chooseTime(e: any) {
+    console.log(e.target.value);
+    this.time = e.target.value;
+  }
+
+  filter?: string
+  chooseFilter(e: any) {
+    console.log(e.target.value);
+    this.filter = e.target.value;
+  }
+
+
 }

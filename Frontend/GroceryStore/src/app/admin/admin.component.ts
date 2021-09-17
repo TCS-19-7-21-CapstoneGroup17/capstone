@@ -24,11 +24,14 @@ export class AdminComponent implements OnInit {
   }
 
   checkAdmin() {
+    
     let login = this.loginRef.value;
+    console.log(login);
     this.adminSer.checkLoginDetails(login).
       subscribe(result => {
+        console.log(result)
         if (result == "Success") {
-          this.router.navigate(["admin-home"]);
+          this.router.navigate(["../admin-home"]);
         } else {
           this.msg = result;
         }

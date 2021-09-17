@@ -8,42 +8,127 @@
     <title>Admin Dashboard</title>
 </head>
 <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand">Grocery Store Name</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <button class="btn btn-outline-primary" type="button" (click)="showComponent('add')"
+                            style="margin:5px 2px;">Add Product</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-primary" type="button" (click)="showComponent('update')"
+                            style="margin:5px 2px;">Update Product</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-primary" type="button" (click)="showComponent('delete')"
+                            style="margin:5px 2px;">Delete Product</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-primary" type="button" (click)="showComponent('report')"
+                            style="margin:5px 2px;">Generate Report</button>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+    </nav>
+
+    {{component}}
+    <!--  -->
     <div>
         <h2>Admin Dashboard</h2>
-        <h3>Add Product</h3>
-        <form [formGroup]="addProductRef" (ngSubmit)="addProduct()">
-            <label>Product Name</label>
-            <input type="text" formControlName="pName"><br>
-            <label>Price</label>
-            <input type="text" formControlName="price"> <br>
-            <label>Quantity</label>
-            <input type="text" formControlName="quantity"> <br>
-            <label>Image</label>
-            <input type="image" src="" alt="" formControlName="image"> <br>
-            <input type="submit" value="Add">
-            <input type="reset" value="reset">
-        </form>
-        <hr>
-        <h3>Update Price or Quantity</h3>
-        <form [formGroup]="updateProductRef" (ngSubmit)="updateProduct()">
-            <label>Product Name</label>
-            <input type="text" formControlName="pName"><br>
-            <label>Price Update OR</label>
-            <input type="text" formControlName="price"><br>
-            <label>Quantity Update</label>
-            <input type="text" formControlName="quantity"><br>
-            <input type="submit" value="Update">
-            <input type="reset" value="reset">
-        </form>
-        <hr>
-        <h3>Delete Product</h3>
-        <form [formGroup]="deleteProductRef" (ngSubmit)="deleteProduct()">
-            <label>Product Name</label>
-            <input type="text" formControlName="pName"><br>
-            <input type="submit" value="Delete">
-            <input type="reset" value="reset">
-        </form>
-        <hr>
+        <div *ngIf="component == 'add'">
+            <h3>Add Product</h3>
+            <form [formGroup]="addProductRef" (ngSubmit)="addProduct()">
+                <label>Product Name</label>
+                <input type="text" formControlName="pName"><br>
+                <label>Price</label>
+                <input type="text" formControlName="price"> <br>
+                <label>Quantity</label>
+                <input type="text" formControlName="quantity"> <br>
+                <label>Image</label>
+                <input type="image" src="" alt="" formControlName="image"> <br>
+                <input type="submit" value="Add">
+                <input type="reset" value="reset">
+            </form>   
+        </div>
+        
+        <div *ngIf="component == 'update'">
+            <h3>Update Price or Quantity</h3>
+            <form [formGroup]="updateProductRef" (ngSubmit)="updateProduct()">
+                <label>Product Name</label>
+                <input type="text" formControlName="pName"><br>
+                <label>Price Update OR</label>
+                <input type="text" formControlName="price"><br>
+                <label>Quantity Update</label>
+                <input type="text" formControlName="quantity"><br>
+                <input type="submit" value="Update">
+                <input type="reset" value="reset">
+            </form>
+        </div>
+        
+        <div *ngIf="component == 'delete'">
+            <h3>Delete Product</h3>
+            <form [formGroup]="deleteProductRef" (ngSubmit)="deleteProduct()">
+                <label>Product Name</label>
+                <input type="text" formControlName="pName"><br>
+                <input type="submit" value="Delete">
+                <input type="reset" value="reset">
+            </form>   
+        </div>
+        
+        <div *ngIf="component == 'report'">
+            <h3>Generate Report</h3>
+            <form [formGroup]="generateReportRef">
+                <div style="display: flex; flex-direction:row">
+                    <label>Filter by Time</label>
+                    <select formControlName="timeFilter" (change)="chooseTime($event)">
+                        <option>Day</option>
+                        <option>Week</option>
+                        <option>Month</option>
+                        <option>Year</option>
+                    </select>
+                    &emsp;
+                    <!-- options to choose time -->
+                    <div >
+                        <label>Day</label>
+                        <select>
+                            <option ></option>
+                        </select>
+                    </div>
+                    &emsp;
+                    <div >
+                        <label>Month</label>
+                        <select>
+                            <option></option>
+                        </select>
+                    </div>
+                    &emsp;
+                    <div >
+                        <label>Year</label>
+                        <select>
+                            <option></option>
+                        </select>
+                    </div>
+                </div>
+                <br/>
+                <!-- filter by order info -->
+                <div style="display: flex; flex-direction:row">
+                    <label>Filter by Order: </label>
+                    <select formControlName="orderFilter" (change)="chooseFilter($event)">
+                        <option>None</option>
+                        <option>User ID</option>
+                        <option>Product ID</option>
+                    </select>
+                </div>
+
+                <button type="submit">Submit</button>
+                
+            </form>
+        </div>
     </div>
 </body>
 </html>

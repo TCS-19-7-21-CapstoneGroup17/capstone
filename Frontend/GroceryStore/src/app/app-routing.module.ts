@@ -14,6 +14,7 @@ import { FundsComponent } from './user/funds/funds.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignInComponent2 } from './employee/sign-in/sign-in.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {
@@ -33,7 +34,8 @@ const routes: Routes = [
     
   },
   {path:"employee",component:EmployeeComponent},
-  {path:"dashboard/:empId",component:EmployeeComponent},
+  { path: "dashboard/:empId", component: EmployeeComponent },
+  {path:"adminSignin", component:AdminComponent},
   {path:"admin-home",component:AdminDashboardComponent},
   {path:"employeeSignin", component:SignInComponent2},
   {path:"userOrderStatus", component:OrderStatusComponent},

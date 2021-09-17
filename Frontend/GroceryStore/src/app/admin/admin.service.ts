@@ -13,7 +13,7 @@ export class AdminService {
   constructor(public http:HttpClient) { }
 
   checkLoginDetails(admin:Admin):Observable<any>{
-    return this.http.post("http://localhost:9090/admin/signin",admin)
+    return this.http.post("http://localhost:9090/admin/signin",admin, {responseType:"text"})
   }
   // checkLoginDetails(admin:Admin):Observable<any>{
   //   return this.http.post("http://localhost:4200/api/admin/signin",admin)
