@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Admin Dashboard</title>
 </head>
+
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -31,7 +34,7 @@
                             style="margin:5px 2px;">Generate Report</button>
                     </li>
                 </ul>
-                
+
             </div>
         </div>
     </nav>
@@ -52,9 +55,9 @@
                 <input type="image" src="" alt="" formControlName="image"> <br>
                 <input type="submit" value="Add">
                 <input type="reset" value="reset">
-            </form>   
+            </form>
         </div>
-        
+
         <div *ngIf="component == 'update'">
             <h3>Update Price or Quantity</h3>
             <form [formGroup]="updateProductRef" (ngSubmit)="updateProduct()">
@@ -68,7 +71,7 @@
                 <input type="reset" value="reset">
             </form>
         </div>
-        
+
         <div *ngIf="component == 'delete'">
             <h3>Delete Product</h3>
             <form [formGroup]="deleteProductRef" (ngSubmit)="deleteProduct()">
@@ -76,9 +79,9 @@
                 <input type="text" formControlName="pName"><br>
                 <input type="submit" value="Delete">
                 <input type="reset" value="reset">
-            </form>   
+            </form>
         </div>
-        
+
         <div *ngIf="component == 'report'">
             <h3>Generate Report</h3>
             <form [formGroup]="generateReportRef" (ngSubmit)="generateReport()">
@@ -95,7 +98,7 @@
                     <div *ngIf="getTime == 'Day' || getTime == 'Week' ">
                         <label>Day</label>
                         <select formControlName="day" style="margin: 5px;">
-                            <option *ngFor="let day of days" > {{day}}</option>
+                            <option *ngFor="let day of days"> {{day}}</option>
                         </select>
                     </div>
                     &emsp;
@@ -113,10 +116,10 @@
                         </select>
                     </div>
                 </div>
-                <br/>
+                <br />
                 <!-- filter by order info -->
                 <div style="display: flex; flex-direction:row">
-                    <label  style="margin: 5px;">Filter by Order Info: </label>
+                    <label style="margin: 5px;">Filter by Order Info: </label>
                     <select formControlName="orderFilter" (change)="updateGetFilter()" style="margin-right: 15px;">
                         <option>None</option>
                         <option>User ID</option>
@@ -124,18 +127,18 @@
                     </select>
                     <div *ngIf="getFilter == 'User ID' ">
                         <label>User ID</label>
-                        <input type="number" formControlName="userID" style="margin-left: 15px;"/>
+                        <input type="number" formControlName="userID" style="margin-left: 15px;" />
                     </div>
                     <div *ngIf="getFilter == 'Product Name' ">
                         <label>Product Name</label>
-                        <input type="text" formControlName="productName" style="margin-left: 15px;" />   
+                        <input type="text" formControlName="productName" style="margin-left: 15px;" />
                     </div>
-                    
+
                 </div>
 
                 <button type="submit" class="btn btn-secondary">Submit</button>
             </form>
-            <br/>
+            <br />
             <div>
                 <table class="table table-striped">
                     <thead class="thead-dark">
@@ -146,7 +149,7 @@
                             <th>Price</th>
                             <th>Order Date MM/DD/YYYY</th>
                             <th>Status</th>
-                        </tr>                        
+                        </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let rr of allRecords">
@@ -156,7 +159,7 @@
                             <td>{{rr.price}}</td>
                             <td>{{rr.month + 1}}/{{rr.day}}/{{rr.year}}</td>
                             <td>{{rr.status}}</td>
-                        </tr>                        
+                        </tr>
                     </tbody>
 
                 </table>
@@ -164,4 +167,5 @@
         </div>
     </div>
 </body>
+
 </html>
