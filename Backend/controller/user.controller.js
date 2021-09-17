@@ -257,4 +257,4 @@ let getOrderStatus = (request,response) => {
     })
 }
 
-module.exports = {signUp, signIn, getUserInfo, editUserInfo, getUserFunds, addFunds, getOrderStatus}
+module.exports = {signUp, signIn, getUserInfo, editUserInfo, getUserFunds, addFunds, getOrderStatus, updateFund}

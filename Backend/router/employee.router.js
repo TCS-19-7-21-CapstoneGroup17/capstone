@@ -10,7 +10,7 @@ let employeeModel = require('../model/employee.model');
 
 //assign urls to methods
 router.post("/addEmployee/", employeeController.addEmployee);
-router.delete("/deleteEmployee/", employeeController.deleteEmployee);
+router.post("/deleteEmployee/", employeeController.deleteEmployee);
 router.post("/login", employeeController.signInEmployee);
 
 module.exports = router;

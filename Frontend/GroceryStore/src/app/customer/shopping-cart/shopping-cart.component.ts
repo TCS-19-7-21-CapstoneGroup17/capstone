@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { interval } from 'rxjs';
 import { EditCartService } from '../edit-cart.service';
 import { Product } from '../product';
@@ -15,7 +16,7 @@ export class ShoppingCartComponent implements OnInit {
   errorMsg: string = ""
 
   // DI to edit-cart.service.ts to use service class's functions
-  constructor(public editCartSer: EditCartService) {
+  constructor(public editCartSer: EditCartService, public router: Router) {
   }
 
   // on initialization, getAllProducts from the database
@@ -46,7 +47,6 @@ export class ShoppingCartComponent implements OnInit {
           if (parseInt(idx) == this.shoppingCart.length - 1) {
             this.editCartSer.displayProducts(this.shoppingArray);
           }
-
         });
       }
     }
@@ -76,11 +76,12 @@ export class ShoppingCartComponent implements OnInit {
             month: date.getMonth(),
             year: date.getFullYear(),
             quantity: this.shoppingCart[idx].quantity,
-            status: "shipped"
+            status: "processing"
           }
           // add order to Order table
           this.editCartSer.addOrder(order).subscribe(orderRes => {
             // if successfully add to Order table ... 
+            console.log(orderRes);
             if (orderRes.result) {
               let prodQuan = {
                 productName: this.shoppingCart[idx].productName,
@@ -98,20 +99,26 @@ export class ShoppingCartComponent implements OnInit {
                       if (updateFundRes) {
                         this.shoppingCart = []
                         localStorage.setItem(JSON.stringify(userID), JSON.stringify(this.shoppingCart));
+                        //go back to store page
+                        alert("Checkout successful. Total:" + totalCost);
+                        this.router.navigate(["user/add-groceries"]);
                       }
                       else {
                         console.log(updateFundRes.msg)
+                        alert(updateFundRes.msg);
                       }
                     })
                   }
                 }
                 else {
                   console.log(updateQuantityRes.msg);
+                  alert(updateQuantityRes.msg);
                 }
               })
             }
             else {
               console.log(orderRes.msg);
+              alert(orderRes.msg);
             }
           })
         })

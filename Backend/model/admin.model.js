@@ -9,8 +9,8 @@ let adminSchema = mongoose.Schema({
 
 // collection, schema
 let adminModel = mongoose.model("Admin", adminSchema);
-let adminUsername = "admin";
-let adminPassword = "123";
-let adminLogin = { adminUsername, adminPassword };
-// adminModel.insertMany(adminLogin);
+// let adminUsername = "admin";
+// let adminPassword = "123";
+// let adminLogin = {adminUsername,adminPassword};
+//adminModel.insertMany(adminLogin);
 module.exports = adminModel;

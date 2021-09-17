@@ -33,6 +33,14 @@
                         <button class="btn btn-outline-primary" type="button" (click)="showComponent('report')"
                             style="margin:5px 2px;">Generate Report</button>
                     </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-primary" type="button" (click)="showComponent('addEmp')"
+                            style="margin:5px 2px;">Add Employee</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-outline-primary" type="button" (click)="showComponent('deleteEmp')"
+                            style="margin:5px 2px;">Delete Employee</button>
+                    </li>
                 </ul>
 
             </div>
@@ -165,6 +173,36 @@
                 </table>
             </div>
         </div>
+
+        <div  *ngIf="component == 'addEmp'">
+            <h3>Add Employee</h3>
+            <form [formGroup]="addEmpRef" (ngSubmit)="addEmployee()">
+                <label>First name</label>
+                <input type="text" required formControlName="firstname"><br>
+                <label>Last name</label>
+                <input type="text" required formControlName="lastname"><br>
+                <label>Email</label>
+                <input type="email" required formControlName="email"><br>
+                <input type="submit" value="add employee">
+                <input type="reset" value="reset">
+            </form>
+            <p style="color:darkgreen">{{empAddMsg}}</p>
+            <p style="color:red">{{empAddError}}</p>
+            <hr>            
+        </div>
+
+        <div *ngIf="component == 'deleteEmp'">
+            <h3>Delete Employee</h3>
+            <form [formGroup]="delEmpRef" (ngSubmit)="deleteEmployee()">
+                <label>Employee Id</label>
+                <input type="number" required formControlName="_id"><br>
+                <input type="submit" value="delete employee">
+            </form>
+            <p style="color:darkgreen">{{empDelMsg}}</p>
+            <p style="color:red">{{empDelError}}</p>
+            <hr>            
+        </div>
+
     </div>
 </body>
 

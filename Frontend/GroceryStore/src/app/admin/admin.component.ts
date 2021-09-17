@@ -28,12 +28,18 @@ export class AdminComponent implements OnInit {
     let login = this.loginRef.value;
     console.log(login);
     this.adminSer.checkLoginDetails(login).
-      subscribe(result => {
-        console.log(result)
-        if (result == "Success") {
-          this.router.navigate(["../admin-home"]);
+      subscribe(res => {
+        // console.log(result)
+        // if (result == "Success") {
+        //   this.router.navigate(["../admin-home"]);
+        console.log(res);
+        if (res == "Success") {
+          //save admin login info in sessionStorage
+          console.log("login")
+          sessionStorage.setItem("admin", JSON.stringify(login));
+          this.router.navigate(["admin/dashboard"]);
         } else {
-          this.msg = result;
+          this.msg = res;
         }
       },
         error => console.log(error));
