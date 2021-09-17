@@ -1,9 +1,11 @@
-<div>
+<div id="everything">
   <!-- this is for routing between admin, employee, and user -->
-  <div *ngIf="isHomePage">
-    <button [routerLink]="['/admin/signin']" (click)="isClicked()">Admin</button>
-    <button [routerLink]="['/employeeSignin']" (click)="isClicked()">Employee</button>
-    <button [routerLink]="['/user']" (click)="isClicked()">User</button>    
+  <div *ngIf="isHomePage" id="home">
+    <h1>Welcome to the Grocery Store webpage!</h1>
+    <span class="badge badge-secondary"></span>
+    <button [routerLink]="['/admin/signin']" (click)="isClicked()" class="btn btn-primary">Admin Login</button><br>
+    <button [routerLink]="['/employeeSignin']" (click)="isClicked()" class="btn btn-primary">Employee Login</button><br>
+    <button [routerLink]="['/user']" (click)="isClicked()" class="btn btn-primary">User Login</button><br>
   </div>
 
 
