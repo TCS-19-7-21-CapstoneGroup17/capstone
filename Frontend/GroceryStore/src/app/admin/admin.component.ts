@@ -30,6 +30,8 @@ export class AdminComponent implements OnInit {
       subscribe(result => {
         console.log(result);
         if (result.result) {
+          //save admin login info in sessionStorage
+          sessionStorage.setItem("admin", JSON.stringify(login));
           this.router.navigate(["admin/dashboard"]);
         } else {
           this.msg = result.msg;

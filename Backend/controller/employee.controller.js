@@ -9,8 +9,9 @@ let adminModel = require('../model/admin.model');
 //employees start with the same password and ids are auto-generated
 let addEmployee = (request, response)=> {
     let newEmpRequest = request.body;
+    console.log(newEmpRequest);
     //validate admin login that was sent along with new employee request. If admin login is incorrect, do not add
-    adminModel.find({username:newEmpRequest.adminUsername, password:newEmpRequest.adminPassword}, (err0, result0) => {
+    adminModel.find({username:newEmpRequest.adminUsername},{password:newEmpRequest.adminPassword}, (err0, result0) => {
         if (!err0) {
             if (result0.length == 0) { //admin account not found
                 response.json({result:false, msg:"Admin credentials invalid"})
@@ -30,7 +31,7 @@ let addEmployee = (request, response)=> {
                         }
                         //every newly added employee's password will be "temporary@123", will be prompted to change at their first login
                         employeeModel.insertMany({_id:empId, firstname:newEmpRequest.firstname, lastname:newEmpRequest.lastname, 
-                            emailId:newEmpRequest.emailId, password:"temporary@123"}, (err1, result1) => {
+                            email:newEmpRequest.email, password:"temporary@123"}, (err1, result1) => {
                             if (!err1) {
                                 response.json({result:true, msg:"Successfully added employee " + empId});
                                 console.log("Successfully added employee " + empId);
@@ -57,19 +58,24 @@ let addEmployee = (request, response)=> {
 //Delete an employee using their id. Will be performed by Admin
 let deleteEmployee = (request, response)=> {
     let delEmpRequest = request.body;
+    console.log(delEmpRequest)
     //validate admin login that was sent with the employee deletion request. If login is incorrect, do not delete
-    adminModel.find({username:delEmpRequest.adminUsername, password:delEmpRequest.adminPassword}, (err0, result0) =>{
-        if (!err0)
-        {
-            if (result0.length == 0) { //admin account not found
-                response.json({result:false, msg:"Admin credentials invalid"})
-            }
-            else { //admin account found, proceed
-                employeeModel.deleteOne({_id:employeeId._id}, (err, result)=> {
+    // adminModel.find({username:delEmpRequest.adminUsername},{password:delEmpRequest.adminPassword}, (err0, result0) => {
+    //     console.log("check1")
+    //     if (!err0)
+    //     {
+    //         if (result0.length == 0) { //admin account not found
+    //             response.json({result:false, msg:"Admin credentials invalid"})
+    //         }
+    //         else { //admin account found, proceed
+                console.log("check2")
+                employeeModel.deleteOne({_id:delEmpRequest._id}, (err, result)=> {
+                    console.log("check3")
                     if (!err) {
-                        if (result.deletedCount == 1) {
-                            console.log("Successfully deleted employee " + employeeId._id);
-                            response.json({result:true, msg:"Successfully deleted employee " + employeeId._id});
+                        console.log(result);
+                        if (result.deletedCount > 0) {
+                            console.log("Successfully deleted employee " + delEmpRequest._id);
+                            response.json({result:true, msg:"Successfully deleted employee " + delEmpRequest._id});
                         }
                         else {
                             console.log("No employee with that ID found");
@@ -82,12 +88,12 @@ let deleteEmployee = (request, response)=> {
                         response.json({result:false, msg:result});
                     }
                 })
-            }
-        }
-        else {
-            response.json({result:false, msg:"Error: " + err0});
-        }
-    });
+    //         }
+    //     }
+    //     else {
+    //         response.json({result:false, msg:"Error: " + err0});
+    //     }
+    // });
 }
 
 let signInEmployee = (request, response) => {

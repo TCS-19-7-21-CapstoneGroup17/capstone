@@ -144,10 +144,13 @@ export class EditCartService {
             }
           }
           // else, add product to shopping cart for the first time
-          else shoppingCart.push({ productName: pName, quantity: 1 });
+          else {
+            shoppingCart.push({ productName: pName, quantity: 1 });
+          }
 
           // store updated shopping cart into localStorage
           localStorage.setItem(userID, JSON.stringify(shoppingCart));
+          alert("Successfully added 1 to cart")
         }
         // create a shopping cart for them and add first item
         else {
@@ -158,8 +161,6 @@ export class EditCartService {
 
     })
     // if shopping cart for this user already exists
-    
-    
   }
 
   // delete product from shopping cart
@@ -180,6 +181,7 @@ export class EditCartService {
         shoppingCart[foundProductIdx].quantity -= 1;
       }
       localStorage.setItem(userID, JSON.stringify(shoppingCart));
+      alert("Successfully deleted 1 from cart");
     }
   }
 

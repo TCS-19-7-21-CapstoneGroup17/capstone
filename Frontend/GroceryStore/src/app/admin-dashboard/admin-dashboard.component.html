@@ -50,6 +50,29 @@
         <p style="color:darkgreen">{{deleteMsg}}</p>
         <p style="color:red">{{deleteError}}</p>
         <hr>
+        <h3>Add Employee</h3>
+        <form [formGroup]="addEmpRef" (ngSubmit)="addEmployee()">
+            <label>First name</label>
+            <input type="text" required formControlName="firstname"><br>
+            <label>Last name</label>
+            <input type="text" required formControlName="lastname"><br>
+            <label>Email</label>
+            <input type="email" required formControlName="email"><br>
+            <input type="submit" value="add employee">
+            <input type="reset" value="reset">
+        </form>
+        <p style="color:darkgreen">{{empAddMsg}}</p>
+        <p style="color:red">{{empAddError}}</p>
+        <hr>
+        <h3>Delete Employee</h3>
+        <form [formGroup]="delEmpRef" (ngSubmit)="deleteEmployee()">
+            <label>Employee Id</label>
+            <input type="number" required formControlName="_id"><br>
+            <input type="submit" value="delete employee">
+        </form>
+        <p style="color:darkgreen">{{empDelMsg}}</p>
+        <p style="color:red">{{empDelError}}</p>
+        <hr>
     </div>
 </body>
 </html>

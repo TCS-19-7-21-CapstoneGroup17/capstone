@@ -17,6 +17,10 @@ export class AdminDashboardComponent implements OnInit {
   updateError:string = "";
   deleteMsg:string = "";
   deleteError:string = "";
+  empAddMsg:string = "";
+  empAddError:string = "";
+  empDelMsg:string = "";
+  empDelError:string = "";
 
   addProductRef = new FormGroup({
     productName: new FormControl(),
@@ -31,6 +35,14 @@ export class AdminDashboardComponent implements OnInit {
   })
   deleteProductRef = new FormGroup({
     productName: new FormControl()
+  })
+  addEmpRef = new FormGroup({
+    firstname: new FormControl(),
+    lastname: new FormControl(),
+    email: new FormControl()
+  })
+  delEmpRef = new FormGroup({
+    _id: new FormControl()
   })
 
   constructor(public adminSer: AdminService,
@@ -86,5 +98,42 @@ export class AdminDashboardComponent implements OnInit {
       },
         error => console.log(error));
     this.deleteProductRef.reset();
+  }
+  addEmployee() {
+    this.empAddMsg = "";
+    this.empAddError = "";
+    let employee = this.addEmpRef.value;
+    //get loginInfo from session storage and add to request
+    let admin = JSON.parse(sessionStorage.getItem("admin")!);
+    let empAddRequest = {firstname:employee.firstname, lastname:employee.lastname, email:employee.email, adminUsername:admin.username, adminPassword:admin.password}
+    console.log(empAddRequest);
+    this.adminSer.addEmployee(empAddRequest).subscribe(result=> {
+      if (result.result) {
+        this.empAddMsg = result.msg;
+      }
+      else {
+        this.empAddError = result.msg;
+      }
+    })
+    this.addEmpRef.reset();
+  }
+  deleteEmployee() {
+    this.empDelMsg = "";
+    this.empDelError = "";
+    let employee = this.delEmpRef.value;
+    console.log(employee);
+    //get loginInfo from session storage and add to request
+    let admin = JSON.parse(sessionStorage.getItem("admin")!);
+    let empDelRequest = {_id:employee._id, adminUsername:admin.username, adminPassword:admin.password};
+    console.log(empDelRequest);
+    this.adminSer.deleteEmployee(empDelRequest).subscribe(result=> {
+      if (result.result) {
+        this.empDelMsg = result.msg;
+      }
+      else {
+        this.empDelError = result.msg;
+      }
+    }) 
+  this.delEmpRef.reset();
   }
 }

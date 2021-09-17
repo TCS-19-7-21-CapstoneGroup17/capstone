@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Admin } from './model.admin';
 import { Product } from '../employee/model.product';
@@ -26,6 +26,12 @@ export class AdminService {
   }
   deleteProduct(product:Product):Observable<any>{
     return this.http.post("http://localhost:9090/product/deleteProduct", product)
+  }
+  addEmployee(employee:any):Observable<any> {
+    return this.http.post("http://localhost:9090/employee/addEmployee", employee);
+  }
+  deleteEmployee(employee:any):Observable<any> {
+    return this.http.post("http://localhost:9090/employee/deleteEmployee", employee);
   }
   // viewRequest():Observable<any>{
   //   return this.http.get("")
