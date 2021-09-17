@@ -13,21 +13,23 @@
         <h3>Add Product</h3>
         <form [formGroup]="addProductRef" (ngSubmit)="addProduct()">
             <label>Product Name</label>
-            <input type="text" formControlName="pName"><br>
+            <input type="text" formControlName="productName" required><br>
             <label>Price</label>
-            <input type="text" formControlName="price"> <br>
+            <input type="number" formControlName="price" required> <br>
             <label>Quantity</label>
-            <input type="text" formControlName="quantity"> <br>
+            <input type="number" formControlName="quantity" required> <br>
             <label>Image</label>
-            <input type="image" src="" alt="" formControlName="image"> <br>
+            <input type="text" src="" alt="" formControlName="image" placeholder="(url)" required> <br>
             <input type="submit" value="Add">
             <input type="reset" value="reset">
         </form>
+        <p style="color:darkgreen">{{addMsg}}</p>
+        <p style="color:red">{{addError}}</p>
         <hr>
         <h3>Update Price or Quantity</h3>
         <form [formGroup]="updateProductRef" (ngSubmit)="updateProduct()">
             <label>Product Name</label>
-            <input type="text" formControlName="pName"><br>
+            <input type="text" formControlName="productName"><br>
             <label>Price Update OR</label>
             <input type="text" formControlName="price"><br>
             <label>Quantity Update</label>
@@ -35,14 +37,18 @@
             <input type="submit" value="Update">
             <input type="reset" value="reset">
         </form>
+        <p style="color:darkgreen">{{updateMsg}}</p>
+        <p style="color:red">{{updateError}}</p>
         <hr>
         <h3>Delete Product</h3>
         <form [formGroup]="deleteProductRef" (ngSubmit)="deleteProduct()">
             <label>Product Name</label>
-            <input type="text" formControlName="pName"><br>
+            <input type="text" formControlName="productName"><br>
             <input type="submit" value="Delete">
             <input type="reset" value="reset">
         </form>
+        <p style="color:darkgreen">{{deleteMsg}}</p>
+        <p style="color:red">{{deleteError}}</p>
         <hr>
     </div>
 </body>

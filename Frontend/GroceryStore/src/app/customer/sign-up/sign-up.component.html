@@ -5,13 +5,13 @@
     <div class="col">
         <div class="container-md">
             <form [formGroup]="signupRef" (ngSubmit)="doSignup()" >
-                First Name <input type="text" formControlName="firstname" /> <br/><br/>
-                Last Name <input type="text" formControlName="lastname" /> <br /><br/>
-                Email <input type="email" formControlName="emailId" /> <br/><br/>
-                Password <input type="password" formControlName="password"/> <br/><br/>
-                Date of Birth <input type="text" formControlName="dob" placeholder="mm/dd/yyyy"/> <br/><br/>
-                Phone Number <input type="number" formControlName="phone"/> <br/><br/>
-                Address <input type="text" formControlName="address"/> <br/><br/>
+                First Name <input type="text" formControlName="firstname" required/> <br/><br/>
+                Last Name <input type="text" formControlName="lastname" required/> <br /><br/>
+                Email <input type="email" formControlName="emailId" required/> <br/><br/>
+                Password <input type="password" formControlName="password" required/> <br/><br/>
+                Date of Birth <input type="date" formControlName="dob" placeholder="mm/dd/yyyy" required/> <br/><br/>
+                Phone Number <input type="number" formControlName="phone" required/> <br/><br/>
+                Address <input type="text" formControlName="address" required/> <br/><br/>
 
                 <div style="color: red;">{{errorMsg}}</div>
                 <br/>

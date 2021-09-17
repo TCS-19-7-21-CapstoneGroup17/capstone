@@ -28,28 +28,32 @@ let getProductDetail = (request, response) => {
 
 let addProduct = (req, res) => {
     let product = req.body;
-
+    console.log(product);
     productModel.insertMany(product, (err, result) => {
         if (!err) {
             res.send("Product stored successfully");
-            //return to dashboard?
         }
         else {
-            res.send(err);
+            res.send("Error: " + err);
         }
     })
 }
 let updateProduct = (req, res) => {
     let product = req.body;
-
-    if (product.price != null) {
+    if (product.price != null && product.quantity != null){
+        res.json({result:false, msg:"Can only change price or quantity, not both"})
+    }
+    else if (product.price != null) {
         productModel.updateOne({ productName: product.productName }, { $set: { price: product.price } }, (err, result) => {
             if (!err) {
-                // res.send("Product updated successfully")
-                res.json({result: true, msg:"Product updated successfully"})
+                if (result.matchedCount > 0) {
+                    res.json({result: true, msg:"Product's price updated successfully"})
+                }
+                else {
+                    res.json({result:false, msg:"Product with this name was not found"})
+                }
             }
             else {
-                // res.send(err);
                 res.json({result: false, msg: "Error: " + err})
             }
         })
@@ -57,15 +61,15 @@ let updateProduct = (req, res) => {
     else if (product.quantity != null) {
         productModel.updateOne({ productName: product.productName }, { $set: { quantity: product.quantity } }, (err, result) => {
             if (!err) {
-                // res.send("Product updated successfully")
-                res.json({ result: true, msg: "Product updated successfully" })
+                res.json({ result: true, msg: "Product's quantity updated successfully" })
             }
             else {
-                console.log("error updating quantity");
-                // res.send(err);
-                res.json({ result: true, msg: "Product updated successfully" })
+                res.json({ result: false, msg: "Error: " + err})
             }
         })
+    }
+    else {
+        res.json({result: false, msg:"Did not update product: Both quantity and price were null"})
     }
 
 }
@@ -74,10 +78,15 @@ let deleteProduct = (req, res) => {
 
     productModel.deleteOne({ productName: product.productName }, (err, result) => {
         if (!err) {
-            res.send("Product deleted successfully");
+            if (result.deletedCount > 0) {
+                res.json({result:true, msg:"Product deleted successfully"});
+            }
+            else {
+                res.json({result:false, msg:"Product with this name was not found"});
+            }
         }
         else {
-            res.send(err);
+            res.json({result:false, msg:"Error: " + err});
         }
     })
 }

@@ -11,19 +11,26 @@ import { Router } from '@angular/router';
 })
 export class AdminDashboardComponent implements OnInit {
 
+  addMsg:string = "";
+  addError:string = "";
+  updateMsg:string = "";
+  updateError:string = "";
+  deleteMsg:string = "";
+  deleteError:string = "";
+
   addProductRef = new FormGroup({
-    pName: new FormControl(),
+    productName: new FormControl(),
     price: new FormControl(),
     quantity: new FormControl(),
     image: new FormControl()
   });
   updateProductRef = new FormGroup({
-    pName: new FormControl(),
+    productName: new FormControl(),
     price: new FormControl(),
     quantity: new FormControl()
   })
   deleteProductRef = new FormGroup({
-    pName: new FormControl()
+    productName: new FormControl()
   })
 
   constructor(public adminSer: AdminService,
@@ -33,39 +40,48 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   addProduct() {
+    this.addMsg = "";
+    this.addError = "";
     let product = this.addProductRef.value;
     this.adminSer.addProduct(product).
       subscribe(result => {
-        if (result == "Success") {
-          //this.router.navigate(["admin-home",login.username]);
+        if (result == "Product stored successfully") {
+          this.addMsg = result;
         } else {
-          //this.msg = result;
+          this.addError = result;
         }
       },
         error => console.log(error));
     this.addProductRef.reset();
   }
   updateProduct() {
+    this.updateMsg="";
+    this.updateError="";
     let product = this.updateProductRef.value;
+    console.log(product);
     this.adminSer.updateProduct(product).
       subscribe(result => {
-        if (result == "Success") {
-          //this.router.navigate(["admin-home",login.username]);
-        } else {
-          //this.msg = result;
+        console.log(result);
+        if (result.result) {
+          this.updateMsg = result.msg;
+        } 
+        else {
+          this.updateError = result.msg;  
         }
       },
         error => console.log(error));
     this.updateProductRef.reset();
   }
   deleteProduct() {
+    this.deleteMsg="";
+    this.deleteError="";
     let product = this.deleteProductRef.value;
     this.adminSer.deleteProduct(product).
       subscribe(result => {
-        if (result == "Success") {
-          //this.router.navigate(["admin-home",login.username]);
+        if (result.result) {
+          this.deleteMsg = result.msg;
         } else {
-          //this.msg = result;
+          this.deleteError = result.msg;
         }
       },
         error => console.log(error));
