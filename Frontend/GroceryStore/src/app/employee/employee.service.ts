@@ -12,7 +12,7 @@ export class EmployeeService {
   config:any = {
     deployed:false,
     URL:'http://localhost:',
-    PORT:'4200',
+    PORT:'9090',
     URL2:'/api'
   }
 
@@ -24,10 +24,10 @@ export class EmployeeService {
     if(this.config['deployed']){
       URL = this.config['URL2']+"/v1/employee/login"
     }else{
-      URL = this.config["URL"]+this.config["PORT"]+"/v1/employee/login"
+      URL = this.config["URL"]+this.config["PORT"]+"/employee/login"
     }
     console.log("[LOG]: Going to: " + URL)
-    return this.http.post("http://localhost:9090/api/employee/login",employee, {responseType:'text'});
+    return this.http.post(URL ,employee);
   }
 
 

@@ -15,12 +15,12 @@ let orderRouter = require('./router/order.router')
 let app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use("/admin", employeeRouter);
+app.use("/admin", adminRouter);
 app.use("/product", productRouter);
 app.use("/user", userRouter);
-app.use("/admin", adminRouter);
 app.use("/ticket", ticketRouter);
 app.use("/order", orderRouter);
+app.use("/employee", employeeRouter);
 
 mongoose.connect("mongodb://localhost:27017/capstone").
 then(res=>console.log("Connected to mongodb")).catch(error=>console.log(error));

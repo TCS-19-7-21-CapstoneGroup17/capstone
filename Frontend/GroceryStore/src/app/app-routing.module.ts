@@ -13,6 +13,7 @@ import { EditProfileComponent } from './user/edit-profile/edit-profile.component
 import { FundsComponent } from './user/funds/funds.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SignInComponent2 } from './employee/sign-in/sign-in.component';
 
 const routes: Routes = [
   {
@@ -33,7 +34,7 @@ const routes: Routes = [
   },
   {path:"employee",component:EmployeeComponent},
   {path:"admin-home",component:AdminDashboardComponent},
-  {path:"employeeSignin", component:SignInComponent},
+  {path:"employeeSignin", component:SignInComponent2},
   {path:"userOrderStatus", component:OrderStatusComponent},
   {path:"editProfile", component:EditProfileComponent},
   {path:"addFunds", component:FundsComponent},

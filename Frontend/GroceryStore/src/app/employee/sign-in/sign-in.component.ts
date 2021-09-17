@@ -4,14 +4,14 @@ import { Router } from '@angular/router';
 import { EmployeeService } from '../employee.service';
 
 @Component({
-  selector: 'app-sign-in',
+  selector: 'app-sign-in2',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent2 implements OnInit {
 
   employeeLoginRef = new FormGroup({
-    empId:new FormControl(),
+    _id:new FormControl(),
     password:new FormControl()
   });
 
@@ -25,12 +25,14 @@ export class SignInComponent2 implements OnInit {
 
   checkEmployee() {
     let employeeLogin = this.employeeLoginRef.value;
+    console.log(employeeLogin);
     this.employee_service.sendCredentials(employeeLogin).
     subscribe(result => {
-      if(result == "Success"){
+      console.log(result)
+      if(result.result){
         this.router.navigate(["dashboard",employeeLogin.empId]);
       }else{
-        this.msg = result;
+        this.msg = result.msg;
       }
     },
     error=>console.log(error));

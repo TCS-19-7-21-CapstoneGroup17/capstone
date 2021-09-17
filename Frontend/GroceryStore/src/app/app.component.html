@@ -2,7 +2,7 @@
   <!-- this is for routing between admin, employee, and user -->
   <div *ngIf="isHomePage">
     <button >Admin</button>
-    <button [routerLink]="['../employee']" (click)="isClicked()">Employee</button>
+    <button [routerLink]="['../employeeSignin']" (click)="isClicked()">Employee</button>
     <button [routerLink]="['../user']" (click)="isClicked()">User</button>    
   </div>
 

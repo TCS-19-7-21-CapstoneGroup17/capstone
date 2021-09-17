@@ -90,19 +90,23 @@ let deleteEmployee = (request, response)=> {
     });
 }
 
-// sign in page for the employee with emailID and password
 let signInEmployee = (request, response) => {
     console.log("method called")
     let login = request.body;
-    employeeModel.find({_id:login.empId, password:login.password}, (err, result)=>{
-        if(result != ""){
-            // Employee successfully logged in
-            console.log(result);
-            response.send("Success");
-        }else{
-            // failed login
-            console.log("login failed");
-            response.send("Login failed, Incorrect ID or Password");
+    employeeModel.find({empId:login.empId, password:login.password}, (err, result)=>{
+        if (!err) {
+            if(result.length != 0){
+                // Employee successfully logged in
+                console.log(result);
+                response.json({result:true});
+            }else{
+                // failed login
+                console.log("login failed");
+                response.json({result:false, msg: "Login failed, Incorrect ID or Password"});
+            }
+        }
+        else {
+            response.json({result:false, msg: "Error: " + err});
         }
     });
 }

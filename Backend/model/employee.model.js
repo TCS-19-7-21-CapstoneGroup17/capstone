@@ -6,6 +6,7 @@ mongoose.pluralize(null);
 
 //create the schema for employees
 let employeeSchema = mongoose.Schema({
+    _id:Number,
     id:String,
     firstname:String,
     lastname:String, 
@@ -18,4 +19,5 @@ let employeeSchema = mongoose.Schema({
 });
 
 //create the model for employees using the schema
-module.exports = mongoose.model("employees", employeeSchema);
+let employeeModel = mongoose.model("employees", employeeSchema);
+module.exports = employeeModel;
