@@ -14,7 +14,7 @@ import { Ticket } from './model.ticket'
     config:any = {
       deployed:false,
       URL:'http://localhost:',
-      PORT:'4200',
+      PORT:'9090',
       URL2:'/api'
     }
     
@@ -25,7 +25,7 @@ import { Ticket } from './model.ticket'
       if(this.config['deployed']){
         URL = this.config['URL2']+'/v1/products/getallproducts'
       }else{
-        URL = this.config['URL']+this.config['PORT']+'/v1/products/getallproducts'
+        URL = this.config['URL']+this.config['PORT']+'/product/getAllProducts'
       }
       console.log(`Traveling to: ${URL}`)
       return this.http.get<Product>(URL)

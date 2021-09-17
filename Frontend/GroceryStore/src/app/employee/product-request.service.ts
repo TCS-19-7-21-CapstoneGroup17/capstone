@@ -12,7 +12,7 @@ export class ProductRequestService {
   config:any = {
     deployed:false,
     URL:'http://localhost:',
-    PORT:'4200',
+    PORT:'9090',
     URL2:'/api'
   }
 

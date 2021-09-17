@@ -35,6 +35,7 @@ export class SignUpComponent implements OnInit {
       if (res.result) {
         console.log("Successfully added User");
         console.log("user id: " + res.uid);
+        alert("Your user ID is: " + res.uid);
         localStorage.setItem("userID", JSON.stringify(res.uid));
         this.router.navigate(["user/add-groceries"]);
       }

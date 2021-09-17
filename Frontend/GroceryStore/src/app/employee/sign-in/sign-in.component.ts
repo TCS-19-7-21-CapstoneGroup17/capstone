@@ -30,7 +30,10 @@ export class SignInComponent2 implements OnInit {
     subscribe(result => {
       console.log(result)
       if(result.result){
-        this.router.navigate(["dashboard",employeeLogin._id]);
+        if (employeeLogin.password == "temporary@123"){
+          alert("please update your password immediately");
+        }
+          this.router.navigate(["dashboard",employeeLogin._id]);
       }else{
         this.msg = result.msg;
       }

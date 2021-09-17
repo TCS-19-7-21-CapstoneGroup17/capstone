@@ -74,5 +74,87 @@
         <p style="color:red">{{empDelError}}</p>
         <hr>
     </div>
+    <h3>Generate Report</h3>
+    <form [formGroup]="generateReportRef" (ngSubmit)="generateReport()">
+        <div style="display: flex; flex-direction:row">
+            <label style="margin: 5px;">Filter by Time Frame: </label>
+            <select formControlName="timeFilter" (change)="updateGetTime()" style="margin-right: 15px;">
+                <option>Day</option>
+                <option>Week</option>
+                <option>Month</option>
+                <option>Year</option>
+            </select>
+            &emsp;
+            <!-- options to choose time -->
+            <div *ngIf="getTime == 'Day' || getTime == 'Week' ">
+                <label>Day</label>
+                <select formControlName="day" style="margin: 5px;">
+                    <option *ngFor="let day of days"> {{day}}</option>
+                </select>
+            </div>
+            &emsp;
+            <div *ngIf="getTime == 'Day' || getTime == 'Week' || getTime == 'Month'">
+                <label>Month</label>
+                <select formControlName="month" style="margin: 5px;">
+                    <option *ngFor="let month of months">{{month}}</option>
+                </select>
+            </div>
+            &emsp;
+            <div *ngIf="getTime == 'Day' || getTime == 'Week' || getTime == 'Month' || getTime == 'Year'">
+                <label>Year</label>
+                <select formControlName="year" style="margin: 5px;">
+                    <option *ngFor="let year of years"> {{year}}</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <!-- filter by order info -->
+        <div style="display: flex; flex-direction:row">
+            <label style="margin: 5px;">Filter by Order Info: </label>
+            <select formControlName="orderFilter" (change)="updateGetFilter()" style="margin-right: 15px;">
+                <option>None</option>
+                <option>User ID</option>
+                <option>Product Name</option>
+            </select>
+            <div *ngIf="getFilter == 'User ID' ">
+                <label>User ID</label>
+                <input type="number" formControlName="userID" style="margin-left: 15px;" />
+            </div>
+            <div *ngIf="getFilter == 'Product Name' ">
+                <label>Product Name</label>
+                <input type="text" formControlName="productName" style="margin-left: 15px;" />
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-secondary">Submit</button>
+    </form>
+    <br />
+    <div>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>User ID</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Order Date MM/DD/YYYY</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let rr of allRecords">
+                    <td>{{rr.userId}}</td>
+                    <td>{{rr.productName}}</td>
+                    <td>{{rr.quantity}}</td>
+                    <td>{{rr.price}}</td>
+                    <td>{{rr.month + 1}}/{{rr.day}}/{{rr.year}}</td>
+                    <td>{{rr.status}}</td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
 </body>
 </html>
