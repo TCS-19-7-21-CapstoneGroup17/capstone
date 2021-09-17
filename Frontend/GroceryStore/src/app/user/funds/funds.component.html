@@ -4,13 +4,13 @@
             <h2 style="text-align: center; margin-top: 15px;">Grocery Store Funds!</h2>
         </div>
         <div class="row" style="text-align: center;">
-            <h4>Enter Your User ID</h4>
-            <form [formGroup]="userIDref" (ngSubmit)="submitUserId()">
+            <!-- <h4>Enter Your User ID</h4> -->
+            <!-- <form [formGroup]="userIDref" (ngSubmit)="submitUserId()">
                 <label>User ID: </label>
                 <input type="text" formControlName="userId" style="margin-bottom: 10px;"/><br/>
                 <input type="submit" value="View Funds" class="btn-primary" style="margin-bottom: 10px;"/>
-            </form>
-            <div *ngIf="showFundsPageFlag">
+            </form> -->
+            <!-- <div *ngIf="showFundsPageFlag"> -->
                 <h3>You have {{amt}} dollars in your account!</h3>
                 <br/>
                 <form [formGroup]="userFundsAcct" (ngSubmit)="fundsTransaction()">
@@ -21,7 +21,7 @@
                     <input type="text" formControlName="fundsAmtRef" style="margin-bottom: 10px;"/><br/>
                     <input type="submit" value="Add Funds" class="btn-primary" style="margin-bottom: 20px;"/>
                 </form>
-            </div>
+            <!-- </div> -->
         </div>
         <div class="row">
             <span class="alert" role="alert" style="text-align: center;">{{msg}}</span>

@@ -174,7 +174,7 @@ export class UserService {
   }
 
   getOrderHistory(userId:number):Observable<any> {
-    return this.http.post("http://localhost:9090/api/user/orderStatus/", userId);
+    return this.http.get("http://localhost:9090/user/orderStatus/" + userId);
   }
 
   pullUserInfo(userId:number):Observable<any> {
@@ -185,11 +185,11 @@ export class UserService {
     return this.http.put("http://localhost:9090/api/user/editProfile/update", profileInfo, {responseType:'text'})
   }
 
-  pullFundsInfo(userId:number):Observable<any> {
-    return this.http.post("http://localhost:9090/api/user/addFunds", userId)
+  pullFundsInfo(_id:number):Observable<any> {
+    return this.http.get("http://localhost:9090/user/addFunds/"+ _id)
   }
 
-  updateFundsInfo(fundsInfo:any):Observable<any> {
-    return this.http.put("http://localhost:9090/api/user/addFunds/update", fundsInfo, {responseType:'text'})
+  updateFundsInfo(_id:number, fundsInfo:any):Observable<any> {
+    return this.http.put("http://localhost:9090/user/addFunds/update/" + _id, fundsInfo, {responseType:'text'})
   }
 }

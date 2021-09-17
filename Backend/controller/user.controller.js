@@ -205,8 +205,8 @@ let editUserInfo = (request, response) => {
 
 let getUserFunds = (request, response) => {
     // pull the id
-    let usrId = request.body;
-    userModel.findOne({_id:usrId.userId}, (err, res)=> {
+    let usrId = request.params._id;
+    userModel.findOne({_id:usrId}, (err, res)=> {
         if(!err){
             console.log(res)
             response.json(res);
@@ -219,14 +219,15 @@ let getUserFunds = (request, response) => {
 let addFunds = (request, response) => {
     // pull the id
     let updateFunds = request.body;
-    userModel.findOne({_id:updateFunds.userId, bankAccountNumber:updateFunds.bankAccountref}, (err, res) => {
+    let usrId = request.params._id;
+    userModel.findOne({_id:usrId, bankAccountNumber:updateFunds.bankAccountref}, (err, res) => {
         if(res != null){
             console.log(res);
-            let newAmt = updateFunds.fundsAmtRef + res.fundsAmt;
-            let bankAmt = res.bankFunds - updateFunds.fundsAmtRef
-            userModel.updateOne({_id:updateFunds.userId}, {$set:{fundsAmt:newAmt}}, (err1, res1) => {
+            let newAmt = parseInt(updateFunds.fundsAmtRef) + parseInt(res.fundsAmt);
+            let bankAmt = parseInt(res.bankFunds) - parseInt(updateFunds.fundsAmtRef);
+            userModel.updateOne({_id:usrId}, {$set:{fundsAmt:newAmt}}, (err1, res1) => {
                 if(!err1){
-                    userModel.updateOne({_id:updateFunds.userId}, {$set:{bankFunds:bankAmt}}, (err2, res2) => {
+                    userModel.updateOne({_id:usrId}, {$set:{bankFunds:bankAmt}}, (err2, res2) => {
                         if(!err2){
                             response.send("Funds Added");
                             console.log(res2);
@@ -245,8 +246,8 @@ let addFunds = (request, response) => {
 }
 
 let getOrderStatus = (request,response) => {
-    let usrID = request.body;
-    orderModel.find({userId:usrID.userId}, (err, data) => {
+    let usrID = request.params.userId;
+    orderModel.find({userId:usrID}, (err, data) => {
         if (!err) {
             console.log("sending data" + data);
             response.json(data);
