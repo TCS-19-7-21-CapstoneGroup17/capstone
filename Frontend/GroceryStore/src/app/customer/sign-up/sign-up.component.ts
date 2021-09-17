@@ -30,12 +30,12 @@ export class SignUpComponent implements OnInit {
 
   doSignup() {
     // based on result {result:bool, msg:string}, display messages? success/fail
+    console.log(this.signupRef.value);
     this.editCartSer.addUser(this.signupRef.value).subscribe(res => {
       if (res.result) {
         console.log("Successfully added User");
-        console.log(res);
+        console.log("user id: " + res.uid);
         localStorage.setItem("userID", JSON.stringify(res.uid));
-        console.log(localStorage.getItem("userID"))
         this.router.navigate(["user/add-groceries"]);
       }
       else {

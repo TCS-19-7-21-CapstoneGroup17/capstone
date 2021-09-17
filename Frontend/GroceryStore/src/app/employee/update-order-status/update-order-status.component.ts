@@ -8,14 +8,14 @@ import { OrdersService } from 'src/app/employee/orders.service';
 })
 export class UpdateOrderStatusComponent implements OnInit {
 
-  selectedOrderType?:any;
+  selectedOrderType?: any;
 
-  constructor(public orders_service:OrdersService) { }
+  constructor(public orders_service: OrdersService) { }
 
   ngOnInit(): void {
   }
 
-  checkOrderType(selectedOrderTypeRef:any){
+  checkOrderType(selectedOrderTypeRef: any) {
     console.log(selectedOrderTypeRef)
   }
 }

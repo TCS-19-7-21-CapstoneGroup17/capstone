@@ -8,18 +8,18 @@ import { EmployeeService } from 'src/app/employee/employee.service';
 })
 export class EditEmployeeProfileComponent implements OnInit {
 
-  password1Res?:string
-  password2Res?:string
+  password1Res?: string
+  password2Res?: string
 
-  constructor(public employee_service:EmployeeService) { }
+  constructor(public employee_service: EmployeeService) { }
 
   ngOnInit(): void {
   }
 
-  submitNewPassword(updatePasswordRef:any){
-    let a:any = document.getElementById('f_currPassword')
-    let b:any = document.getElementById('f_newPassword1')
-    let c:any = document.getElementById('f_newPassword2')
+  submitNewPassword(updatePasswordRef: any) {
+    let a: any = document.getElementById('f_currPassword')
+    let b: any = document.getElementById('f_newPassword1')
+    let c: any = document.getElementById('f_newPassword2')
 
     a.value = ""
     b.value = ""
@@ -27,39 +27,39 @@ export class EditEmployeeProfileComponent implements OnInit {
 
     console.log(updatePasswordRef)
 
-    let emp_id:any  = sessionStorage.getItem('id')
+    let emp_id: any = sessionStorage.getItem('id')
 
     // We need to retrieve the employee password
-    let resp = this.employee_service.getEmployeeById({"id":emp_id})
-    resp.subscribe((response:any)=>{
+    let resp = this.employee_service.getEmployeeById({ "id": emp_id })
+    resp.subscribe((response: any) => {
       let employee_details = response['data'][0]
       console.log("here are the details")
       console.log(employee_details)
 
-      if(updatePasswordRef['f_newPassword1'] != updatePasswordRef['f_newPassword2']){
+      if (updatePasswordRef['f_newPassword1'] != updatePasswordRef['f_newPassword2']) {
         console.log("ok")
         this.password1Res = "❌ Password didn't match!"
         this.password2Res = "❌ Password didn't match!"
-      }else{
-        if(updatePasswordRef['f_currPassword'] == employee_details['password']){
+      } else {
+        if (updatePasswordRef['f_currPassword'] == employee_details['password']) {
           console.log("Match!")
           let update_details = {
-            id:emp_id,
-            password:updatePasswordRef['f_newPassword1']
+            id: emp_id,
+            password: updatePasswordRef['f_newPassword1']
           }
 
           // Send PUT request for password change
           this.employee_service.updatePassword(update_details)
-          .subscribe((res:any)=>{
-            if(res.status){
-              alert("Your password has been successfully changed!")
-            }else{
-              alert("Password could not be changed! Try again!")
-            }
-          })
+            .subscribe((res: any) => {
+              if (res.status) {
+                alert("Your password has been successfully changed!")
+              } else {
+                alert("Password could not be changed! Try again!")
+              }
+            })
         }
       }
-    })    
+    })
   }
 
 }

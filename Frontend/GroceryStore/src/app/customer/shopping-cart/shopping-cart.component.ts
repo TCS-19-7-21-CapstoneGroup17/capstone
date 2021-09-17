@@ -12,7 +12,8 @@ export class ShoppingCartComponent implements OnInit {
   // variables
   shoppingCart: Array<any> = []
   shoppingArray: Array<Product> = []
-  timerInterval: any
+  errorMsg: string = ""
+
   // DI to edit-cart.service.ts to use service class's functions
   constructor(public editCartSer: EditCartService) {
   }
@@ -55,19 +56,16 @@ export class ShoppingCartComponent implements OnInit {
 
   // need userID, totalCost, productName, productQuantity
   doCheckout() {
-    console.log("doing checkout")
-
     let userID = this.editCartSer.getUserID();
     let totalCost = 0;
 
     // if user has their shopping cart in localStorage
     if (localStorage.getItem(JSON.stringify(userID))) {
       this.shoppingCart = JSON.parse(localStorage.getItem(JSON.stringify(userID)) || "");
-
       for (let idx in this.shoppingCart) {
-        // for each product in the shopping cart, get the full details of it
         // product[0] == ALL details about product (from db)
         // shoppingCart[idx] == productName + quantity in cart
+        // for each product in the shopping cart, get the full details of it
         this.editCartSer.getOneProduct(this.shoppingCart[idx].productName).subscribe(product => {
           let date = new Date();
           let order = {
@@ -80,6 +78,7 @@ export class ShoppingCartComponent implements OnInit {
             quantity: this.shoppingCart[idx].quantity,
             status: "shipped"
           }
+          // add order to Order table
           this.editCartSer.addOrder(order).subscribe(orderRes => {
             // if successfully add to Order table ... 
             if (orderRes.result) {
@@ -87,12 +86,15 @@ export class ShoppingCartComponent implements OnInit {
                 productName: this.shoppingCart[idx].productName,
                 quantity: product[0].quantity - this.shoppingCart[idx].quantity
               };
+              // update product quantity in Product table
               this.editCartSer.updateProductQuantity(prodQuan).subscribe(updateQuantityRes => {
                 // if successfully updated product quantity ... 
                 if (updateQuantityRes.result) {
                   totalCost += this.shoppingCart[idx].quantity * product[0].price;
                   if (parseInt(idx) == this.shoppingCart.length - 1) {
+                    // update funds in User table
                     this.editCartSer.updateFunds({ userID: userID, totalCost: totalCost }).subscribe(updateFundRes => {
+                      // if successfully deduct totalCost from fund, clear shopping cart
                       if (updateFundRes) {
                         this.shoppingCart = []
                         localStorage.setItem(JSON.stringify(userID), JSON.stringify(this.shoppingCart));

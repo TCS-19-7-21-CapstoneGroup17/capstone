@@ -9,7 +9,7 @@ let orderSchema = mongoose.Schema({
     _id: Number,
     userId: Number,
     productName: String,
-    // productId: Number,
+    productId: Number, //delete later?
     price: Number, //price for an individual object (not the total, if purchasing multiple. Can calculate that using this and quantity)
     day: Number,
     month: Number, //Note: Months start with 0 (January)

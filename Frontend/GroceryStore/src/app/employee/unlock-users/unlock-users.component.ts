@@ -9,18 +9,18 @@ import { UserService } from 'src/app/employee/user.service';
 })
 export class UnlockUsersComponent implements OnInit {
 
-  tickets:Data[] = []
+  tickets: Data[] = []
 
-  constructor(public user_service:UserService) {
+  constructor(public user_service: UserService) {
     this.user_service.getTickets().subscribe(result => {
       this.tickets = result.data
     })
-   }
+  }
 
   ngOnInit(): void {
   }
 
-  unLockUser(userName:any){
+  unLockUser(userName: any) {
     let obj = {
       userName: userName,
       locked: false

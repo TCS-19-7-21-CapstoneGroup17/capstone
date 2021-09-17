@@ -1,6 +1,7 @@
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeeComponent } from './employee/employee.component';
+import { AppComponent } from './app.component';
 import { AddGroceriesComponent } from './customer/add-groceries/add-groceries.component';
 import { CustomerComponent } from './customer/customer.component';
 import { RaiseTicketComponent } from './customer/raise-ticket/raise-ticket.component';
@@ -38,7 +39,8 @@ const routes: Routes = [
   {path:"editProfile", component:EditProfileComponent},
   {path:"addFunds", component:FundsComponent},
   //should be set to home or index page
-  {path:"", redirectTo:"employeeSignin",pathMatch:"prefix"}
+  { path: "home", component: AppComponent },
+  { path: '', redirectTo: "home", pathMatch: "full" }
 ];
 
 @NgModule({

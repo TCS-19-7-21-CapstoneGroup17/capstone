@@ -65,7 +65,6 @@ export class EditCartService {
   getUserID(): number {
     let userID = localStorage.getItem("userID");
     if (userID) {
-      console.log("something is stored " + userID);
       return JSON.parse(userID);
     }
     // first time opening page. set userID == -1 (not logged in)
@@ -77,17 +76,13 @@ export class EditCartService {
 
   // given an array of products, display products in a grid
   displayProducts(productArray: Array<Product>) {
-    console.log("Using service class, display products");
     let rowTag = document.getElementById('rows') || document.createElement('div');
     while (rowTag.firstChild) {
-      console.log("delete children")
       rowTag.removeChild(rowTag.firstChild);
     }
 
     // for each product in shopping cart, display it
     for (let pp of productArray) {
-      console.log(pp.productName);
-
       let columnDiv = document.createElement('div');
       columnDiv.className = 'col-3';
       columnDiv.id = "columns";
@@ -131,31 +126,46 @@ export class EditCartService {
   addToCart(pName: string) {
     // get shopping cart from localStorage
     let userID = JSON.stringify(this.getUserID());
+    // get productInfo from database
+    let storeQuantity = this.getOneProduct(pName).subscribe(pp => {
+      let storeQuantity = pp[0].quantity;
+      // if store has the product available
+      if (storeQuantity > 0) {
+        // if user has a shopping car in localStorage 
+        if (localStorage.getItem(userID)) {
+          let shoppingCart = JSON.parse(localStorage.getItem(userID) || "");
+          function findProduct(product: any) { return product.productName == pName; }
+
+          // if product is already in shopping cart, increment product quantity by 1
+          if (shoppingCart.find(findProduct)) {
+            // can not add more products in cart than is available is store
+            if (shoppingCart.find(findProduct).quantity < storeQuantity) {
+              shoppingCart.find(findProduct).quantity += 1;
+            }
+          }
+          // else, add product to shopping cart for the first time
+          else shoppingCart.push({ productName: pName, quantity: 1 });
+
+          // store updated shopping cart into localStorage
+          localStorage.setItem(userID, JSON.stringify(shoppingCart));
+        }
+        // create a shopping cart for them and add first item
+        else {
+          localStorage.setItem(userID, JSON.stringify([{productName: pName, quantity:1}]))
+        }
+      }
+
+
+    })
     // if shopping cart for this user already exists
-    if (localStorage.getItem(userID)) {
-      // get shopping cart from localStorage
-      let shoppingCart = JSON.parse(localStorage.getItem(userID) || "");
-      function findProduct(product: any) { return product.productName == pName; }
-
-      // if product is already in shopping cart, increment product quantity by 1
-      if (shoppingCart.find(findProduct)) shoppingCart.find(findProduct).quantity += 1;
-      // else, add product to shopping cart for the first time
-      else shoppingCart.push({ productName: pName, quantity: 1 });
-
-      // store updated shopping cart into localStorage
-      localStorage.setItem(userID, JSON.stringify(shoppingCart));
-    }
-    // create a shopping cart for them and add first item
-    else {
-      localStorage.setItem(userID, JSON.stringify([{productName: pName, quantity:1}]))
-    }
+    
     
   }
 
   // delete product from shopping cart
   deleteFromCart(pName: string) {
+    // get userID and shopping cart from localStorage
     let userID = JSON.stringify(this.getUserID());
-
     let shoppingCart = JSON.parse(localStorage.getItem(userID) || "");
     function findProduct(product: any) { return product.productName == pName; }
 
@@ -171,8 +181,6 @@ export class EditCartService {
       }
       localStorage.setItem(userID, JSON.stringify(shoppingCart));
     }
-
-    console.log(shoppingCart);
   }
 
 }
