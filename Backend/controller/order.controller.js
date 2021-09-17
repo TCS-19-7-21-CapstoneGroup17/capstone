@@ -30,7 +30,7 @@ let generateDailyReport = (request, response)=> {
         })
     }
     else if (reportDay.filter == "product") { //will filter with a specific product id
-        orderModel.find({day:reportDay.day, month:reportDay.month, year:reportDay.year, productId:reportDay.productId}, (err, result)=> {
+        orderModel.find({day:reportDay.day, month:reportDay.month, year:reportDay.year, productName:reportDay.productName}, (err, result)=> {
             if (!err) {
                 response.send({result:true, records:result});
             }
@@ -80,7 +80,7 @@ let generateWeeklyReport = (request,response)=> {
                 let genReport = [];
                 for (let rec of result) {
                     let recDate = new Date(rec.year, rec.month, rec.day);
-                    if (dateFns.isSameWeek(givenDate, recDate) && (reportWeek.productId == rec.productId)) {
+                    if (dateFns.isSameWeek(givenDate, recDate) && (reportWeek.productName == rec.productName)) {
                         genReport.push(rec);
                     }
                 }
@@ -121,7 +121,7 @@ let generateMonthlyReport = (request, response)=> {
         })
     }
     else if (reportMonth.filter == "product") { //will filter with a specific product id
-        orderModel.find({month:reportMonth.month, year:reportMonth.year, productId:reportMonth.productId}, (err, result)=> {
+        orderModel.find({month:reportMonth.month, year:reportMonth.year, productName:reportMonth.productName}, (err, result)=> {
             if (!err) {
                 response.send({result:true, records:result});
             }
@@ -161,7 +161,7 @@ let generateYearlyReport = (request,response)=> {
         })
     }
     else if (reportYear.filter == "product") { //will filter with a specific product id
-        orderModel.find({year:reportYear.year, productId:reportYear.productId}, (err, result)=> {
+        orderModel.find({year:reportYear.year, productName:reportYear.productName}, (err, result)=> {
             if (!err) {
                 response.send({result:true, records:result});
             }

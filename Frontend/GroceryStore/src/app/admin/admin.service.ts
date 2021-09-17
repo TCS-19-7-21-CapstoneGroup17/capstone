@@ -30,4 +30,17 @@ export class AdminService {
   // viewRequest():Observable<any>{
   //   return this.http.get("")
   // }
+
+  getYearlyReport(report: any): Observable<any> {
+    return this.http.post("http://localhost:9090/order/yearlyReport", report);
+  }
+  getMonthlyReport(report: any): Observable<any>{
+    return this.http.post("http://localhost:9090/order/monthlyReport", report)
+  }
+  getWeeklyReport(report: any): Observable<any> {
+    return this.http.post("http://localhost:9090/order/weeklyReport", report)
+  }
+  getDailyReport(report: any): Observable<any> {
+    return this.http.post("http://localhost:9090/order/dailyReport", report)
+  }
 }
