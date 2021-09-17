@@ -2,10 +2,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ProductRequestSchema = new Schema({
-  id: String,
+  _id: Number,
+  product: String,
   emp_id: String,
   quantity: Number,
   request_type:String
 });
 
-module.exports = mongoose.model("product_request", ProductRequestSchema);
+let requestModel = mongoose.model("Request", ProductRequestSchema);
+module.exports = requestModel;

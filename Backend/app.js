@@ -9,7 +9,8 @@ let productRouter = require('./router/product.router');
 let userRouter = require('./router/user.router');
 let adminRouter = require('./router/admin.router');
 let ticketRouter = require('./router/ticket.router');
-let orderRouter = require('./router/order.router')
+let orderRouter = require('./router/order.router');
+let requestRouter = require('./router/product_request.router')
 
 //create express reference and add middleware
 let app = express();
@@ -21,6 +22,7 @@ app.use("/user", userRouter);
 app.use("/ticket", ticketRouter);
 app.use("/order", orderRouter);
 app.use("/employee", employeeRouter);
+app.use("/request", requestRouter);
 
 mongoose.connect("mongodb://localhost:27017/capstone").
 then(res=>console.log("Connected to mongodb")).catch(error=>console.log(error));
@@ -28,5 +30,6 @@ app.use("/api/employee", employeeRouter);
 //http://localhost:9090/api/employee/login
 app.use("/api/user", userRouter);
 //http://localhost:9090/api/user/orderStatus
+
 
 app.listen(9090, ()=>console.log("Server running on port number 9090"));
