@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Admin Dashboard</title>
 </head>
+
 <body>
     <div>
         <h2>Admin Dashboard</h2>
         <h3>Add Product</h3>
         <form [formGroup]="addProductRef" (ngSubmit)="addProduct()">
-            <label>Product Name</label>
-            <input type="text" formControlName="productName" required><br>
-            <label>Price</label>
-            <input type="number" formControlName="price" required> <br>
-            <label>Quantity</label>
-            <input type="number" formControlName="quantity" required> <br>
-            <label>Image</label>
-            <input type="text" src="" alt="" formControlName="image" placeholder="(url)" required> <br>
-            <input type="submit" value="Add">
+            <div class="row">
+                <div class="col">
+                    <label>Product Name</label>
+                    <input type="text" formControlName="productName" required>
+                </div>
+                <div class="col">
+                    <label>Price</label>
+                    <input type="number" formControlName="price" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Quantity</label>
+                    <input type="number" formControlName="quantity" required>
+                </div>
+                <div class="col">
+                    <label>Image</label>
+                    <input type="text" src="" alt="" formControlName="image" placeholder="(url)" required>
+                </div>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Add">
             <input type="reset" value="reset">
         </form>
         <p style="color:darkgreen">{{addMsg}}</p>
@@ -28,13 +43,21 @@
         <hr>
         <h3>Update Price or Quantity</h3>
         <form [formGroup]="updateProductRef" (ngSubmit)="updateProduct()">
-            <label>Product Name</label>
-            <input type="text" formControlName="productName"><br>
-            <label>Price Update OR</label>
-            <input type="text" formControlName="price"><br>
-            <label>Quantity Update</label>
-            <input type="text" formControlName="quantity"><br>
-            <input type="submit" value="Update">
+            <div class = "row">
+                <label>Product Name</label>
+                <input type="text" formControlName="productName"><br>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Price Update</label>
+                    <input type="text" formControlName="price">
+                </div>
+                <div class="col">
+                    <label> OR Quantity Update</label>
+                    <input type="text" formControlName="quantity">
+                </div>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Update">
             <input type="reset" value="reset">
         </form>
         <p style="color:darkgreen">{{updateMsg}}</p>
@@ -44,7 +67,7 @@
         <form [formGroup]="deleteProductRef" (ngSubmit)="deleteProduct()">
             <label>Product Name</label>
             <input type="text" formControlName="productName"><br>
-            <input type="submit" value="Delete">
+            <input class="btn btn-primary" type="submit" value="Delete">
             <input type="reset" value="reset">
         </form>
         <p style="color:darkgreen">{{deleteMsg}}</p>
@@ -52,13 +75,23 @@
         <hr>
         <h3>Add Employee</h3>
         <form [formGroup]="addEmpRef" (ngSubmit)="addEmployee()">
-            <label>First name</label>
-            <input type="text" required formControlName="firstname"><br>
-            <label>Last name</label>
-            <input type="text" required formControlName="lastname"><br>
-            <label>Email</label>
-            <input type="email" required formControlName="email"><br>
-            <input type="submit" value="add employee">
+            <div class="row">
+                <div class="col">
+                    <label>First name</label>
+                    <input type="text" required formControlName="firstname">
+                </div>
+                <div class="col">
+                    <label>Last name</label>
+                    <input type="text" required formControlName="lastname"><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label>Email</label>
+                    <input type="email" required formControlName="email">
+                </div>
+            </div>
+            <input class="btn btn-primary" type="submit" value="add employee">
             <input type="reset" value="reset">
         </form>
         <p style="color:darkgreen">{{empAddMsg}}</p>
@@ -66,9 +99,13 @@
         <hr>
         <h3>Delete Employee</h3>
         <form [formGroup]="delEmpRef" (ngSubmit)="deleteEmployee()">
-            <label>Employee Id</label>
-            <input type="number" required formControlName="_id"><br>
-            <input type="submit" value="delete employee">
+            <div class="row">
+                <div class="col">
+                    <label>Employee Id</label>
+                    <input type="number" required formControlName="_id">
+                </div>
+            </div>
+            <input class="btn btn-primary" type="submit" value="delete employee">
         </form>
         <p style="color:darkgreen">{{empDelMsg}}</p>
         <p style="color:red">{{empDelError}}</p>
@@ -157,4 +194,5 @@
     </div>
 
 </body>
+
 </html>
