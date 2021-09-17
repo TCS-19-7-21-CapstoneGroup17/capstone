@@ -33,6 +33,7 @@ const routes: Routes = [
     
   },
   {path:"employee",component:EmployeeComponent},
+  {path:"dashboard/:empId",component:EmployeeComponent},
   {path:"admin-home",component:AdminDashboardComponent},
   {path:"employeeSignin", component:SignInComponent2},
   {path:"userOrderStatus", component:OrderStatusComponent},

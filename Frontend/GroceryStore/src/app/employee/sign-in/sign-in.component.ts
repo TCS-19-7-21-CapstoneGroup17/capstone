@@ -30,7 +30,7 @@ export class SignInComponent2 implements OnInit {
     subscribe(result => {
       console.log(result)
       if(result.result){
-        this.router.navigate(["dashboard",employeeLogin.empId]);
+        this.router.navigate(["dashboard",employeeLogin._id]);
       }else{
         this.msg = result.msg;
       }
