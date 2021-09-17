@@ -68,9 +68,7 @@ let deleteEmployee = (request, response)=> {
     //             response.json({result:false, msg:"Admin credentials invalid"})
     //         }
     //         else { //admin account found, proceed
-                console.log("check2")
                 employeeModel.deleteOne({_id:delEmpRequest._id}, (err, result)=> {
-                    console.log("check3")
                     if (!err) {
                         console.log(result);
                         if (result.deletedCount > 0) {
