@@ -35,6 +35,9 @@ const routes: Routes = [
   },
   {path:"employee",component:EmployeeComponent},
   { path: "dashboard/:empId", component: EmployeeComponent },
+
+  { path: "admin/dashboard", component: AdminDashboardComponent },
+  { path: "admin/signin", component: AdminComponent },
   {path:"adminSignin", component:AdminComponent},
   {path:"admin-home",component:AdminDashboardComponent},
   {path:"employeeSignin", component:SignInComponent2},
